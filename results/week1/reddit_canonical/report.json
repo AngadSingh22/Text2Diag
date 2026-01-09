@@ -1,0 +1,54 @@
+{
+  "timestamp": "2026-01-10T00:13:07.048657",
+  "counts": {
+    "total_windows": 57756,
+    "users": 57756,
+    "by_split": {
+      "train": 46184,
+      "val": 5761,
+      "test": 5811
+    }
+  },
+  "leakage_check": "PASS",
+  "stats": {
+    "text_length_chars": {
+      "min": 9,
+      "median": 841,
+      "p95": 3740,
+      "max": 40125
+    },
+    "has_condition_pct": 88.27
+  },
+  "labels": {
+    "overall": {
+      "adhd": 18531,
+      "ocd": 12381,
+      "depression": 11952,
+      "ptsd": 8932,
+      "other": 7117
+    },
+    "by_split": {
+      "train": {
+        "adhd": 14749,
+        "ocd": 9889,
+        "depression": 9581,
+        "ptsd": 7174,
+        "other": 5714
+      },
+      "val": {
+        "adhd": 1861,
+        "ocd": 1269,
+        "depression": 1181,
+        "ptsd": 889,
+        "other": 676
+      },
+      "test": {
+        "adhd": 1921,
+        "ocd": 1223,
+        "depression": 1190,
+        "ptsd": 869,
+        "other": 727
+      }
+    }
+  }
+}

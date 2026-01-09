@@ -178,3 +178,74 @@ Get-ChildItem AGENT_PROTOCOL.md, RUNLOG.md, ACCEPTANCE_TESTS.md, DECISIONS.md  #
 
 ### Next Step
 Push governance changes to GitHub.
+
+---
+
+### Next Step
+Execute changes.
+
+---
+
+## 2026-01-10T00:10:22+05:30 [SAFE]
+
+### Plan
+**Week 1**: Canonical Dataset Build (Reddit Mental Health)
+Implement `src/text2diag/data/reddit_windows.py` and `scripts/02_build_reddit_canonical.py` to:
+1. Load `solomonk/reddit_mental_health_posts` (raw).
+2. Group posts by author into windows of size N=3.
+3. Apply Label Policy:
+    - **Weak Labels**: Union of subreddits in window.
+    - **Condition Head**: Whitelist map (e.g., r/ADHD -> "adhd").
+    - **Generic Map**: r/mentalhealth -> "general_distress".
+    - **Unknown**: Keep as "other" or drop based on config.
+4. Split deterministically (Train/Val/Test: 0.8/0.1/0.1).
+5. Write Canonical JSONL to `data/processed/reddit_mh_windows/`.
+6. Generate reports in `results/week1/reddit_canonical/`.
+
+### Diff Summary
+| File | Change | Why |
+|------|--------|-----|
+| `configs/data_reddit.yaml` | New config | Define paths, split seeds, label map |
+| `configs/labels_condition_whitelist.txt` | New whitelist | Define allowed condition labels |
+| `src/text2diag/data/reddit_windows.py` | New module | Windowing & labeling logic |
+| `scripts/02_build_reddit_canonical.py` | New script | End-to-end pipeline |
+| `tests/test_reddit_canonical.py` | New tests | Verify splits & label logic |
+| `DECISIONS.md` | Recorded label policy | Governance |
+
+### Commands Run
+```bash
+# Atomic Commit: Governance
+git add RUNLOG.md DECISIONS.md ; git commit -m "W1: Canonical Dataset Build plan and label policy"
+# [main 2a44d9c] ...
+
+# Atomic Commit: Implementation
+git add src/text2diag/data/reddit_windows.py configs/data_reddit.yaml configs/labels_condition_whitelist.txt scripts/02_build_reddit_canonical.py tests/test_reddit_canonical.py .gitignore
+git commit -m "W1: Canonical Dataset Build code/config/tests"
+# [main 58a83cb] 6 files changed, 562 insertions(+), 3 deletions(-)
+
+# Pipeline Execution
+py scripts/02_build_reddit_canonical.py
+# Loading raw data from: data/raw/reddit_mental_health_posts
+# Found 57756 unique authors.
+# Writing 46184 records to data\processed\reddit_mh_windows\train.jsonl
+# Writing 5761 records to data\processed\reddit_mh_windows\val.jsonl
+# Writing 5811 records to data\processed\reddit_mh_windows\test.jsonl
+# Reports written to results\week1\reddit_canonical
+```
+
+### Test Outputs
+```
+# Tier B (Full)
+py -m pytest tests/ -v --tb=short
+# tests/test_reddit_canonical.py::test_assign_user_split_deterministic PASSED
+# tests/test_reddit_canonical.py::test_normalize_text PASSED
+# tests/test_reddit_canonical.py::test_label_policy_logic PASSED
+# tests/test_reddit_canonical.py::test_derive_labels PASSED
+# ============================== 4 passed in 2.55s ==============================
+
+py scripts/02_build_reddit_canonical.py --help  # ✓ details in runlog
+Get-ChildItem AGENT_PROTOCOL.md, RUNLOG.md, AL... # ✓ All Present
+```
+
+### Next Step
+Push everything to GitHub.
