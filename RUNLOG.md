@@ -136,3 +136,45 @@ Also:
 
 ### Next Step
 Update .gitignore and requirements.txt, then create DECISIONS.md.
+
+---
+
+## 2026-01-09T23:40:33+05:30 [SAFE]
+
+### Plan
+Update governance to reduce agent overhead via two-tier execution (FAST PATH / SAFE PATH).
+
+### Diff Summary
+| File | Change | Why |
+|------|--------|-----|
+| `AGENT_PROTOCOL.md` | Added FAST/SAFE PATH policies | Reduce I/O, define relevant scope |
+| `ACCEPTANCE_TESTS.md` | Split Tier A (smoke) / Tier B (full) | Enable quick iteration |
+| `RUNLOG.md` | Updated templates for short/full entries | Match execution tiers |
+| `DECISIONS.md` | Added governance rationale | Audit trail |
+
+### Commands Run
+```bash
+git add AGENT_PROTOCOL.md ; git commit -m "Governance: introduce fast/safe execution paths"
+# [main 2a44d9c] 1 file changed, 52 insertions(+), 17 deletions(-)
+
+git add ACCEPTANCE_TESTS.md ; git commit -m "Tests: split smoke vs full tiers"
+# [main 3782a54] 1 file changed, 80 insertions(+), 58 deletions(-)
+
+git add RUNLOG.md DECISIONS.md ; git commit -m "Governance: update RUNLOG template and log decision rationale"
+# [main b932243] 2 files changed, 37 insertions(+), 8 deletions(-)
+```
+
+### Test Outputs
+```
+# Tier A (Smoke)
+py -m compileall src scripts -q  # ✓ exit 0
+py -c "import sys; sys.path.insert(0, 'src'); import text2diag; print('Import OK')"  # ✓ Import OK
+py -m pytest tests/ -q --tb=no  # ✓ no tests ran (expected - test files empty)
+
+# Tier B (Full)
+py -m pytest tests/ -v --tb=short  # ✓ 0 items collected
+Get-ChildItem AGENT_PROTOCOL.md, RUNLOG.md, ACCEPTANCE_TESTS.md, DECISIONS.md  # ✓ All 4 present
+```
+
+### Next Step
+Push governance changes to GitHub.
