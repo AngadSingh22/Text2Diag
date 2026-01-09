@@ -58,13 +58,14 @@ py -m pytest tests/ -v --tb=short
 
 ### B2. All Scripts Help Check
 ```powershell
-py scripts/prepare_data.py --help
-py scripts/train.py --help
-py scripts/eval.py --help
-py scripts/calibrate.py --help
-py scripts/infer_json.py --help
-py scripts/run_all.py --help
-py scripts/inspect_raw_datasets.py --help
+py scripts/01_inspect_raw_datasets.py --help
+py scripts/02_build_reddit_canonical.py --help
+py scripts/03_train_baseline.py --help
+py scripts/04_eval_robustness.py --help
+py scripts/05_build_sanitized_dataset.py --help
+py scripts/06_train_robust.py --help
+py scripts/07_posttrain_pack_sanitized.py --help
+py scripts/08_compare_robustness.py --help
 ```
 **Expected**: Each prints usage info, exit code 0.
 
@@ -89,13 +90,14 @@ Get-ChildItem AGENT_PROTOCOL.md, RUNLOG.md, ACCEPTANCE_TESTS.md, DECISIONS.md | 
 py -m compileall src scripts -q; `
 py -c "import sys; sys.path.insert(0, 'src'); import text2diag; print('Import OK')"; `
 py -m pytest tests/ -v --tb=short; `
-py scripts/prepare_data.py --help; `
-py scripts/train.py --help; `
-py scripts/eval.py --help; `
-py scripts/calibrate.py --help; `
-py scripts/infer_json.py --help; `
-py scripts/run_all.py --help; `
-py scripts/inspect_raw_datasets.py --help; `
+py scripts/01_inspect_raw_datasets.py --help; `
+py scripts/02_build_reddit_canonical.py --help; `
+py scripts/03_train_baseline.py --help; `
+py scripts/04_eval_robustness.py --help; `
+py scripts/05_build_sanitized_dataset.py --help; `
+py scripts/06_train_robust.py --help; `
+py scripts/07_posttrain_pack_sanitized.py --help; `
+py scripts/08_compare_robustness.py --help; `
 Get-ChildItem AGENT_PROTOCOL.md, RUNLOG.md, ACCEPTANCE_TESTS.md, DECISIONS.md | Select-Object Name
 ```
 
@@ -144,7 +146,7 @@ Get-Item notebooks/colab_week2_train.ipynb
 ### Week 2 Sanitized (Post-Train Pack)
 Tier A (Smoke):
 ```bash
-py scripts/11_posttrain_pack_sanitized.py --checkpoint_path results/week3/robust_baseline/checkpoints/checkpoint-X --data_dir data/processed/reddit_mh_sanitized --label_map data/processed/reddit_mh_sanitized/label2id.json --smoke --out_dir results/test_pack_smoke
+py scripts/07_posttrain_pack_sanitized.py --checkpoint_path results/week3/robust_baseline/checkpoints/checkpoint-X --data_dir data/processed/reddit_mh_sanitized --label_map data/processed/reddit_mh_sanitized/label2id.json --smoke --out_dir results/test_pack_smoke
 # Expect: Preds saved, Metrics printed, Pack Complete.
 ```
 

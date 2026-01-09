@@ -587,7 +587,25 @@ Map every file move and log decisions.
 (Pending Execution)
 
 ### Next Step
-Execute Phase 3, Group 3 (Module Normalization).
+Notify User (Cleanup Complete).
+
+---
+
+## 2026-01-10T06:05:00+05:30 [SAFE]
+**Summary**: Plan Phase 3 Complete. Repo Cleanup V1 executed.
+**Changes**:
+- Normalized `results/` structure.
+- Updated `ACCEPTANCE_TESTS.md` with new `0X_` paths.
+- Verified with Tier B full suite.
+**Artifacts**: `reports/REPO_TREE_POST_CLEANUP.txt`, `reports/REPO_MANIFEST.json`.
+**Tests**: ✓ Tier B Checks (All Passed).
+
+---
+
+## 2026-01-10T06:00:00+05:30 [FAST]
+**Summary**: Plan Phase 3.3: Moved `src/text2diag/modeling` to `src/text2diag/decision`.
+**Commits**: (Pending)
+**Smoke**: ✓ Import Check OK
 
 ---
 

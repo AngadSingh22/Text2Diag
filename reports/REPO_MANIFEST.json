@@ -9,7 +9,7 @@
     },
     {
         "FullName":  "F:\\Text2Diag\\ACCEPTANCE_TESTS.md",
-        "Length":  4848
+        "Length":  5107
     },
     {
         "FullName":  "F:\\Text2Diag\\AGENT_PROTOCOL.md",
@@ -17,11 +17,11 @@
     },
     {
         "FullName":  "F:\\Text2Diag\\CLEANUP_PLAN.md",
-        "Length":  614
+        "Length":  2249
     },
     {
         "FullName":  "F:\\Text2Diag\\DECISIONS.md",
-        "Length":  6892
+        "Length":  7651
     },
     {
         "FullName":  "F:\\Text2Diag\\LICENSE",
@@ -41,7 +41,7 @@
     },
     {
         "FullName":  "F:\\Text2Diag\\RUNLOG.md",
-        "Length":  20014
+        "Length":  21473
     },
     {
         "FullName":  "F:\\Text2Diag\\.github\\workflows\\ci.yaml",
@@ -192,6 +192,30 @@
         "Length":  262
     },
     {
+        "FullName":  "F:\\Text2Diag\\docs\\legacy\\scripts\\calibrate.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\docs\\legacy\\scripts\\eval.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\docs\\legacy\\scripts\\infer_json.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\docs\\legacy\\scripts\\prepare_data.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\docs\\legacy\\scripts\\run_all.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\docs\\legacy\\scripts\\train.py",
+        "Length":  0
+    },
+    {
         "FullName":  "F:\\Text2Diag\\docs\\templates\\W2_SANITIZED_SUMMARY_TEMPLATE.md",
         "Length":  1332
     },
@@ -216,72 +240,20 @@
         "Length":  0
     },
     {
+        "FullName":  "F:\\Text2Diag\\reports\\REPO_DRIFT_AUDIT.md",
+        "Length":  2447
+    },
+    {
         "FullName":  "F:\\Text2Diag\\reports\\REPO_MANIFEST.json",
         "Length":  0
     },
     {
         "FullName":  "F:\\Text2Diag\\reports\\REPO_TREE_DEPTH4.txt",
-        "Length":  21312
+        "Length":  11288
     },
     {
         "FullName":  "F:\\Text2Diag\\results\\final\\.gitkeep",
         "Length":  0
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\metrics.json",
-        "Length":  1278
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\preds_test.jsonl",
-        "Length":  1808
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\preds_val.jsonl",
-        "Length":  1802
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\config.json",
-        "Length":  812
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\model.safetensors",
-        "Length":  267841796
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\optimizer.pt",
-        "Length":  535743307
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\rng_state.pth",
-        "Length":  14455
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\scheduler.pt",
-        "Length":  1465
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\special_tokens_map.json",
-        "Length":  132
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\tokenizer.json",
-        "Length":  711661
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\tokenizer_config.json",
-        "Length":  1283
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\trainer_state.json",
-        "Length":  1277
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\training_args.bin",
-        "Length":  5841
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\vocab.txt",
-        "Length":  231508
     },
     {
         "FullName":  "F:\\Text2Diag\\results\\week1\\.gitkeep",
@@ -372,8 +344,204 @@
         "Length":  231508
     },
     {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\.gitkeep",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\metrics.json",
+        "Length":  1495
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\metrics.md",
+        "Length":  299
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\preds_test.jsonl",
+        "Length":  1063186
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\preds_val.jsonl",
+        "Length":  1047782
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\checkpoints\\checkpoint-4332.zip",
+        "Length":  681829537
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\checkpoints\\checkpoint-4332\\config.json",
+        "Length":  774
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\checkpoints\\checkpoint-4332\\model.safetensors",
+        "Length":  267841796
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\checkpoints\\checkpoint-4332\\optimizer.pt",
+        "Length":  535747659
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\checkpoints\\checkpoint-4332\\rng_state.pth",
+        "Length":  14709
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\checkpoints\\checkpoint-4332\\scaler.pt",
+        "Length":  1383
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\checkpoints\\checkpoint-4332\\scheduler.pt",
+        "Length":  1465
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\checkpoints\\checkpoint-4332\\special_tokens_map.json",
+        "Length":  125
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\checkpoints\\checkpoint-4332\\tokenizer.json",
+        "Length":  711661
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\checkpoints\\checkpoint-4332\\tokenizer_config.json",
+        "Length":  1227
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\checkpoints\\checkpoint-4332\\trainer_state.json",
+        "Length":  2162
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\checkpoints\\checkpoint-4332\\training_args.bin",
+        "Length":  5841
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\checkpoints\\checkpoint-4332\\vocab.txt",
+        "Length":  231508
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2_archived_duplicate\\results\\week2\\checkpoints\\runs\\Jan09_19-48-18_1910b0ae9270\\events.out.tfevents.1767988101.1910b0ae9270.1301.0",
+        "Length":  7295
+    },
+    {
         "FullName":  "F:\\Text2Diag\\results\\week3\\.gitkeep",
         "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\results\\week3\\robust_baseline\\metrics.json",
+        "Length":  1495
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\results\\week3\\robust_baseline\\preds_test.jsonl",
+        "Length":  1063222
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\results\\week3\\robust_baseline\\preds_val.jsonl",
+        "Length":  1047666
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\results\\week3\\robust_baseline\\checkpoints\\checkpoint-4332\\config.json",
+        "Length":  774
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\results\\week3\\robust_baseline\\checkpoints\\checkpoint-4332\\model.safetensors",
+        "Length":  267841796
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\results\\week3\\robust_baseline\\checkpoints\\checkpoint-4332\\optimizer.pt",
+        "Length":  535747659
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\results\\week3\\robust_baseline\\checkpoints\\checkpoint-4332\\rng_state.pth",
+        "Length":  14709
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\results\\week3\\robust_baseline\\checkpoints\\checkpoint-4332\\scaler.pt",
+        "Length":  1383
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\results\\week3\\robust_baseline\\checkpoints\\checkpoint-4332\\scheduler.pt",
+        "Length":  1465
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\results\\week3\\robust_baseline\\checkpoints\\checkpoint-4332\\special_tokens_map.json",
+        "Length":  125
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\results\\week3\\robust_baseline\\checkpoints\\checkpoint-4332\\tokenizer.json",
+        "Length":  711661
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\results\\week3\\robust_baseline\\checkpoints\\checkpoint-4332\\tokenizer_config.json",
+        "Length":  1227
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\results\\week3\\robust_baseline\\checkpoints\\checkpoint-4332\\trainer_state.json",
+        "Length":  2182
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\results\\week3\\robust_baseline\\checkpoints\\checkpoint-4332\\training_args.bin",
+        "Length":  5905
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\results\\week3\\robust_baseline\\checkpoints\\checkpoint-4332\\vocab.txt",
+        "Length":  231508
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\results\\week3\\robust_baseline\\checkpoints\\runs\\Jan09_23-25-15_2128e9e91ac7\\events.out.tfevents.1768001118.2128e9e91ac7.1274.0",
+        "Length":  7328
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\smoke\\metrics.json",
+        "Length":  1278
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\smoke\\preds_test.jsonl",
+        "Length":  1808
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\smoke\\preds_val.jsonl",
+        "Length":  1802
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\smoke\\checkpoints\\checkpoint-1\\config.json",
+        "Length":  812
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\smoke\\checkpoints\\checkpoint-1\\model.safetensors",
+        "Length":  267841796
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\smoke\\checkpoints\\checkpoint-1\\optimizer.pt",
+        "Length":  535743307
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\smoke\\checkpoints\\checkpoint-1\\rng_state.pth",
+        "Length":  14455
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\smoke\\checkpoints\\checkpoint-1\\scheduler.pt",
+        "Length":  1465
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\smoke\\checkpoints\\checkpoint-1\\special_tokens_map.json",
+        "Length":  132
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\smoke\\checkpoints\\checkpoint-1\\tokenizer.json",
+        "Length":  711661
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\smoke\\checkpoints\\checkpoint-1\\tokenizer_config.json",
+        "Length":  1283
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\smoke\\checkpoints\\checkpoint-1\\trainer_state.json",
+        "Length":  1277
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\smoke\\checkpoints\\checkpoint-1\\training_args.bin",
+        "Length":  5841
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\smoke\\checkpoints\\checkpoint-1\\vocab.txt",
+        "Length":  231508
     },
     {
         "FullName":  "F:\\Text2Diag\\results\\week4\\.gitkeep",
@@ -384,80 +552,8 @@
         "Length":  0
     },
     {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\.gitkeep",
-        "Length":  0
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\metrics.json",
-        "Length":  1495
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\metrics.md",
-        "Length":  299
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\preds_test.jsonl",
-        "Length":  1063186
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\preds_val.jsonl",
-        "Length":  1047782
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332.zip",
-        "Length":  681829537
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\config.json",
-        "Length":  774
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\model.safetensors",
-        "Length":  267841796
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\optimizer.pt",
-        "Length":  535747659
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\rng_state.pth",
-        "Length":  14709
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\scaler.pt",
-        "Length":  1383
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\scheduler.pt",
-        "Length":  1465
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\special_tokens_map.json",
-        "Length":  125
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\tokenizer.json",
-        "Length":  711661
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\tokenizer_config.json",
-        "Length":  1227
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\trainer_state.json",
-        "Length":  2162
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\training_args.bin",
-        "Length":  5841
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\vocab.txt",
-        "Length":  231508
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\runs\\Jan09_19-48-18_1910b0ae9270\\events.out.tfevents.1767988101.1910b0ae9270.1301.0",
-        "Length":  7295
+        "FullName":  "F:\\Text2Diag\\scripts\\01_inspect_raw_datasets.py",
+        "Length":  7538
     },
     {
         "FullName":  "F:\\Text2Diag\\scripts\\02_build_reddit_canonical.py",
@@ -472,52 +568,72 @@
         "Length":  10542
     },
     {
-        "FullName":  "F:\\Text2Diag\\scripts\\10_build_sanitized_dataset.py",
+        "FullName":  "F:\\Text2Diag\\scripts\\05_build_sanitized_dataset.py",
         "Length":  5136
     },
     {
-        "FullName":  "F:\\Text2Diag\\scripts\\11_posttrain_pack_sanitized.py",
-        "Length":  8217
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\scripts\\11_train_robust.py",
+        "FullName":  "F:\\Text2Diag\\scripts\\06_train_robust.py",
         "Length":  4718
     },
     {
-        "FullName":  "F:\\Text2Diag\\scripts\\12_compare_robustness.py",
+        "FullName":  "F:\\Text2Diag\\scripts\\07_posttrain_pack_sanitized.py",
+        "Length":  8217
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\08_compare_robustness.py",
         "Length":  5602
     },
     {
-        "FullName":  "F:\\Text2Diag\\scripts\\calibrate.py",
-        "Length":  0
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\01_inspect_raw_datasets.cpython-314.pyc",
+        "Length":  11102
     },
     {
-        "FullName":  "F:\\Text2Diag\\scripts\\eval.py",
-        "Length":  0
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\02_build_reddit_canonical.cpython-314.pyc",
+        "Length":  10009
     },
     {
-        "FullName":  "F:\\Text2Diag\\scripts\\infer_json.py",
-        "Length":  0
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\03_train_baseline.cpython-314.pyc",
+        "Length":  7271
     },
     {
-        "FullName":  "F:\\Text2Diag\\scripts\\inspect_raw_datasets.py",
-        "Length":  7538
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\04_eval_robustness.cpython-314.pyc",
+        "Length":  14699
     },
     {
-        "FullName":  "F:\\Text2Diag\\scripts\\prepare_data.py",
-        "Length":  0
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\05_build_sanitized_dataset.cpython-314.pyc",
+        "Length":  7753
     },
     {
-        "FullName":  "F:\\Text2Diag\\scripts\\run_all.py",
-        "Length":  0
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\06_train_robust.cpython-314.pyc",
+        "Length":  6517
     },
     {
-        "FullName":  "F:\\Text2Diag\\scripts\\train.py",
-        "Length":  0
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\07_posttrain_pack_sanitized.cpython-314.pyc",
+        "Length":  13005
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\08_compare_robustness.cpython-314.pyc",
+        "Length":  8823
     },
     {
         "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\09_eval_sanitized.cpython-314.pyc",
         "Length":  14344
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\10_build_sanitized_dataset.cpython-314.pyc",
+        "Length":  7753
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\11_posttrain_pack_sanitized.cpython-314.pyc",
+        "Length":  13005
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\11_train_robust.cpython-314.pyc",
+        "Length":  6517
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\12_compare_robustness.cpython-314.pyc",
+        "Length":  8823
     },
     {
         "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\calibrate.cpython-314.pyc",
@@ -533,7 +649,7 @@
     },
     {
         "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\inspect_raw_datasets.cpython-314.pyc",
-        "Length":  11037
+        "Length":  11099
     },
     {
         "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\prepare_data.cpython-314.pyc",
@@ -680,6 +796,22 @@
         "Length":  130
     },
     {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\decision\\postprocess.py",
+        "Length":  1411
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\decision\\__init__.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\decision\\__pycache__\\postprocess.cpython-314.pyc",
+        "Length":  2895
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\decision\\__pycache__\\__init__.cpython-314.pyc",
+        "Length":  133
+    },
+    {
         "FullName":  "F:\\Text2Diag\\src\\text2diag\\eval\\dumps.py",
         "Length":  0
     },
@@ -798,14 +930,6 @@
     {
         "FullName":  "F:\\Text2Diag\\src\\text2diag\\model\\__pycache__\\train.cpython-314.pyc",
         "Length":  127
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\src\\text2diag\\modeling\\postprocess.py",
-        "Length":  1411
-    },
-    {
-        "FullName":  "F:\\Text2Diag\\src\\text2diag\\modeling\\__init__.py",
-        "Length":  0
     },
     {
         "FullName":  "F:\\Text2Diag\\src\\text2diag\\train\\train_baseline.py",
