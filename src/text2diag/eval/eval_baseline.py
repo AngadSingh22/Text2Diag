@@ -55,6 +55,16 @@ def evaluate_and_dump(
     # Probs
     all_probs = 1.0 / (1.0 + np.exp(-all_logits))
     
+    # Helper for JSON safe values
+    def safe_float(val):
+        if val is None:
+            return None
+        if isinstance(val, (int, float, np.number)):
+            if np.isnan(val) or np.isinf(val):
+                return None
+            return float(val)
+        return val
+
     # 1. Write Dumps (JSONL)
     dump_path = out_dir / f"preds_{split_name}.jsonl"
     print(f"Writing dump to {dump_path}")
@@ -80,17 +90,17 @@ def evaluate_and_dump(
     # Threshold 0.5 metrics
     preds_05 = (all_probs > 0.5).astype(int)
     
-    results["micro_f1"] = f1_score(all_labels, preds_05, average="micro", zero_division=0)
-    results["macro_f1"] = f1_score(all_labels, preds_05, average="macro", zero_division=0)
+    results["micro_f1"] = float(f1_score(all_labels, preds_05, average="micro", zero_division=0))
+    results["macro_f1"] = float(f1_score(all_labels, preds_05, average="macro", zero_division=0))
     
     # AUC (if possible)
     try:
-        results["micro_roc_auc"] = roc_auc_score(all_labels, all_probs, average="micro")
-        results["macro_roc_auc"] = roc_auc_score(all_labels, all_probs, average="macro")
+        results["micro_roc_auc"] = safe_float(roc_auc_score(all_labels, all_probs, average="micro"))
+        results["macro_roc_auc"] = safe_float(roc_auc_score(all_labels, all_probs, average="macro"))
     except ValueError:
         # Happens if a class has no positive examples in split
-        results["micro_roc_auc"] = -1.0
-        results["macro_roc_auc"] = -1.0
+        results["micro_roc_auc"] = None
+        results["macro_roc_auc"] = None
         
     # Per-label metrics
     per_label = {}
@@ -105,15 +115,15 @@ def evaluate_and_dump(
             try:
                 auc = roc_auc_score(y_true, y_score)
             except ValueError:
-                auc = -1.0
+                auc = None
         else:
             f1 = 0.0
             auc = 0.0
             
         per_label[label_name] = {
             "support": support,
-            "f1": round(f1, 4),
-            "roc_auc": round(auc, 4)
+            "f1": round(float(f1), 4),
+            "roc_auc": safe_float(auc)
         }
     
     results["per_label"] = per_label

@@ -1,0 +1,68 @@
+{
+  "val": {
+    "micro_f1": 0.9423076923076923,
+    "macro_f1": 0.19797979797979798,
+    "micro_roc_auc": 0.9450113378684808,
+    "macro_roc_auc": null,
+    "per_label": {
+      "adhd": {
+        "support": 49,
+        "f1": 0.9899,
+        "roc_auc": 0.6939
+      },
+      "depression": {
+        "support": 3,
+        "f1": 0.0,
+        "roc_auc": 0.4823
+      },
+      "ocd": {
+        "support": 1,
+        "f1": 0.0,
+        "roc_auc": 0.6939
+      },
+      "other": {
+        "support": 0,
+        "f1": 0.0,
+        "roc_auc": 0.0
+      },
+      "ptsd": {
+        "support": 1,
+        "f1": 0.0,
+        "roc_auc": 0.0816
+      }
+    }
+  },
+  "test": {
+    "micro_f1": 0.9900990099009901,
+    "macro_f1": 0.2,
+    "micro_roc_auc": 0.9864026012415016,
+    "macro_roc_auc": null,
+    "per_label": {
+      "adhd": {
+        "support": 50,
+        "f1": 1.0,
+        "roc_auc": null
+      },
+      "depression": {
+        "support": 1,
+        "f1": 0.0,
+        "roc_auc": 0.3878
+      },
+      "ocd": {
+        "support": 0,
+        "f1": 0.0,
+        "roc_auc": 0.0
+      },
+      "other": {
+        "support": 0,
+        "f1": 0.0,
+        "roc_auc": 0.0
+      },
+      "ptsd": {
+        "support": 0,
+        "f1": 0.0,
+        "roc_auc": 0.0
+      }
+    }
+  }
+}

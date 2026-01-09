@@ -295,9 +295,13 @@ git commit -m "W2: add Colab notebook + acceptance tests update + RUNLOG entry"
 ### Test Outputs
 ```
 # Tier A (Smoke)
-py -m compileall src scripts -q  # ✓ Passed (Syntax OK)
-py scripts/03_train_baseline.py --help # ⚠ Skipped (Missing 'transformers' locally)
-# NOTE: Training script requires DL environment (Colab). Local run skipped.
+py -m compileall src scripts -q  # ✓ Passed
+py scripts/03_train_baseline.py --data_dir data/processed/reddit_mh_windows --out_dir results/test_w2_smoke --limit_examples 50 --epochs 1 --batch_size 2
+# Training complete. Best checkpoint: results\test_w2_smoke\checkpoints\checkpoint-7
+# Writing dump to results\test_w2_smoke\preds_val.jsonl
+# Writing dump to results\test_w2_smoke\preds_test.jsonl
+# Done. Artifacts saved to results\test_w2_smoke
+# Exit code: 0
 
 # Artifacts
 Get-Item notebooks/colab_week2_train.ipynb # ✓ Exists
