@@ -38,7 +38,14 @@ def load_model_and_tokenizer(checkpoint_path: Path):
     model.eval()
     
     # Move to GPU if available
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+        print(f"✅ GPU Available: {torch.cuda.get_device_name(0)}")
+        model.cuda()
+    else:
+        device = torch.device("cpu")
+        print("⚠️ GPU NOT Available. Using CPU (this will be slow).")
+        
     model.to(device)
     
     return tokenizer, model, device
