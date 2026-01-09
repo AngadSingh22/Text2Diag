@@ -1,0 +1,11 @@
+# Threshold Policy Configuration
+# W2.6: Locked operational decision layer
+
+policy: "per_label"
+
+thresholds_per_label_path: "results/week2/audits/thresholds_per_label.json"
+fallback_global_path: "results/week2/audits/thresholds_global.json"
+
+# IMPORTANT: Raw probabilities are always exported.
+# Thresholds are a DECISION LAYER only, not calibration.
+note: "Decision layer only; probs are uncalibrated"

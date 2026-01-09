@@ -1,0 +1,15 @@
+# Text Sanitization Configuration
+# W2.6: Locked policy for shortcut removal
+
+strip_urls: true
+strip_reddit_refs: true
+mask_diagnosis_words: false
+
+# Only used if mask_diagnosis_words is true
+diagnosis_vocab:
+  - adhd
+  - ocd
+  - ptsd
+  - depression
+
+case_insensitive: true
