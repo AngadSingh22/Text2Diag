@@ -66,3 +66,24 @@ Adopted a "Weak Label" strategy for Reddit data:
 ### Expected Metric Impact
 - **Accuracy**: May be lower than "clean" labels but more realistic.
 - **Calibration**: Expect higher uncertainty for `general_distress` inputs.
+
+---
+
+## 2026-01-10T02:00:00+05:30 – W2.5 Shortcut/Leakage Audit: FAIL
+
+### What Changed
+**Finding**: 62% of examples contain explicit subreddit references (e.g., "r/adhd", "r/depression") in the text.
+
+### Why This Matters
+- The model may be learning to detect "r/adhd" substring rather than actual ADHD symptom language.
+- Real-world clinical text will not contain these reddit-specific tokens.
+- Our 89% F1 may be inflated by this shortcut.
+
+### Remediation (Deferred to Week 3)
+1. **Token Stripping**: Add preprocessing step to remove `r/<subreddit>` patterns.
+2. **URL Removal**: Strip all URLs.
+3. **Robustness Eval**: Re-train or re-evaluate on masked data.
+
+### Expected Metric Impact
+- After remediation, F1 may drop significantly (10-30%) as model loses shortcut.
+- True "diagnostic ability" will be measured.

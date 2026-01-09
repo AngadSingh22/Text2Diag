@@ -308,5 +308,86 @@ Get-Item notebooks/colab_week2_train.ipynb # ✓ Exists
 Get-Item src/text2diag/model/baseline.py # ✓ Exists
 ```
 
+### Test Outputs
+```
+# Tier A (Smoke)
+py -m compileall src scripts -q  # ✓ Passed
+py scripts/03_train_baseline.py --data_dir data/processed/reddit_mh_windows --out_dir results/test_w2_smoke --limit_examples 50 --epochs 1 --batch_size 2
+# Training complete. Best checkpoint: results\test_w2_smoke\checkpoints\checkpoint-7
+# Writing dump to results\test_w2_smoke\preds_val.jsonl
+# Writing dump to results\test_w2_smoke\preds_test.jsonl
+# Done. Artifacts saved to results\test_w2_smoke
+# Exit code: 0
+
+# Colab Full Run (Week 2)
+# Results downloaded to results_week2.zip and verified.
+# Test Micro F1: 0.893
+# Test Macro F1: 0.883
+# Strong performance across all labels (ADHD/OCD > 0.92).
+```
+
 ### Next Step
-User to run `notebooks/colab_week2_train.ipynb` on Colab to produce Week 2 results.
+Week 2 Complete. Proceed to Week 3 (Robustness & Error Analysis).
+
+---
+
+## 2026-01-10T01:57:49+05:30 [SAFE]
+
+### Plan
+**W2.5: Post-training audits (integrity, leakage, thresholding, error analysis, sensitivity)**
+
+Implement 5 audit scripts:
+1. `scripts/04_week2_integrity_audit.py` - Validate canonical contract
+2. `scripts/05_week2_shortcut_audit.py` - Detect label leakage in text
+3. `scripts/06_week2_threshold_sweep.py` - Find optimal thresholds
+4. `scripts/07_week2_error_analysis.py` - Top FP/FN per label
+5. `scripts/08_week2_sensitivity_smoke.py` - Stratified metric analysis
+
+### Diff Summary
+| File | Change | Why |
+|------|--------|-----|
+| `scripts/04_week2_integrity_audit.py` | NEW | Validate data contract |
+| `scripts/05_week2_shortcut_audit.py` | NEW | Detect subreddit leakage |
+| `scripts/06_week2_threshold_sweep.py` | NEW | Threshold optimization |
+| `scripts/07_week2_error_analysis.py` | NEW | Error analysis |
+| `scripts/08_week2_sensitivity_smoke.py` | NEW | Sensitivity checks |
+| `ACCEPTANCE_TESTS.md` | Updated | W2.5 smoke block |
+
+### Commands Run
+```bash
+py scripts/04_week2_integrity_audit.py
+# Loaded 5 labels: ['adhd', 'depression', 'ocd', 'other', 'ptsd']
+# CHECK 1-5: ALL PASS
+# Exit 0
+
+py scripts/05_week2_shortcut_audit.py --sample 20000
+# Leak Rate: 62.39% -> FAIL
+# Exit 1
+
+py scripts/06_week2_threshold_sweep.py
+# Best Global (Micro F1): t=0.45, F1=0.8919
+# Best Global (Macro F1): t=0.5, F1=0.8824
+# Exit 0
+
+py scripts/07_week2_error_analysis.py --topk 20
+# Loaded 5761 val, 5811 test predictions
+# Exit 0
+
+py scripts/08_week2_sensitivity_smoke.py
+# Merged 5761 records
+# Exit 0
+```
+
+### Test Outputs
+```
+# Artifacts created:
+# results/week2/audits/integrity_report.md
+# results/week2/audits/shortcut_report.md (FAIL - 62% leakage)
+# results/week2/audits/threshold_report.md
+# results/week2/audits/error_analysis.md
+# results/week2/audits/sensitivity_report.md
+# + corresponding .json files
+```
+
+### Next Step
+Week 2.5 Complete. Proceed to Week 3 (Remediation: strip subreddit tokens, re-train).
