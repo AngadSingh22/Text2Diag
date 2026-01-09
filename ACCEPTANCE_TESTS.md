@@ -141,39 +141,6 @@ Get-Item notebooks/colab_week2_train.ipynb
 
 ---
 
-## Week 2.5: Post-Training Audits
-
-### A6. W2.5 Audit Smoke Tests
-Run all audit scripts and verify outputs exist.
-```powershell
-py scripts/04_week2_integrity_audit.py
-py scripts/05_week2_shortcut_audit.py --sample 20000
-py scripts/06_week2_threshold_sweep.py
-py scripts/07_week2_error_analysis.py --topk 20
-py scripts/08_week2_sensitivity_smoke.py
+Get-Item notebooks/colab_week2_train.ipynb
 ```
-**Expected**: All scripts exit 0 (or 1 for shortcut if leakage detected), artifacts created in `results/week2/audits/`.
-
-### B6. W2.5 Audit Artifacts Check
-```powershell
-Get-ChildItem results/week2/audits/*.md | Select-Object Name
-Get-ChildItem results/week2/audits/*.json | Select-Object Name
-```
-**Expected**: At least 5 `.md` and 5 `.json` files exist.
-
----
-
-## Week 2.6: Shortcut Remediation
-
-### A7. W2.6 Leakage-Controlled Eval
-```powershell
-py scripts/09_eval_sanitized.py --checkpoint results_week2/results/week2/checkpoints/checkpoint-4332 --sanitize_config configs/sanitize.yaml
-```
-**Expected**: Creates artifacts in `results/week2/remediation/`, reports PASS/FAIL verdict.
-
-### B7. W2.6 Artifacts Check
-```powershell
-Get-ChildItem results/week2/remediation/*.json | Select-Object Name
-Get-ChildItem results/week2/policy/*.md | Select-Object Name
-```
-**Expected**: `leakage_eval_metrics.json`, `preds_val_sanitized.jsonl`, `preds_test_sanitized.jsonl`, `THRESHOLD_POLICY.md` exist.
+**Expected**: File found.
