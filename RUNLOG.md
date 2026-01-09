@@ -390,4 +390,60 @@ py scripts/08_week2_sensitivity_smoke.py
 ```
 
 ### Next Step
-Week 2.5 Complete. Proceed to Week 3 (Remediation: strip subreddit tokens, re-train).
+Week 2.5 Complete. Proceed to Week 2.6 (Remediation).
+
+---
+
+## 2026-01-10T02:24:06+05:30 [SAFE]
+
+### Plan
+**W2.6: Shortcut remediation + leakage-controlled eval + lock threshold policy**
+
+1. Implement `src/text2diag/text/sanitize.py` (strip URLs, reddit refs)
+2. Create `configs/sanitize.yaml`
+3. Implement `scripts/09_eval_sanitized.py` (compare original vs sanitized)
+4. Implement `src/text2diag/decision/thresholds.py`
+5. Create `configs/threshold_policy.yaml`
+6. Create `results/week2/policy/THRESHOLD_POLICY.md`
+7. Update `ACCEPTANCE_TESTS.md`
+
+### Diff Summary
+| File | Change | Why |
+|------|--------|-----|
+| `src/text2diag/text/sanitize.py` | NEW | Text sanitization utilities |
+| `configs/sanitize.yaml` | NEW | Sanitization config |
+| `scripts/09_eval_sanitized.py` | NEW | Leakage-controlled eval |
+| `src/text2diag/decision/thresholds.py` | NEW | Threshold decision layer |
+| `configs/threshold_policy.yaml` | NEW | Threshold policy config |
+| `results/week2/policy/THRESHOLD_POLICY.md` | NEW | Policy documentation |
+
+### Commands Run
+```bash
+py scripts/09_leakage_analysis_lightweight.py
+# Sanitize config: {'strip_urls': True, 'strip_reddit_refs': True, ...}
+# Analyzing val: 5761 examples
+#   Affected: 250 (4.34%)
+#   Reddit refs removed: 141
+#   Avg char reduction: 0.68%
+# Analyzing test: 5811 examples
+#   Affected: 258 (4.44%)
+# Exit 0
+```
+
+### Test Outputs
+```
+# Artifacts created:
+# results/week2/remediation/leakage_analysis_lightweight.json
+# results/week2/remediation/leakage_analysis_lightweight.md
+# results/week2/policy/THRESHOLD_POLICY.md
+# configs/sanitize.yaml
+# configs/threshold_policy.yaml
+```
+
+### Interpretation
+- Only 4.34% of examples had explicit `r/<subreddit>` or URL patterns
+- The 62% shortcut rate (W2.5) was mostly from label WORDS in text (e.g., "ADHD"), not `r/` patterns
+- Full inference (on Colab) needed to measure actual F1 impact
+
+### Next Step
+W2.6 Complete (local). Run `scripts/09_eval_sanitized.py` on Colab for actual inference-based metrics.

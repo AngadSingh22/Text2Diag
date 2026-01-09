@@ -87,3 +87,42 @@ Adopted a "Weak Label" strategy for Reddit data:
 ### Expected Metric Impact
 - After remediation, F1 may drop significantly (10-30%) as model loses shortcut.
 - True "diagnostic ability" will be measured.
+
+---
+
+## 2026-01-10T02:24:06+05:30 – W2.6 Policy Lock: Text Sanitization
+
+### What Changed
+**LOCKED**: Text sanitization rules for preprocessing:
+1. `strip_urls`: Remove all `http(s)://` and `www.` patterns. **ON by default.**
+2. `strip_reddit_refs`: Remove `r/<subreddit>`, `/r/<subreddit>` patterns. **ON by default.**
+3. `mask_diagnosis_words`: Optional toggle to mask condition names. **OFF by default.**
+
+### Why
+- Addresses 62% shortcut leakage detected in W2.5.
+- URLs and subreddit references are reddit-specific artifacts not present in real clinical text.
+- Diagnosis word masking is optional as it may remove legitimate symptom discussions.
+
+### Expected Metric Impact
+- F1 may drop 10-30% if model relied on shortcuts.
+- Establishes "true" model capability.
+
+---
+
+## 2026-01-10T02:24:06+05:30 – W2.6 Policy Lock: Threshold Decision Layer
+
+### What Changed
+**LOCKED**: Operational threshold policy:
+- **Policy**: Per-label thresholds (from W2.5 sweep).
+- **Values**: adhd=0.45, depression=0.45, ocd=0.40, other=0.50, ptsd=0.60
+- **Fallback**: Global t=0.45 (micro-optimized).
+- **Note**: Raw probabilities are always exported. Thresholds are a decision layer only.
+
+### Why
+- Per-label thresholds maximize per-class F1 given class imbalance.
+- Explicit policy prevents ad-hoc threshold choices downstream.
+- Disclaimer: Probabilities are NOT calibrated (no Week 3 work).
+
+### Expected Metric Impact
+- Improved per-label F1 vs fixed 0.5 threshold.
+- No change to ranking metrics (AUC).
