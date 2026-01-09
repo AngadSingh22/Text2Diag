@@ -98,7 +98,7 @@ def main():
     parser.add_argument("--checkpoint", type=Path, default=Path("results_week2/results/week2/checkpoints/checkpoint-4332"))
     parser.add_argument("--data_dir", type=Path, default=Path("data/processed/reddit_mh_windows"))
     parser.add_argument("--out_dir", type=Path, default=Path("results/week2/robustness"))
-    parser.add_argument("--sanitize_config", type=Path, default=Path("configs/sanitize.yaml"))
+    parser.add_argument("--sanitize_config", type=Path, default=Path("configs/text_cleaning.yaml"))
     parser.add_argument("--enable_masked", action="store_true", help="Also eval with diagnosis word masking")
     parser.add_argument("--max_len", type=int, default=256)
     parser.add_argument("--batch_size", type=int, default=16)
