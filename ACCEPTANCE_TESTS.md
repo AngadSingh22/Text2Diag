@@ -1,99 +1,121 @@
 # ACCEPTANCE_TESTS – Definition of Done
 
 > **Purpose**: Define exact commands to verify the codebase is in a working state.
-> Run these after every change.
 
 ---
 
-## Quick Smoke Tests (Fast, Local)
+## Tier A: Smoke Tests (Run on Every Atomic Commit)
 
-### 1. Python Syntax Check
-Verify all Python files have valid syntax.
+Fast checks that must pass before any commit. Target: <10 seconds.
 
-```bash
-python -m py_compile scripts/*.py
-python -m py_compile src/text2diag/**/*.py
+### A1. Syntax Check
+```powershell
+py -m compileall src scripts -q
 ```
-
 **Expected**: Exit code 0, no output.
 
----
-
-### 2. Import Check
-Verify the main package imports without errors.
-
-```bash
-python -c "import sys; sys.path.insert(0, 'src'); import text2diag; print('OK')"
+### A2. Import Check
+```powershell
+py -c "import sys; sys.path.insert(0, 'src'); import text2diag; print('OK')"
 ```
-
 **Expected**: Prints `OK`, exit code 0.
 
+### A3. New Script Help Check
+For any newly added/modified script, verify `--help` works:
+```powershell
+py scripts/<script_name>.py --help
+```
+**Expected**: Prints usage info, exit code 0.
+
+### A4. Quick Pytest
+```powershell
+py -m pytest tests/ -q --tb=no
+```
+**Expected**: All collected tests pass (or 0 collected if empty). Exit code 0.
+
 ---
 
-### 3. Script Help Check
-Verify each script responds to `--help` without crashing.
+### Tier A: All-in-One Command (Copy-Paste Ready)
 
-```bash
-python scripts/prepare_data.py --help
-python scripts/train.py --help
-python scripts/eval.py --help
-python scripts/calibrate.py --help
-python scripts/infer_json.py --help
-python scripts/run_all.py --help
+```powershell
+# Windows PowerShell - Smoke Tests
+py -m compileall src scripts -q; `
+py -c "import sys; sys.path.insert(0, 'src'); import text2diag; print('Import OK')"; `
+py -m pytest tests/ -q --tb=no
 ```
 
+---
+
+## Tier B: Full Tests (Run Before Push/Milestone)
+
+Comprehensive checks for merge readiness. Run after completing a plan step.
+
+### B1. Full Pytest with Verbose Output
+```powershell
+py -m pytest tests/ -v --tb=short
+```
+**Expected**: All tests pass.
+
+### B2. All Scripts Help Check
+```powershell
+py scripts/prepare_data.py --help
+py scripts/train.py --help
+py scripts/eval.py --help
+py scripts/calibrate.py --help
+py scripts/infer_json.py --help
+py scripts/run_all.py --help
+py scripts/inspect_raw_datasets.py --help
+```
 **Expected**: Each prints usage info, exit code 0.
 
----
-
-## Unit Tests
-
-### 4. Pytest Suite
-Run all unit tests in the `tests/` directory.
-
-```bash
-pytest tests/ -v
+### B3. Governance Files Exist
+```powershell
+Get-ChildItem AGENT_PROTOCOL.md, RUNLOG.md, ACCEPTANCE_TESTS.md, DECISIONS.md | Select-Object Name
 ```
+**Expected**: All 4 files listed.
 
-**Expected**: All tests pass (or skip if not yet implemented).
-
-**Existing test files**:
-- `tests/test_contract_validator.py`
-- `tests/test_evidence_span_validity.py`
-- `tests/test_repair_rules.py`
-- `tests/test_splits_deterministic.py`
+### B4. Lint (if configured)
+```powershell
+# TODO: Add ruff or flake8 when configured
+# ruff check src scripts
+```
 
 ---
 
-## Governance File Checks
+### Tier B: All-in-One Command (Copy-Paste Ready)
 
-### 5. Governance Files Exist
-Verify all governance files are present.
-
-```bash
-ls AGENT_PROTOCOL.md RUNLOG.md ACCEPTANCE_TESTS.md DECISIONS.md 2>nul || dir AGENT_PROTOCOL.md RUNLOG.md ACCEPTANCE_TESTS.md DECISIONS.md
+```powershell
+# Windows PowerShell - Full Tests
+py -m compileall src scripts -q; `
+py -c "import sys; sys.path.insert(0, 'src'); import text2diag; print('Import OK')"; `
+py -m pytest tests/ -v --tb=short; `
+py scripts/prepare_data.py --help; `
+py scripts/train.py --help; `
+py scripts/eval.py --help; `
+py scripts/calibrate.py --help; `
+py scripts/infer_json.py --help; `
+py scripts/run_all.py --help; `
+py scripts/inspect_raw_datasets.py --help; `
+Get-ChildItem AGENT_PROTOCOL.md, RUNLOG.md, ACCEPTANCE_TESTS.md, DECISIONS.md | Select-Object Name
 ```
-
-**Expected**: All files listed (DECISIONS.md created when first decision is logged).
 
 ---
 
 ## Artifacts
 
-After a successful run, these should exist:
-- `RUNLOG.md` with latest entry
-- All scripts executable without syntax errors
+After a successful SAFE PATH run:
+- `RUNLOG.md` with latest entry (expanded format)
+- All scripts respond to `--help`
 - `src/text2diag/` importable
+- All governance files present
 
 ---
 
-## Run All Acceptance Tests (One Command)
+## Test File Inventory
 
-```bash
-# Windows PowerShell
-python -m py_compile scripts/prepare_data.py scripts/train.py scripts/eval.py scripts/calibrate.py scripts/infer_json.py scripts/run_all.py; `
-python -c "import sys; sys.path.insert(0, 'src'); import text2diag; print('Import OK')"; `
-pytest tests/ -v --tb=short
-```
-
-**Expected**: All commands succeed with exit code 0.
+| File | Purpose | Tier |
+|------|---------|------|
+| `tests/test_contract_validator.py` | Contract validation | A, B |
+| `tests/test_evidence_span_validity.py` | Evidence spans | A, B |
+| `tests/test_repair_rules.py` | Repair rules | A, B |
+| `tests/test_splits_deterministic.py` | Deterministic splits | A, B |
