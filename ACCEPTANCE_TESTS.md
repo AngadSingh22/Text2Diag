@@ -141,7 +141,14 @@ Get-Item notebooks/colab_week2_train.ipynb
 
 ---
 
-## Week 2: Robustness Eval
+### Week 2 Sanitized (Post-Train Pack)
+Tier A (Smoke):
+```bash
+py scripts/11_posttrain_pack_sanitized.py --checkpoint_path results/week3/robust_baseline/checkpoints/checkpoint-X --data_dir data/processed/reddit_mh_sanitized --label_map data/processed/reddit_mh_sanitized/label2id.json --smoke --out_dir results/test_pack_smoke
+# Expect: Preds saved, Metrics printed, Pack Complete.
+```
+
+## Week 2.6 (Leakage Eval)
 
 ### A6. Leakage-Controlled Eval
 ```powershell

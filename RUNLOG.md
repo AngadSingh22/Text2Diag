@@ -447,3 +447,87 @@ py scripts/09_leakage_analysis_lightweight.py
 
 ### Next Step
 W2.6 Complete (local). Run `scripts/09_eval_sanitized.py` on Colab for actual inference-based metrics.
+
+---
+
+## 2026-01-10T05:15:00+05:30 [SAFE]
+
+### Plan
+**Week 3: Robustness & Remediation (Blind Training)**
+Address the confirmed self-labeling leakage by rebuilding the dataset with diagnosis masking and retraining the model.
+
+1. **Data**: `scripts/10_build_sanitized_dataset.py` (Masks diagnosis words).
+2. **Training**: `scripts/11_train_robust.py` (Retrains DistilBERT).
+3. **Governance**: Update `DECISIONS.md`.
+4. **Eval**: `scripts/12_compare_robustness.py`.
+
+### Diff Summary
+| File | Change | Why |
+|------|--------|-----|
+| `scripts/10_build_sanitized_dataset.py` | NEW | Builds dataset with `mask_diagnosis_words=True` |
+| `scripts/11_train_robust.py` | NEW | Trains robust baseline on sanitized data |
+| `notebooks/colab_week3_robust_train.ipynb` | NEW | Colab notebook for heavy training |
+| `scripts/12_compare_robustness.py` | NEW | Comapres W2 vs W3 robustness |
+| `DECISIONS.md` | Updated | Logged pivot to Blind Training |
+
+### Commands Run
+```bash
+py scripts/10_build_sanitized_dataset.py --limit 100 # (Smoke Test)
+py scripts/11_train_robust.py --epochs 1 --limit_examples 10 # (Smoke Test)
+```
+
+### Test Outputs
+```
+# Data Build (Smoke)
+# Writing 100 records... OK
+
+# Training (Smoke)
+# Training complete... OK
+```
+
+### Next Step
+User is running `notebooks/colab_week3_robust_train.ipynb` on Colab. Once done, will run `scripts/12_compare_robustness.py`.
+
+---
+
+## 2026-01-10T05:25:00+05:30 [SAFE]
+
+### Plan
+**Prep: post-train eval + comparison + audits for sanitized retrain (pre-checkpoint)**
+Prepare a "One-Shot" evaluation pack to strictly audit and verify the new Week 3 (Sanitized) model once training completes.
+
+**Objective**: Standardize outputs in `results/week2_sanitized/` and automate the verify/compare loop.
+
+1.  **Script**: `scripts/11_posttrain_pack_sanitized.py`
+    - Evaluates model -> `preds/`
+    - Computes Metrics -> `metrics/`
+    - Runs Audits (Shortcut, Threshold, Error, Sensitivity) -> `audits/`
+    - Compares vs W2 Baseline -> `compare/`
+2.  **Template**: `docs/templates/W2_SANITIZED_SUMMARY_TEMPLATE.md`
+3.  **Governance**: Update `ACCEPTANCE_TESTS.md` with smoke test.
+
+### Diff Summary
+| File | Change | Why |
+|------|--------|-----|
+| `docs/templates/W2_SANITIZED_SUMMARY_TEMPLATE.md` | NEW | Speed up reporting |
+| `scripts/11_posttrain_pack_sanitized.py` | NEW | Automated post-train pipeline |
+| `ACCEPTANCE_TESTS.md` | Update | Add smoke test for pack |
+
+### Commands Run
+```bash
+# Atomic Commit 1: Doc + Log
+git add RUNLOG.md docs/templates/W2_SANITIZED_SUMMARY_TEMPLATE.md
+git commit -m "Prep: add sanitized posttrain summary template"
+
+# Atomic Commit 2: Script
+git add scripts/11_posttrain_pack_sanitized.py
+git commit -m "Prep: add one-shot posttrain pack for sanitized retrain"
+
+# Atomic Commit 3: Tests
+git add ACCEPTANCE_TESTS.md
+git commit -m "Prep: add smoke acceptance for posttrain pack"
+```
+
+### Next Step
+Wait for Colab training to finish, then run the pack:
+`py scripts/11_posttrain_pack_sanitized.py --checkpoint_path ...`
