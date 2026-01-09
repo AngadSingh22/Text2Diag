@@ -249,3 +249,60 @@ Get-ChildItem AGENT_PROTOCOL.md, RUNLOG.md, AL... # ✓ All Present
 
 ### Next Step
 Push everything to GitHub.
+
+---
+
+## 2026-01-10T00:47:23+05:30 [SAFE]
+
+### Plan
+**Week 2**: Baseline Training & Evaluation (Colab-ready).
+Implement baseline training pipeline for multi-label classification using HuggingFace Trainer.
+1. **Model**: `src/text2diag/model/baseline.py` (Encoder + classification head).
+2. **Data**: `src/text2diag/data/jsonl_dataset.py` (JSONL reader -> tokenized multi-hot).
+3. **Train/Eval**: `src/text2diag/train/` and `src/text2diag/eval/` modules.
+4. **Script**: `scripts/03_train_baseline.py` entrypoint.
+5. **Colab**: `notebooks/colab_week2_train.ipynb`.
+6. **Tests**: Update `ACCEPTANCE_TESTS.md` with W2 smoke tests.
+
+### Diff Summary
+| File | Change | Why |
+|------|--------|-----|
+| `src/text2diag/model/baseline.py` | New module | Model definition |
+| `src/text2diag/data/jsonl_dataset.py` | New module | Data loading |
+| `src/text2diag/train/train_baseline.py` | New module | Training logic |
+| `src/text2diag/eval/eval_baseline.py` | New module | Eval metrics & dumps |
+| `scripts/03_train_baseline.py` | New script | CLI entrypoint |
+| `notebooks/colab_week2_train.ipynb` | New notebook | Reproducible run |
+| `ACCEPTANCE_TESTS.md` | Add W2 tests | Governance |
+
+### Commands Run
+```bash
+# Atomic Commit: Model + Data
+git add src/text2diag/model/baseline.py src/text2diag/data/jsonl_dataset.py
+git commit -m "W2: add baseline model + JSONL dataset loader"
+# [main bcb9627] 2 files changed, 102 insertions(+)
+
+# Atomic Commit: Scripts
+git add src/text2diag/train/train_baseline.py src/text2diag/eval/eval_baseline.py scripts/03_train_baseline.py
+git commit -m "W2: add training/eval scripts and metrics + prediction dumps"
+# [main f0b3567] 3 files changed, 359 insertions(+)
+
+# Atomic Commit: Colab + Tests
+git add notebooks/colab_week2_train.ipynb ACCEPTANCE_TESTS.md RUNLOG.md
+git commit -m "W2: add Colab notebook + acceptance tests update + RUNLOG entry"
+```
+
+### Test Outputs
+```
+# Tier A (Smoke)
+py -m compileall src scripts -q  # ✓ Passed (Syntax OK)
+py scripts/03_train_baseline.py --help # ⚠ Skipped (Missing 'transformers' locally)
+# NOTE: Training script requires DL environment (Colab). Local run skipped.
+
+# Artifacts
+Get-Item notebooks/colab_week2_train.ipynb # ✓ Exists
+Get-Item src/text2diag/model/baseline.py # ✓ Exists
+```
+
+### Next Step
+User to run `notebooks/colab_week2_train.ipynb` on Colab to produce Week 2 results.

@@ -119,3 +119,22 @@ After a successful SAFE PATH run:
 | `tests/test_evidence_span_validity.py` | Evidence spans | A, B |
 | `tests/test_repair_rules.py` | Repair rules | A, B |
 | `tests/test_splits_deterministic.py` | Deterministic splits | A, B |
+| `tests/test_reddit_canonical.py` | Reddit Logic | A, B |
+
+---
+
+## Week 2: Baseline Model Tests
+
+### A5. W2 Smoke Test (Training Loop)
+Verify the training script runs end-to-end on a tiny subset.
+```powershell
+py scripts/03_train_baseline.py --data_dir data/processed/reddit_mh_windows --out_dir results/test_w2_smoke --limit_examples 50 --epochs 1 --batch_size 2
+```
+**Expected**: Runs without error, creates artifacts in `results/test_w2_smoke`.
+
+### B5. Colab Notebook Check
+Ensure notebook exists.
+```powershell
+Get-Item notebooks/colab_week2_train.ipynb
+```
+**Expected**: File found.
