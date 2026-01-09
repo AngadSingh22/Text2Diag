@@ -56,7 +56,7 @@ def run_training(
     # Arguments
     args = TrainingArguments(
         output_dir=str(output_dir / "checkpoints"),
-        evaluation_strategy="epoch",
+        eval_strategy="epoch",
         save_strategy="epoch",
         logging_strategy="epoch",
         learning_rate=learning_rate,
@@ -75,13 +75,26 @@ def run_training(
         remove_unused_columns=False # Required for custom Dataset with 'example_id'
     )
     
+    from transformers import DataCollatorWithPadding
+    base_collator = DataCollatorWithPadding(tokenizer=tokenizer)
+    
+    def safe_collator(features):
+        # Exclude 'example_id' which breaks padding
+        # features is List[Dict]
+        filtered = []
+        for f in features:
+            f_new = {k: v for k, v in f.items() if k != "example_id"}
+            filtered.append(f_new)
+        return base_collator(filtered)
+
     trainer = Trainer(
         model=model,
         args=args,
         train_dataset=train_dataset,
         eval_dataset=val_dataset,
         compute_metrics=compute_metrics,
-        tokenizer=tokenizer
+        tokenizer=tokenizer,
+        data_collator=safe_collator
     )
     
     print("Starting training...")
