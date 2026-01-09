@@ -141,6 +141,18 @@ Get-Item notebooks/colab_week2_train.ipynb
 
 ---
 
-Get-Item notebooks/colab_week2_train.ipynb
+## Week 2: Robustness Eval
+
+### A6. Leakage-Controlled Eval
+```powershell
+py scripts/04_eval_robustness.py --checkpoint results_week2/results/week2/checkpoints/checkpoint-4332 --sanitize_config configs/text_cleaning.yaml
 ```
-**Expected**: File found.
+**Expected**: Creates artifacts in `results/week2/robustness/`.
+
+### B6. Artifacts Check
+```powershell
+Get-ChildItem results/week2/robustness/*.json | Select-Object Name
+Get-ChildItem configs/text_cleaning.yaml
+Get-ChildItem configs/model_thresholds.yaml
+```
+**Expected**: `leakage_eval_metrics.json` and config files exist.

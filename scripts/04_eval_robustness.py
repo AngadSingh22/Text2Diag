@@ -18,7 +18,7 @@ from sklearn.metrics import f1_score, roc_auc_score
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from text2diag.text.sanitize import sanitize_text, load_sanitize_config
+from text2diag.data.cleaning import sanitize_text, load_sanitize_config
 
 def load_jsonl(path: Path) -> list:
     """Load JSONL file."""
