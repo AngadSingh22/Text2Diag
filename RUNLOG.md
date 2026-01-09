@@ -46,25 +46,36 @@ Create 3 governance files to enforce audit trails and acceptance testing:
 3. `ACCEPTANCE_TESTS.md` – Exact "done" check commands
 
 ### Actions
-- [Pending] Create `AGENT_PROTOCOL.md`
-- [Pending] Create `ACCEPTANCE_TESTS.md`
-- [Pending] Commit each file atomically
+- [Done] Create `RUNLOG.md` with template and plan entry
+- [Done] Create `AGENT_PROTOCOL.md` with operating rules
+- [Done] Create `ACCEPTANCE_TESTS.md` with done checks
+- [Done] Commit each file atomically
 - [Pending] Push to GitHub
 
 ### Diff Summary
 | File | Change | Why |
 |------|--------|-----|
-| `RUNLOG.md` | Created with template + initial entry | Governance requirement |
+| `RUNLOG.md` | Created (70 lines) | Append-only audit log with template |
+| `AGENT_PROTOCOL.md` | Created (63 lines) | Hard operating rules for agent |
+| `ACCEPTANCE_TESTS.md` | Created (99 lines) | Exact "done" check commands |
 
 ### Commands Run
 ```bash
-# Will be updated after each step
+git add RUNLOG.md ; git commit -m "Plan Step 1: Create RUNLOG.md with template and initial plan entry"
+# [main 59c8a38] 1 file changed, 70 insertions(+)
+
+git add AGENT_PROTOCOL.md ; git commit -m "Plan Step 2: Create AGENT_PROTOCOL.md with operating rules"
+# [main 7aaf8f6] 1 file changed, 63 insertions(+)
+
+git add ACCEPTANCE_TESTS.md ; git commit -m "Plan Step 3: Create ACCEPTANCE_TESTS.md with done checks"
+# [main fd43d7b] 1 file changed, 99 insertions(+)
 ```
 
 ### Test/Metric Outputs
 ```
-# Will be updated after verification
+Files created successfully. Governance files ready.
+Acceptance tests will be runnable after push.
 ```
 
 ### Next Step
-Create `AGENT_PROTOCOL.md` and commit.
+Push all commits to GitHub.
