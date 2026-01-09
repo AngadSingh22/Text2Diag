@@ -160,3 +160,20 @@ Get-ChildItem results/week2/audits/*.md | Select-Object Name
 Get-ChildItem results/week2/audits/*.json | Select-Object Name
 ```
 **Expected**: At least 5 `.md` and 5 `.json` files exist.
+
+---
+
+## Week 2.6: Shortcut Remediation
+
+### A7. W2.6 Leakage-Controlled Eval
+```powershell
+py scripts/09_eval_sanitized.py --checkpoint results_week2/results/week2/checkpoints/checkpoint-4332 --sanitize_config configs/sanitize.yaml
+```
+**Expected**: Creates artifacts in `results/week2/remediation/`, reports PASS/FAIL verdict.
+
+### B7. W2.6 Artifacts Check
+```powershell
+Get-ChildItem results/week2/remediation/*.json | Select-Object Name
+Get-ChildItem results/week2/policy/*.md | Select-Object Name
+```
+**Expected**: `leakage_eval_metrics.json`, `preds_val_sanitized.jsonl`, `preds_test_sanitized.jsonl`, `THRESHOLD_POLICY.md` exist.

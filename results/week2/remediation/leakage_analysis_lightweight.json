@@ -1,0 +1,38 @@
+{
+  "config": {
+    "strip_urls": true,
+    "strip_reddit_refs": true,
+    "mask_diagnosis_words": false,
+    "diagnosis_vocab": [
+      "adhd",
+      "ocd",
+      "ptsd",
+      "depression"
+    ],
+    "case_insensitive": true
+  },
+  "splits": {
+    "val": {
+      "total_examples": 5761,
+      "examples_affected": 250,
+      "affected_pct": 4.34,
+      "total_urls_removed": 219,
+      "total_reddit_refs_removed": 141,
+      "avg_char_reduction_pct": 0.68
+    },
+    "test": {
+      "total_examples": 5811,
+      "examples_affected": 258,
+      "affected_pct": 4.44,
+      "total_urls_removed": 192,
+      "total_reddit_refs_removed": 148,
+      "avg_char_reduction_pct": 0.72
+    }
+  },
+  "expected_impact": {
+    "note": "Cannot compute actual F1 delta without re-running inference (requires GPU)",
+    "shortcut_report_leak_rate": 62.39,
+    "recommendation": "Run scripts/09_eval_sanitized.py on Colab with GPU for actual metrics",
+    "provisional_verdict": "LIKELY SHORTCUT DEPENDENCE (based on 62% leak rate)"
+  }
+}
