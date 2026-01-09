@@ -588,3 +588,10 @@ Map every file move and log decisions.
 
 ### Next Step
 Execute Phase 2 Commit, then Phase 3 (Moves).
+
+---
+
+## 2026-01-10T05:50:00+05:30 [FAST]
+**Summary**: Plan Phase 3.1: Moved legacy scripts to `docs/legacy/scripts`.
+**Commits**: (Pending)
+**Smoke**: ✓ compileall | ✓ import | ✓ pytest -q
