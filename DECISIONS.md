@@ -44,3 +44,25 @@ Current governance caused slowness due to:
 - **Test time**: Smoke tier targets <10s vs ~30s+ for full suite
 - **Auditability**: Preserved via SAFE PATH requirements before push
 - **Risk**: None – SAFE PATH ensures full validation before merge
+
+---
+
+## 2026-01-10T00:10:22+05:30 – W1 Label Policy: Weak Labels + Taxonomy
+
+### What Changed
+Adopted a "Weak Label" strategy for Reddit data:
+1. **Source**: Subreddit name = weak label signal.
+2. **Taxonomy**:
+    - **Conditions**: Only whitelisted subs (e.g., `ADHD`, `Anxiety`) map to condition labels.
+    - **Generic**: Subs like `mentalhealth`, `depression_help` map to `general_distress`.
+    - **Other**: Unknown subs map to `other` or are dropped.
+3. **Abstention**: Model should learn to abstain or predict `general_distress` when evidence is ambiguous.
+
+### Why
+- **No Clinical Ground Truth**: We only have user self-reports/community membership.
+- **Safety**: Avoiding "diagnosis" claims. Output is "user posts in r/ADHD-like context", not "user has ADHD".
+- **Generic Handling**: Distinguishing general distress from specific conditions is critical for precision.
+
+### Expected Metric Impact
+- **Accuracy**: May be lower than "clean" labels but more realistic.
+- **Calibration**: Expect higher uncertainty for `general_distress` inputs.

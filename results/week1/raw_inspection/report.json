@@ -1,0 +1,151 @@
+{
+  "timestamp": "2026-01-09T17:15:29.271940+00:00",
+  "out_dir": "F:\\Text2Diag\\data\\raw",
+  "report_dir": "F:\\Text2Diag\\results\\week1\\raw_inspection",
+  "huggingface_dataset": {
+    "dataset_id": "solomonk/reddit_mental_health_posts",
+    "source": "huggingface",
+    "splits": {
+      "train": {
+        "num_rows": 151288,
+        "columns": [
+          "author",
+          "body",
+          "created_utc",
+          "id",
+          "num_comments",
+          "score",
+          "subreddit",
+          "title",
+          "upvote_ratio",
+          "url"
+        ],
+        "dtypes": {
+          "author": "Value('string')",
+          "body": "Value('string')",
+          "created_utc": "Value('string')",
+          "id": "Value('string')",
+          "num_comments": "Value('int64')",
+          "score": "Value('int64')",
+          "subreddit": "Value('string')",
+          "title": "Value('string')",
+          "upvote_ratio": "Value('float64')",
+          "url": "Value('string')"
+        },
+        "missingness": {
+          "author": {
+            "null_count": 0,
+            "null_pct": 0.0
+          },
+          "body": {
+            "null_count": 1609,
+            "null_pct": 1.06
+          },
+          "created_utc": {
+            "null_count": 0,
+            "null_pct": 0.0
+          },
+          "id": {
+            "null_count": 0,
+            "null_pct": 0.0
+          },
+          "num_comments": {
+            "null_count": 0,
+            "null_pct": 0.0
+          },
+          "score": {
+            "null_count": 0,
+            "null_pct": 0.0
+          },
+          "subreddit": {
+            "null_count": 0,
+            "null_pct": 0.0
+          },
+          "title": {
+            "null_count": 0,
+            "null_pct": 0.0
+          },
+          "upvote_ratio": {
+            "null_count": 0,
+            "null_pct": 0.0
+          },
+          "url": {
+            "null_count": 0,
+            "null_pct": 0.0
+          }
+        },
+        "sample_rows": [
+          {
+            "author": "HotConversation1273",
+            "body": "A few months ago I was accepted into this full time software engineering fellowship and it’s made me realize that I CANNOT work sustainably to save my life. It’s so hard to prioritize my time when I g",
+            "created_utc": "2021-12-22T18:32:56.000Z",
+            "id": "rmbjwb",
+            "num_comments": "1",
+            "score": "1",
+            "subreddit": "ADHD",
+            "title": "I get extremely anxious if I’m not working 24/7",
+            "upvote_ratio": "1.0",
+            "url": "https://www.reddit.com/r/ADHD/comments/rmbjwb/i_get_extremely_anxious_if_im_not_working_247/"
+          },
+          {
+            "author": "snorefestt",
+            "body": "Hey guys, I was curious if anyone else has the same issue as me. My apartment is a fucking pigsty, with no exaggeration of the word. I live by myself and my house is beyond messy into dirty, I haven't",
+            "created_utc": "2021-12-22T18:24:25.000Z",
+            "id": "rmbd1y",
+            "num_comments": "3",
+            "score": "5",
+            "subreddit": "ADHD",
+            "title": "I can't will myself to clean my own house, but feel incredibly motivated to clean my girlfriends place?",
+            "upvote_ratio": "1.0",
+            "url": "https://www.reddit.com/r/ADHD/comments/rmbd1y/i_cant_will_myself_to_clean_my_own_house_but_feel/"
+          },
+          {
+            "author": "etyf12",
+            "body": " \n\ni have 6 exams in the next 2 weeks one of them on monday and i havent studied for any of them and i feel overwhelmed from all of this and now i cant sit down and study for the exams and i dont know",
+            "created_utc": "2021-12-22T18:22:52.000Z",
+            "id": "rmbbvu",
+            "num_comments": "1",
+            "score": "2",
+            "subreddit": "ADHD",
+            "title": "i need some help",
+            "upvote_ratio": "1.0",
+            "url": "https://www.reddit.com/r/ADHD/comments/rmbbvu/i_need_some_help/"
+          },
+          {
+            "author": "GetHairOrDieTryin",
+            "body": "Is there anyone out there that is struggling with ADD/ADHD that’s interesting in chatting for a bit? Maybe sharing struggles and advising each other on tips and tricks that we both may have? I got dia",
+            "created_utc": "2021-12-22T18:20:35.000Z",
+            "id": "rmba1t",
+            "num_comments": "3",
+            "score": "2",
+            "subreddit": "ADHD",
+            "title": "Anyone up for a chat?",
+            "upvote_ratio": "1.0",
+            "url": "https://www.reddit.com/r/ADHD/comments/rmba1t/anyone_up_for_a_chat/"
+          },
+          {
+            "author": "ZeroTransPat",
+            "body": "Whenever I get hungry, I never eat because I don't know what to eat. So I end up having pizza because its easy. \n\nI obviously can't eat pizza forever but when I'm at work it makes it even more difficu",
+            "created_utc": "2021-12-22T18:18:47.000Z",
+            "id": "rmb8lm",
+            "num_comments": "2",
+            "score": "1",
+            "subreddit": "ADHD",
+            "title": "Figuring out what to eat sucks",
+            "upvote_ratio": "1.0",
+            "url": "https://www.reddit.com/r/ADHD/comments/rmb8lm/figuring_out_what_to_eat_sucks/"
+          }
+        ]
+      }
+    },
+    "local_path": "data\\raw\\reddit_mental_health_posts"
+  },
+  "mentalhelp_repo": {
+    "repo_url": "https://github.com/stevekwon211/MentalHelp.git",
+    "source": "github",
+    "local_path": "data\\raw\\MentalHelp",
+    "files": [],
+    "data_files": [],
+    "error": "Cloning into 'data\\raw\\MentalHelp'...\nremote: Repository not found.\nfatal: repository 'https://github.com/stevekwon211/MentalHelp.git/' not found\n"
+  }
+}
