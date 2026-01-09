@@ -1,0 +1,10 @@
+# Core dependencies
+datasets>=2.0.0
+pandas>=1.5.0
+numpy>=1.21.0
+
+# For JSON/data handling
+pyarrow>=10.0.0
+
+# Testing
+pytest>=7.0.0
