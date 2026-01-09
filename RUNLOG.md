@@ -562,3 +562,29 @@ tree /F | Out-File -Encoding utf8 reports/REPO_TREE_DEPTH4.txt
 
 ### Next Step
 Execute Phase 1 Commit.
+
+---
+
+## 2026-01-10T05:45:00+05:30 [SAFE]
+
+### Plan
+**Phase 2: Finalize Cleanup Plan**
+Map every file move and log decisions.
+
+**Moves**:
+- 6 Legacy scripts -> `docs/legacy/scripts/`
+- 4 Week 3 scripts -> Renumbered `05_` to `08_`
+- `modeling/` -> `decision/`
+- Results cleanup
+
+### Diff Summary
+| File | Change | Why |
+|------|--------|-----|
+| `CLEANUP_PLAN.md` | Update | Added 14 explicit moves |
+| `DECISIONS.md` | Update | Logged refactor rationale |
+
+### Commands Run
+(Pending Execution)
+
+### Next Step
+Execute Phase 2 Commit, then Phase 3 (Moves).

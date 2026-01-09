@@ -126,3 +126,39 @@ Adopted a "Weak Label" strategy for Reddit data:
 ### Expected Metric Impact
 - Improved per-label F1 vs fixed 0.5 threshold.
 - No change to ranking metrics (AUC).
+
+---
+
+## 2026-01-10T05:05:00+05:30 – W3.1 Strategy Shift: Blind Training (Self-Labeling Remediation)
+
+### What Changed
+**Pivoted** from "Clean Inference" to "Blind Training":
+1.  **Dataset**: Created `reddit_mh_sanitized` where ALL diagnosis words (ADHD, depression, etc.) are masked (`[MASK]`).
+2.  **Training**: Retraining model on this masked dataset (Week 3 Robust Baseline).
+3.  **Acceptance**: We accept that F1 scores will likely drop (e.g., to ~0.75).
+
+### Why
+- **Inference Evaluation (W2.6)** confirmed that the W2 model crashes when shortcuts are removed (Self-labeling dependency).
+- Just masking at test time isn't enough; the model must learn to ignore shortcuts **during training** to learn actual symptom patterns.
+- This establishes the **Honest Baseline**—the true performance ceiling of the model on symptom data alone.
+
+### Expected Metric Impact
+- **F1 Score**: Significant drop expected (0.89 -> ~0.75). This is a **success criteria** for robustness, not a failure.
+- **Generalization**: Model should perform better on real-world (non-Reddit) clinical notes where patients don't announce their diagnosis.
+
+---
+
+## 2026-01-10T05:40:00+05:30 – Repo Normalization V1 (Cleanup)
+
+### What Changed
+1.  **Script Renaming**: `scripts/10_...` -> `scripts/05_...` (Renumbering to close gap).
+2.  **Legacy Archival**: Moving `scripts/train.py`, `eval.py` etc -> `docs/legacy/scripts/` (Start fresh with numbered steps).
+3.  **Module Rename**: `src/text2diag/modeling` -> `src/text2diag/decision` (Resolve ambiguity with `model`).
+
+### Why
+- **Clutter**: Root `scripts/` had 15+ files, half unused.
+- **Sequence**: `10, 11, 12` implied missing steps 5-9.
+- **Ambiguity**: `modeling` usually means Architecture (transformers style), but here contained `postprocess.py` (thresholds). `decision` is clearer.
+
+### Expected Metric Impact
+- None (refactor only).
