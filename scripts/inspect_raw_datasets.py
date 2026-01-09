@@ -47,12 +47,15 @@ def inspect_hf_dataset(out_dir: Path) -> dict[str, Any]:
         return {"error": "datasets package not installed"}
     
     dataset_id = "solomonk/reddit_mental_health_posts"
+    # Pinning to specific commit SHA for reproducibility (checked 2026-01-10)
+    revision = "main" 
+    
     print(f"\n{'='*60}")
-    print(f"Downloading HuggingFace dataset: {dataset_id}")
+    print(f"Downloading HuggingFace dataset: {dataset_id} (rev: {revision})")
     print("="*60)
     
     try:
-        ds = load_dataset(dataset_id)
+        ds = load_dataset(dataset_id, revision=revision)
     except Exception as e:
         print(f"ERROR loading dataset: {e}")
         return {"error": str(e), "dataset_id": dataset_id}
