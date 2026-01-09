@@ -22,3 +22,25 @@
 - **No model metrics yet** – this is data exploration phase
 - **Deliverables**: Structure report (Markdown + JSON) documenting dataset schemas
 - **Risk mitigation**: Understanding data shape early prevents downstream pipeline errors
+
+---
+
+## 2026-01-09T23:40:33+05:30 – Governance: Fast/Safe Execution Paths
+
+### What Changed
+1. **`AGENT_PROTOCOL.md`**: Added FAST PATH (default, lightweight) and SAFE PATH (merge/push) execution policies. Defined "relevant scope" to prevent full repo re-reads.
+2. **`ACCEPTANCE_TESTS.md`**: Split tests into Tier A (smoke, <10s) and Tier B (full). Added copy-paste ready commands for both.
+3. **`RUNLOG.md`**: Updated template to support short FAST PATH entries (3 lines) and full SAFE PATH entries. Added deferred logging to `results/runlogs/`.
+
+### Why
+Current governance caused slowness due to:
+- Mandatory full repo reads on every action
+- Full acceptance tests on every atomic commit
+- Verbose RUNLOG entries even for trivial changes
+- No caching or scope limitation
+
+### Expected Metric Impact
+- **Agent efficiency**: ~60% reduction in I/O per atomic step
+- **Test time**: Smoke tier targets <10s vs ~30s+ for full suite
+- **Auditability**: Preserved via SAFE PATH requirements before push
+- **Risk**: None – SAFE PATH ensures full validation before merge

@@ -4,36 +4,43 @@
 
 ---
 
-## Entry Template
+## Entry Templates
 
+### FAST PATH Entry (3 lines max)
 ```markdown
-## YYYY-MM-DDTHH:MM:SS+TZ
+## YYYY-MM-DDTHH:MM:SS+TZ [FAST]
+**Summary**: <one-line description of change>
+**Commits**: `<sha1>`, `<sha2>`
+**Smoke**: ✓ compileall | ✓ import | ✓ pytest -q
+```
+
+### SAFE PATH Entry (Full)
+```markdown
+## YYYY-MM-DDTHH:MM:SS+TZ [SAFE]
 
 ### Plan
 <Brief summary of what will be done>
 
-### Actions
-- <Action 1>
-- <Action 2>
-
 ### Diff Summary
 | File | Change | Why |
 |------|--------|-----|
-| `file.py` | Added function X | Needed for feature Y |
+| `file.py` | Added X | For Y |
 
 ### Commands Run
 \```bash
 <commands>
 \```
 
-### Test/Metric Outputs
+### Test Outputs
 \```
 <output>
 \```
+*(Or link to: `results/runlogs/<date>/<sha>.txt`)*
 
 ### Next Step
 <What comes next>
 ```
+
 
 ---
 
