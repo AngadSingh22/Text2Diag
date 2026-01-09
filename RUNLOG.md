@@ -79,3 +79,53 @@ Acceptance tests will be runnable after push.
 
 ### Next Step
 Push all commits to GitHub.
+
+---
+
+## 2026-01-09T22:28:02+05:30
+
+### Plan
+**Step W1**: Download + inspect raw datasets (no cleaning yet), emit structure report, no data committed.
+
+Create `scripts/inspect_raw_datasets.py` with argparse that:
+1. Downloads HuggingFace dataset `solomonk/reddit_mental_health_posts` using `datasets.load_dataset`
+2. Prints split sizes, column names, dtypes, missingness, 5 sample rows
+3. Saves dataset locally with `save_to_disk` to `data/raw/`
+4. Clones MentalHelp repo into `data/raw/MentalHelp` if missing
+5. Prints shallow file tree and attempts to load data files (csv/json/jsonl/parquet)
+6. Writes consolidated report (Markdown + JSON) to `results/week1/raw_inspection/`
+
+Also:
+- Update `.gitignore` to exclude `data/raw/` and large artifacts
+- Update `requirements.txt` to add `datasets` dependency
+- Create `DECISIONS.md` with rationale
+
+### Actions
+- [Pending] Update `.gitignore` with data exclusions
+- [Pending] Update `requirements.txt` with `datasets` dependency
+- [Pending] Create `DECISIONS.md`
+- [Pending] Create `scripts/inspect_raw_datasets.py`
+- [Pending] Run script to generate reports
+- [Pending] Run ACCEPTANCE_TESTS.md commands
+- [Pending] Update RUNLOG with results
+
+### Diff Summary
+| File | Change | Why |
+|------|--------|-----|
+| `.gitignore` | Add data/raw/, *.arrow, etc. | Prevent large datasets from being committed |
+| `requirements.txt` | Add datasets>=2.0 | Required for HuggingFace dataset loading |
+| `DECISIONS.md` | Create with W1 decision | Track what/why/impact per protocol |
+| `scripts/inspect_raw_datasets.py` | Create new script | Core deliverable for W1 |
+
+### Commands Run
+```bash
+# Will be updated after each step
+```
+
+### Test/Metric Outputs
+```
+# Will be updated after acceptance tests
+```
+
+### Next Step
+Update .gitignore and requirements.txt, then create DECISIONS.md.
