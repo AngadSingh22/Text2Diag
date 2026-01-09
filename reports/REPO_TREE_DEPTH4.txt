@@ -1,0 +1,356 @@
+﻿Folder PATH listing for volume New Volume
+Volume serial number is 8249-4735
+F:.
+ª   .env.example
+ª   .gitignore
+ª   ACCEPTANCE_TESTS.md
+ª   AGENT_PROTOCOL.md
+ª   CLEANUP_PLAN.md
+ª   DECISIONS.md
+ª   LICENSE
+ª   pyproject.toml
+ª   README.md
+ª   requirements.txt
+ª   RUNLOG.md
+ª   
++---.github
+ª   +---workflows
+ª           ci.yaml
+ª           
++---.pytest_cache
+ª   ª   .gitignore
+ª   ª   CACHEDIR.TAG
+ª   ª   README.md
+ª   ª   
+ª   +---v
+ª       +---cache
+ª               nodeids
+ª               
++---configs
+ª       base.yaml
+ª       calibrate.yaml
+ª       contract.yaml
+ª       data.yaml
+ª       data_reddit.yaml
+ª       evidence.yaml
+ª       labels_condition_whitelist.txt
+ª       model_thresholds.yaml
+ª       text_cleaning.yaml
+ª       train.yaml
+ª       
++---data
+ª   +---processed
+ª   ª   +---reddit_mh_sanitized
+ª   ª   ª       labels.json
+ª   ª   ª       test.jsonl
+ª   ª   ª       train.jsonl
+ª   ª   ª       val.jsonl
+ª   ª   ª       
+ª   ª   +---reddit_mh_windows
+ª   ª           labels.json
+ª   ª           test.jsonl
+ª   ª           train.jsonl
+ª   ª           val.jsonl
+ª   ª           
+ª   +---raw
+ª       +---reddit_mental_health_posts
+ª           ª   dataset_dict.json
+ª           ª   
+ª           +---train
+ª                   cache-4761157a4f07e4bb_00000_of_00004.arrow
+ª                   cache-4761157a4f07e4bb_00001_of_00004.arrow
+ª                   cache-4761157a4f07e4bb_00002_of_00004.arrow
+ª                   cache-4761157a4f07e4bb_00003_of_00004.arrow
+ª                   cache-49e37659623323f2_00000_of_00004.arrow
+ª                   cache-49e37659623323f2_00001_of_00004.arrow
+ª                   cache-49e37659623323f2_00002_of_00004.arrow
+ª                   cache-49e37659623323f2_00003_of_00004.arrow
+ª                   cache-4ee7a8c9f4e989c4.arrow
+ª                   cache-c743bcb84e104aa9.arrow
+ª                   data-00000-of-00001.arrow
+ª                   dataset_info.json
+ª                   state.json
+ª                   
++---docs
+ª   +---templates
+ª           W2_SANITIZED_SUMMARY_TEMPLATE.md
+ª           
++---figures
+ª       .gitkeep
+ª       
++---notebooks
+ª       .gitkeep
+ª       colab_week2_train.ipynb
+ª       colab_week3_robust_train.ipynb
+ª       
++---paper
+ª       .gitkeep
+ª       
++---reports
+ª       REPO_MANIFEST.json
+ª       REPO_TREE_DEPTH4.txt
+ª       
++---results
+ª   +---final
+ª   ª       .gitkeep
+ª   ª       
+ª   +---test_w3_smoke
+ª   ª   ª   metrics.json
+ª   ª   ª   preds_test.jsonl
+ª   ª   ª   preds_val.jsonl
+ª   ª   ª   
+ª   ª   +---checkpoints
+ª   ª       +---checkpoint-1
+ª   ª               config.json
+ª   ª               model.safetensors
+ª   ª               optimizer.pt
+ª   ª               rng_state.pth
+ª   ª               scheduler.pt
+ª   ª               special_tokens_map.json
+ª   ª               tokenizer.json
+ª   ª               tokenizer_config.json
+ª   ª               trainer_state.json
+ª   ª               training_args.bin
+ª   ª               vocab.txt
+ª   ª               
+ª   +---week1
+ª   ª   ª   .gitkeep
+ª   ª   ª   
+ª   ª   +---raw_inspection
+ª   ª   ª       report.json
+ª   ª   ª       report.md
+ª   ª   ª       
+ª   ª   +---reddit_canonical
+ª   ª           report.json
+ª   ª           report.md
+ª   ª           
+ª   +---week2
+ª   ª   ª   .gitkeep
+ª   ª   ª   
+ª   ª   +---policy
+ª   ª   ª       THRESHOLD_POLICY.md
+ª   ª   ª       
+ª   ª   +---smoke
+ª   ª       ª   metrics.json
+ª   ª       ª   metrics.md
+ª   ª       ª   preds_test.jsonl
+ª   ª       ª   preds_val.jsonl
+ª   ª       ª   
+ª   ª       +---checkpoints
+ª   ª           +---checkpoint-7
+ª   ª                   config.json
+ª   ª                   model.safetensors
+ª   ª                   optimizer.pt
+ª   ª                   rng_state.pth
+ª   ª                   scheduler.pt
+ª   ª                   special_tokens_map.json
+ª   ª                   tokenizer.json
+ª   ª                   tokenizer_config.json
+ª   ª                   trainer_state.json
+ª   ª                   training_args.bin
+ª   ª                   vocab.txt
+ª   ª                   
+ª   +---week3
+ª   ª       .gitkeep
+ª   ª       
+ª   +---week4
+ª   ª       .gitkeep
+ª   ª       
+ª   +---week5
+ª           .gitkeep
+ª           
++---results_week2
+ª   +---results
+ª       +---week2
+ª           ª   .gitkeep
+ª           ª   metrics.json
+ª           ª   metrics.md
+ª           ª   preds_test.jsonl
+ª           ª   preds_val.jsonl
+ª           ª   
+ª           +---checkpoints
+ª               ª   checkpoint-4332.zip
+ª               ª   
+ª               +---checkpoint-4332
+ª               ª       config.json
+ª               ª       model.safetensors
+ª               ª       optimizer.pt
+ª               ª       rng_state.pth
+ª               ª       scaler.pt
+ª               ª       scheduler.pt
+ª               ª       special_tokens_map.json
+ª               ª       tokenizer.json
+ª               ª       tokenizer_config.json
+ª               ª       trainer_state.json
+ª               ª       training_args.bin
+ª               ª       vocab.txt
+ª               ª       
+ª               +---runs
+ª                   +---Jan09_19-48-18_1910b0ae9270
+ª                           events.out.tfevents.1767988101.1910b0ae9270.1301.0
+ª                           
++---scripts
+ª   ª   02_build_reddit_canonical.py
+ª   ª   03_train_baseline.py
+ª   ª   04_eval_robustness.py
+ª   ª   10_build_sanitized_dataset.py
+ª   ª   11_posttrain_pack_sanitized.py
+ª   ª   11_train_robust.py
+ª   ª   12_compare_robustness.py
+ª   ª   calibrate.py
+ª   ª   eval.py
+ª   ª   infer_json.py
+ª   ª   inspect_raw_datasets.py
+ª   ª   prepare_data.py
+ª   ª   run_all.py
+ª   ª   train.py
+ª   ª   
+ª   +---__pycache__
+ª           09_eval_sanitized.cpython-314.pyc
+ª           calibrate.cpython-314.pyc
+ª           eval.cpython-314.pyc
+ª           infer_json.cpython-314.pyc
+ª           inspect_raw_datasets.cpython-314.pyc
+ª           prepare_data.cpython-314.pyc
+ª           run_all.cpython-314.pyc
+ª           train.cpython-314.pyc
+ª           
++---src
+ª   +---text2diag
+ª       ª   __init__.py
+ª       ª   
+ª       +---calibration
+ª       ª   ª   metrics.py
+ª       ª   ª   plots.py
+ª       ª   ª   temperature.py
+ª       ª   ª   
+ª       ª   +---__pycache__
+ª       ª           metrics.cpython-314.pyc
+ª       ª           plots.cpython-314.pyc
+ª       ª           temperature.cpython-314.pyc
+ª       ª           
+ª       +---contract
+ª       ª   ª   abstain.py
+ª       ª   ª   repair.py
+ª       ª   ª   report.py
+ª       ª   ª   schema_contract.py
+ª       ª   ª   
+ª       ª   +---__pycache__
+ª       ª           abstain.cpython-314.pyc
+ª       ª           repair.cpython-314.pyc
+ª       ª           report.cpython-314.pyc
+ª       ª           schema_contract.cpython-314.pyc
+ª       ª           
+ª       +---data
+ª       ª   ª   canonicalize.py
+ª       ª   ª   cleaning.py
+ª       ª   ª   jsonl_dataset.py
+ª       ª   ª   reddit_windows.py
+ª       ª   ª   splits.py
+ª       ª   ª   stats.py
+ª       ª   ª   windowing.py
+ª       ª   ª   
+ª       ª   +---adapters
+ª       ª   ª   ª   mentalhelp.py
+ª       ª   ª   ª   reddit_mh_posts.py
+ª       ª   ª   ª   
+ª       ª   ª   +---__pycache__
+ª       ª   ª           mentalhelp.cpython-314.pyc
+ª       ª   ª           reddit_mh_posts.cpython-314.pyc
+ª       ª   ª           
+ª       ª   +---__pycache__
+ª       ª           canonicalize.cpython-314.pyc
+ª       ª           cleaning.cpython-314.pyc
+ª       ª           jsonl_dataset.cpython-314.pyc
+ª       ª           reddit_windows.cpython-314.pyc
+ª       ª           splits.cpython-314.pyc
+ª       ª           stats.cpython-314.pyc
+ª       ª           windowing.cpython-314.pyc
+ª       ª           
+ª       +---eval
+ª       ª   ª   dumps.py
+ª       ª   ª   eval_baseline.py
+ª       ª   ª   metrics.py
+ª       ª   ª   
+ª       ª   +---__pycache__
+ª       ª           dumps.cpython-314.pyc
+ª       ª           eval_baseline.cpython-314.pyc
+ª       ª           metrics.cpython-314.pyc
+ª       ª           
+ª       +---evidence
+ª       ª   ª   faithfulness.py
+ª       ª   ª   saliency.py
+ª       ª   ª   spans.py
+ª       ª   ª   
+ª       ª   +---__pycache__
+ª       ª           faithfulness.cpython-314.pyc
+ª       ª           saliency.cpython-314.pyc
+ª       ª           spans.cpython-314.pyc
+ª       ª           
+ª       +---graph
+ª       ª   ª   cooccurrence.py
+ª       ª   ª   prune.py
+ª       ª   ª   
+ª       ª   +---__pycache__
+ª       ª           cooccurrence.cpython-314.pyc
+ª       ª           prune.cpython-314.pyc
+ª       ª           
+ª       +---io
+ª       ª   ª   schemas.py
+ª       ª   ª   serializers.py
+ª       ª   ª   
+ª       ª   +---__pycache__
+ª       ª           schemas.cpython-314.pyc
+ª       ª           serializers.cpython-314.pyc
+ª       ª           
+ª       +---model
+ª       ª   ª   baseline.py
+ª       ª   ª   encoder.py
+ª       ª   ª   heads.py
+ª       ª   ª   losses.py
+ª       ª   ª   train.py
+ª       ª   ª   
+ª       ª   +---__pycache__
+ª       ª           baseline.cpython-314.pyc
+ª       ª           encoder.cpython-314.pyc
+ª       ª           heads.cpython-314.pyc
+ª       ª           losses.cpython-314.pyc
+ª       ª           train.cpython-314.pyc
+ª       ª           
+ª       +---modeling
+ª       ª       postprocess.py
+ª       ª       __init__.py
+ª       ª       
+ª       +---train
+ª       ª   ª   train_baseline.py
+ª       ª   ª   
+ª       ª   +---__pycache__
+ª       ª           train_baseline.cpython-314.pyc
+ª       ª           
+ª       +---utils
+ª       ª   ª   config.py
+ª       ª   ª   determinism.py
+ª       ª   ª   logging.py
+ª       ª   ª   
+ª       ª   +---__pycache__
+ª       ª           config.cpython-314.pyc
+ª       ª           determinism.cpython-314.pyc
+ª       ª           logging.cpython-314.pyc
+ª       ª           
+ª       +---__pycache__
+ª               __init__.cpython-314.pyc
+ª               
++---tests
+    ª   test_contract_validator.py
+    ª   test_evidence_span_validity.py
+    ª   test_reddit_canonical.py
+    ª   test_repair_rules.py
+    ª   test_splits_deterministic.py
+    ª   
+    +---__pycache__
+            test_contract_validator.cpython-314-pytest-9.0.2.pyc
+            test_evidence_span_validity.cpython-314-pytest-9.0.2.pyc
+            test_reddit_canonical.cpython-314-pytest-9.0.2.pyc
+            test_repair_rules.cpython-314-pytest-9.0.2.pyc
+            test_splits_deterministic.cpython-314-pytest-9.0.2.pyc
+            

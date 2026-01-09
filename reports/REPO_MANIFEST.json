@@ -1,0 +1,886 @@
+﻿[
+    {
+        "FullName":  "F:\\Text2Diag\\.env.example",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\.gitignore",
+        "Length":  635
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\ACCEPTANCE_TESTS.md",
+        "Length":  4848
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\AGENT_PROTOCOL.md",
+        "Length":  3243
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\CLEANUP_PLAN.md",
+        "Length":  614
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\DECISIONS.md",
+        "Length":  6892
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\LICENSE",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\pyproject.toml",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\README.md",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\requirements.txt",
+        "Length":  179
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\RUNLOG.md",
+        "Length":  20014
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\.github\\workflows\\ci.yaml",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\.pytest_cache\\.gitignore",
+        "Length":  39
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\.pytest_cache\\CACHEDIR.TAG",
+        "Length":  191
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\.pytest_cache\\README.md",
+        "Length":  310
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\.pytest_cache\\v\\cache\\nodeids",
+        "Length":  255
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\configs\\base.yaml",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\configs\\calibrate.yaml",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\configs\\contract.yaml",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\configs\\data.yaml",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\configs\\data_reddit.yaml",
+        "Length":  770
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\configs\\evidence.yaml",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\configs\\labels_condition_whitelist.txt",
+        "Length":  101
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\configs\\model_thresholds.yaml",
+        "Length":  414
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\configs\\text_cleaning.yaml",
+        "Length":  289
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\configs\\train.yaml",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\processed\\reddit_mh_sanitized\\labels.json",
+        "Length":  64
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\processed\\reddit_mh_sanitized\\test.jsonl",
+        "Length":  9310888
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\processed\\reddit_mh_sanitized\\train.jsonl",
+        "Length":  71670571
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\processed\\reddit_mh_sanitized\\val.jsonl",
+        "Length":  9092432
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\processed\\reddit_mh_windows\\labels.json",
+        "Length":  64
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\processed\\reddit_mh_windows\\test.jsonl",
+        "Length":  9389136
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\processed\\reddit_mh_windows\\train.jsonl",
+        "Length":  72273361
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\processed\\reddit_mh_windows\\val.jsonl",
+        "Length":  9165027
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\raw\\reddit_mental_health_posts\\dataset_dict.json",
+        "Length":  21
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\raw\\reddit_mental_health_posts\\train\\cache-4761157a4f07e4bb_00000_of_00004.arrow",
+        "Length":  36792
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\raw\\reddit_mental_health_posts\\train\\cache-4761157a4f07e4bb_00001_of_00004.arrow",
+        "Length":  18648
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\raw\\reddit_mental_health_posts\\train\\cache-4761157a4f07e4bb_00002_of_00004.arrow",
+        "Length":  24968
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\raw\\reddit_mental_health_posts\\train\\cache-4761157a4f07e4bb_00003_of_00004.arrow",
+        "Length":  25808
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\raw\\reddit_mental_health_posts\\train\\cache-49e37659623323f2_00000_of_00004.arrow",
+        "Length":  31571048
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\raw\\reddit_mental_health_posts\\train\\cache-49e37659623323f2_00001_of_00004.arrow",
+        "Length":  29056560
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\raw\\reddit_mental_health_posts\\train\\cache-49e37659623323f2_00002_of_00004.arrow",
+        "Length":  27968064
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\raw\\reddit_mental_health_posts\\train\\cache-49e37659623323f2_00003_of_00004.arrow",
+        "Length":  30686280
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\raw\\reddit_mental_health_posts\\train\\cache-4ee7a8c9f4e989c4.arrow",
+        "Length":  1248
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\raw\\reddit_mental_health_posts\\train\\cache-c743bcb84e104aa9.arrow",
+        "Length":  1232408
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\raw\\reddit_mental_health_posts\\train\\data-00000-of-00001.arrow",
+        "Length":  119564992
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\raw\\reddit_mental_health_posts\\train\\dataset_info.json",
+        "Length":  2242
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\data\\raw\\reddit_mental_health_posts\\train\\state.json",
+        "Length":  262
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\docs\\templates\\W2_SANITIZED_SUMMARY_TEMPLATE.md",
+        "Length":  1332
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\figures\\.gitkeep",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\notebooks\\.gitkeep",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\notebooks\\colab_week2_train.ipynb",
+        "Length":  3581
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\notebooks\\colab_week3_robust_train.ipynb",
+        "Length":  3525
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\paper\\.gitkeep",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\reports\\REPO_MANIFEST.json",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\reports\\REPO_TREE_DEPTH4.txt",
+        "Length":  21312
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\final\\.gitkeep",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\metrics.json",
+        "Length":  1278
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\preds_test.jsonl",
+        "Length":  1808
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\preds_val.jsonl",
+        "Length":  1802
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\config.json",
+        "Length":  812
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\model.safetensors",
+        "Length":  267841796
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\optimizer.pt",
+        "Length":  535743307
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\rng_state.pth",
+        "Length":  14455
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\scheduler.pt",
+        "Length":  1465
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\special_tokens_map.json",
+        "Length":  132
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\tokenizer.json",
+        "Length":  711661
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\tokenizer_config.json",
+        "Length":  1283
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\trainer_state.json",
+        "Length":  1277
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\training_args.bin",
+        "Length":  5841
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\test_w3_smoke\\checkpoints\\checkpoint-1\\vocab.txt",
+        "Length":  231508
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week1\\.gitkeep",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week1\\raw_inspection\\report.json",
+        "Length":  5946
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week1\\raw_inspection\\report.md",
+        "Length":  2813
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week1\\reddit_canonical\\report.json",
+        "Length":  1027
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week1\\reddit_canonical\\report.md",
+        "Length":  1688
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2\\.gitkeep",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2\\policy\\THRESHOLD_POLICY.md",
+        "Length":  1799
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2\\smoke\\metrics.json",
+        "Length":  1339
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2\\smoke\\metrics.md",
+        "Length":  319
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2\\smoke\\preds_test.jsonl",
+        "Length":  9101
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2\\smoke\\preds_val.jsonl",
+        "Length":  9124
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2\\smoke\\checkpoints\\checkpoint-7\\config.json",
+        "Length":  812
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2\\smoke\\checkpoints\\checkpoint-7\\model.safetensors",
+        "Length":  267841796
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2\\smoke\\checkpoints\\checkpoint-7\\optimizer.pt",
+        "Length":  535743307
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2\\smoke\\checkpoints\\checkpoint-7\\rng_state.pth",
+        "Length":  14455
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2\\smoke\\checkpoints\\checkpoint-7\\scheduler.pt",
+        "Length":  1465
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2\\smoke\\checkpoints\\checkpoint-7\\special_tokens_map.json",
+        "Length":  132
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2\\smoke\\checkpoints\\checkpoint-7\\tokenizer.json",
+        "Length":  711661
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2\\smoke\\checkpoints\\checkpoint-7\\tokenizer_config.json",
+        "Length":  1283
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2\\smoke\\checkpoints\\checkpoint-7\\trainer_state.json",
+        "Length":  1311
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2\\smoke\\checkpoints\\checkpoint-7\\training_args.bin",
+        "Length":  5841
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week2\\smoke\\checkpoints\\checkpoint-7\\vocab.txt",
+        "Length":  231508
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week3\\.gitkeep",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week4\\.gitkeep",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results\\week5\\.gitkeep",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\.gitkeep",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\metrics.json",
+        "Length":  1495
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\metrics.md",
+        "Length":  299
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\preds_test.jsonl",
+        "Length":  1063186
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\preds_val.jsonl",
+        "Length":  1047782
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332.zip",
+        "Length":  681829537
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\config.json",
+        "Length":  774
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\model.safetensors",
+        "Length":  267841796
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\optimizer.pt",
+        "Length":  535747659
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\rng_state.pth",
+        "Length":  14709
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\scaler.pt",
+        "Length":  1383
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\scheduler.pt",
+        "Length":  1465
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\special_tokens_map.json",
+        "Length":  125
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\tokenizer.json",
+        "Length":  711661
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\tokenizer_config.json",
+        "Length":  1227
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\trainer_state.json",
+        "Length":  2162
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\training_args.bin",
+        "Length":  5841
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\checkpoint-4332\\vocab.txt",
+        "Length":  231508
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\results_week2\\results\\week2\\checkpoints\\runs\\Jan09_19-48-18_1910b0ae9270\\events.out.tfevents.1767988101.1910b0ae9270.1301.0",
+        "Length":  7295
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\02_build_reddit_canonical.py",
+        "Length":  6149
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\03_train_baseline.py",
+        "Length":  5561
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\04_eval_robustness.py",
+        "Length":  10542
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\10_build_sanitized_dataset.py",
+        "Length":  5136
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\11_posttrain_pack_sanitized.py",
+        "Length":  8217
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\11_train_robust.py",
+        "Length":  4718
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\12_compare_robustness.py",
+        "Length":  5602
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\calibrate.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\eval.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\infer_json.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\inspect_raw_datasets.py",
+        "Length":  7538
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\prepare_data.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\run_all.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\train.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\09_eval_sanitized.cpython-314.pyc",
+        "Length":  14344
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\calibrate.cpython-314.pyc",
+        "Length":  119
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\eval.cpython-314.pyc",
+        "Length":  114
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\infer_json.cpython-314.pyc",
+        "Length":  120
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\inspect_raw_datasets.cpython-314.pyc",
+        "Length":  11037
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\prepare_data.cpython-314.pyc",
+        "Length":  122
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\run_all.cpython-314.pyc",
+        "Length":  117
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\scripts\\__pycache__\\train.cpython-314.pyc",
+        "Length":  115
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\__init__.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\calibration\\metrics.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\calibration\\plots.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\calibration\\temperature.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\calibration\\__pycache__\\metrics.cpython-314.pyc",
+        "Length":  135
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\calibration\\__pycache__\\plots.cpython-314.pyc",
+        "Length":  133
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\calibration\\__pycache__\\temperature.cpython-314.pyc",
+        "Length":  139
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\contract\\abstain.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\contract\\repair.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\contract\\report.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\contract\\schema_contract.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\contract\\__pycache__\\abstain.cpython-314.pyc",
+        "Length":  132
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\contract\\__pycache__\\repair.cpython-314.pyc",
+        "Length":  131
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\contract\\__pycache__\\report.cpython-314.pyc",
+        "Length":  131
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\contract\\__pycache__\\schema_contract.cpython-314.pyc",
+        "Length":  140
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\canonicalize.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\cleaning.py",
+        "Length":  2983
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\jsonl_dataset.py",
+        "Length":  2286
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\reddit_windows.py",
+        "Length":  8178
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\splits.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\stats.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\windowing.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\adapters\\mentalhelp.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\adapters\\reddit_mh_posts.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\adapters\\__pycache__\\mentalhelp.cpython-314.pyc",
+        "Length":  140
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\adapters\\__pycache__\\reddit_mh_posts.cpython-314.pyc",
+        "Length":  145
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\__pycache__\\canonicalize.cpython-314.pyc",
+        "Length":  133
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\__pycache__\\cleaning.cpython-314.pyc",
+        "Length":  5160
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\__pycache__\\jsonl_dataset.cpython-314.pyc",
+        "Length":  4360
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\__pycache__\\reddit_windows.cpython-314.pyc",
+        "Length":  12268
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\__pycache__\\splits.cpython-314.pyc",
+        "Length":  127
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\__pycache__\\stats.cpython-314.pyc",
+        "Length":  126
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\data\\__pycache__\\windowing.cpython-314.pyc",
+        "Length":  130
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\eval\\dumps.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\eval\\eval_baseline.py",
+        "Length":  4333
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\eval\\metrics.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\eval\\__pycache__\\dumps.cpython-314.pyc",
+        "Length":  126
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\eval\\__pycache__\\eval_baseline.cpython-314.pyc",
+        "Length":  6084
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\eval\\__pycache__\\metrics.cpython-314.pyc",
+        "Length":  128
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\evidence\\faithfulness.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\evidence\\saliency.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\evidence\\spans.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\evidence\\__pycache__\\faithfulness.cpython-314.pyc",
+        "Length":  137
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\evidence\\__pycache__\\saliency.cpython-314.pyc",
+        "Length":  133
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\evidence\\__pycache__\\spans.cpython-314.pyc",
+        "Length":  130
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\graph\\cooccurrence.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\graph\\prune.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\graph\\__pycache__\\cooccurrence.cpython-314.pyc",
+        "Length":  134
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\graph\\__pycache__\\prune.cpython-314.pyc",
+        "Length":  127
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\io\\schemas.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\io\\serializers.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\io\\__pycache__\\schemas.cpython-314.pyc",
+        "Length":  126
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\io\\__pycache__\\serializers.cpython-314.pyc",
+        "Length":  130
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\model\\baseline.py",
+        "Length":  1018
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\model\\encoder.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\model\\heads.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\model\\losses.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\model\\train.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\model\\__pycache__\\baseline.cpython-314.pyc",
+        "Length":  1472
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\model\\__pycache__\\encoder.cpython-314.pyc",
+        "Length":  129
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\model\\__pycache__\\heads.cpython-314.pyc",
+        "Length":  127
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\model\\__pycache__\\losses.cpython-314.pyc",
+        "Length":  128
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\model\\__pycache__\\train.cpython-314.pyc",
+        "Length":  127
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\modeling\\postprocess.py",
+        "Length":  1411
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\modeling\\__init__.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\train\\train_baseline.py",
+        "Length":  3212
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\train\\__pycache__\\train_baseline.cpython-314.pyc",
+        "Length":  4477
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\utils\\config.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\utils\\determinism.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\utils\\logging.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\utils\\__pycache__\\config.cpython-314.pyc",
+        "Length":  128
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\utils\\__pycache__\\determinism.cpython-314.pyc",
+        "Length":  133
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\utils\\__pycache__\\logging.cpython-314.pyc",
+        "Length":  129
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\src\\text2diag\\__pycache__\\__init__.cpython-314.pyc",
+        "Length":  137
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\tests\\test_contract_validator.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\tests\\test_evidence_span_validity.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\tests\\test_reddit_canonical.py",
+        "Length":  2880
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\tests\\test_repair_rules.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\tests\\test_splits_deterministic.py",
+        "Length":  0
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\tests\\__pycache__\\test_contract_validator.cpython-314-pytest-9.0.2.pyc",
+        "Length":  144
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\tests\\__pycache__\\test_evidence_span_validity.cpython-314-pytest-9.0.2.pyc",
+        "Length":  148
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\tests\\__pycache__\\test_reddit_canonical.cpython-314-pytest-9.0.2.pyc",
+        "Length":  20586
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\tests\\__pycache__\\test_repair_rules.cpython-314-pytest-9.0.2.pyc",
+        "Length":  138
+    },
+    {
+        "FullName":  "F:\\Text2Diag\\tests\\__pycache__\\test_splits_deterministic.cpython-314-pytest-9.0.2.pyc",
+        "Length":  146
+    }
+]

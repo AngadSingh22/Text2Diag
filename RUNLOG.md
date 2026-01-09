@@ -531,3 +531,34 @@ git commit -m "Prep: add smoke acceptance for posttrain pack"
 ### Next Step
 Wait for Colab training to finish, then run the pack:
 `py scripts/11_posttrain_pack_sanitized.py --checkpoint_path ...`
+
+---
+
+## 2026-01-10T05:35:00+05:30 [SAFE]
+
+### Plan
+**Repo cleanup v1: audit + plan + non-destructive path normalization.**
+Address suspected drift and inconsistent naming.
+
+1.  **Phase 1 (Audit)**: Generate `reports/REPO_TREE_DEPTH4.txt`, `reports/REPO_DRIFT_AUDIT.md`, `reports/REPO_MANIFEST.json`.
+2.  **Phase 2 (Plan)**: Create `CLEANUP_PLAN.md` mapping every file.
+3.  **Phase 3 (Execute)**: `git mv`, update imports, update `ACCEPTANCE_TESTS.md`.
+
+### Diff Summary
+| File | Change | Why |
+|------|--------|-----|
+| `CLEANUP_PLAN.md` | NEW | Authoritative cleanup plan |
+| `reports/REPO_DRIFT_AUDIT.md` | NEW | Analysis of current state |
+| `reports/REPO_MANIFEST.json` | NEW | Machine-readable file list |
+
+### Commands Run
+```bash
+# Phase 1: Audit
+mkdir reports
+Get-ChildItem -Recurse -File | Select-Object FullName, Length | ConvertTo-Json | Out-File -Encoding utf8 reports/REPO_MANIFEST.json
+tree /F | Out-File -Encoding utf8 reports/REPO_TREE_DEPTH4.txt
+# Generated reports/REPO_DRIFT_AUDIT.md
+```
+
+### Next Step
+Execute Phase 1 Commit.
