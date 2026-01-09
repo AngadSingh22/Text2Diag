@@ -1,7 +1,7 @@
 # Data directories (large, not committed)
-data/
-data/raw/
-data/processed/
+/data/
+/data/raw/
+/data/processed/
 
 # HuggingFace datasets cache
 *.arrow

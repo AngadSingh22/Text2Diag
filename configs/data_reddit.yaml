@@ -1,0 +1,29 @@
+# Reddit Mental Health Dataset Configuration
+
+# Paths
+raw_path: "data/raw/reddit_mental_health_posts"
+out_path: "data/processed/reddit_mh_windows"
+report_dir: "results/week1/reddit_canonical"
+
+# Windowing
+window_size_posts: 3
+text_fields: ["title", "body"]
+separator: "\n\n---POST---\n\n"
+max_tokens: 512  # Fallback to max_chars in implementation for now
+
+# Splitting
+split_seed: 1337
+split_fracs:
+  train: 0.8
+  val: 0.1
+  test: 0.1
+
+# Label Policy
+label_policy:
+  mode: "hierarchical"
+  condition_whitelist: "configs/labels_condition_whitelist.txt"
+  generic_map:
+    mentalhealth: "general_distress"
+    depression_help: "general_distress"
+  unknown_subreddit_action: "keep_as_other"  # options: drop, other, keep
+  other_label: "other"
