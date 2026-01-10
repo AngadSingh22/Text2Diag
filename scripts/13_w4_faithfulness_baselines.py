@@ -181,41 +181,57 @@ def main():
         logger.error("No results!")
         return
         
-    deltas_A = [r["delta_A_evidence"] for r in results]
-    deltas_B = [r["delta_B_random"] for r in results]
-    deltas_C = [r["delta_C_shuffle"] for r in results]
+    deltas_A = np.array([r["delta_A_evidence"] for r in results])
+    deltas_B = np.array([r["delta_B_random"] for r in results])
+    deltas_C = np.array([r["delta_C_shuffle"] for r in results])
     
-    # Paired comparisons
-    diff_AB = np.mean(np.array(deltas_A) - np.array(deltas_B))
-    diff_AC = np.mean(np.array(deltas_A) - np.array(deltas_C))
+    # Paired Differences (Evidence vs Random)
+    diffs_AB = deltas_A - deltas_B
+    diffs_AC = deltas_A - deltas_C
+    
+    # Metrics
+    mean_diff_AB = np.mean(diffs_AB)
+    dominance_rate = np.mean(deltas_A > deltas_B)
+    
+    # Bootstrap CI for mean_diff_AB
+    n_boot = 1000
+    boot_means = []
+    rng = np.random.RandomState(args.seed)
+    for _ in range(n_boot):
+        sample = rng.choice(diffs_AB, size=len(diffs_AB), replace=True)
+        boot_means.append(np.mean(sample))
+    
+    ci_lower = float(np.percentile(boot_means, 2.5))
+    ci_upper = float(np.percentile(boot_means, 97.5))
     
     stats = {
-        "A_mean": float(np.mean(deltas_A)),
-        "B_mean": float(np.mean(deltas_B)),
-        "C_mean": float(np.mean(deltas_C)),
-        "diff_AB_mean": float(diff_AB),
-        "diff_AC_mean": float(diff_AC),
-        "A_pass_rate": sum(1 for d in deltas_A if d >= 0.03) / len(deltas_A),
-        "B_pass_rate": sum(1 for d in deltas_B if d >= 0.03) / len(deltas_B)
+        "sample_size": len(results),
+        "A_mean_delta": float(np.mean(deltas_A)),
+        "B_mean_delta": float(np.mean(deltas_B)),
+        "C_mean_delta": float(np.mean(deltas_C)),
+        "paired_mean_diff_AB": float(mean_diff_AB),
+        "paired_dominance_rate": float(dominance_rate),
+        "paired_diff_AB_ci95": [ci_lower, ci_upper],
+        "masking_mode": "whitespace_replacement" # Hardcoded based on verified faithfulness.py logic
     }
     
     # Save Report
-    with open(args.out_dir / "baselines_report.json", "w") as f:
+    with open(args.out_dir / "paired_faithfulness_report.json", "w") as f:
         json.dump(stats, f, indent=2)
         
-    md_path = args.out_dir / "baselines_summary.md"
+    md_path = args.out_dir / "paired_faithfulness_report.md"
     with open(md_path, "w") as f:
-        f.write("# Faithfulness Baselines Report\n\n")
+        f.write("# Paired Faithfulness Report (Week 4.2)\n\n")
         f.write(f"- **Sample Size**: {len(results)}\n")
-        f.write(f"- **Evidence (A) Mean Delta**: {stats['A_mean']:.4f}\n")
-        f.write(f"- **Random (B) Mean Delta**: {stats['B_mean']:.4f}\n")
-        f.write(f"- **Shuffle (C) Mean Delta**: {stats['C_mean']:.4f}\n\n")
-        f.write("## Hypothesis Check\n")
-        f.write(f"- **Evidence > Random?** {'YES' if diff_AB > 0 else 'NO'} (Diff: {diff_AB:.4f})\n")
-        f.write(f"- **Evidence > Shuffle?** {'YES' if diff_AC > 0 else 'NO'} (Diff: {diff_AC:.4f})\n\n")
-        f.write("## Pass Rates (Delta >= 0.03)\n")
-        f.write(f"- Evidence (A): {stats['A_pass_rate']:.2%}\n")
-        f.write(f"- Random (B): {stats['B_pass_rate']:.2%}\n")
+        f.write(f"- **Masking Mode**: {stats['masking_mode']}\n\n")
+        f.write("## Paired Metrics (Evidence vs Random)\n")
+        f.write(f"- **Dominance Rate**: {stats['paired_dominance_rate']:.2%} (Fraction where Evid > Rand)\n")
+        f.write(f"- **Mean Difference**: {stats['paired_mean_diff_AB']:.4f}\n")
+        f.write(f"- **95% CI**: [{ci_lower:.4f}, {ci_upper:.4f}]\n\n")
+        f.write("## Raw Means\n")
+        f.write(f"- Evidence (A): {stats['A_mean_delta']:.4f}\n")
+        f.write(f"- Random (B): {stats['B_mean_delta']:.4f}\n")
+        f.write(f"- Shuffle (C): {stats['C_mean_delta']:.4f}\n")
         
     logger.info(f"Baselines complete. Results in {args.out_dir}")
 

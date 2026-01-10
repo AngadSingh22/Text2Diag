@@ -202,3 +202,11 @@ py scripts/13_w4_faithfulness_baselines.py --checkpoint temp_model --temperature
 py -c "import json; d=json.load(open('results/test_w4_1_baselines/baselines_report.json')); assert d['A_pass_rate'] >= d['B_pass_rate'], f'Evidence ({d['A_pass_rate']}) worse than Random ({d['B_pass_rate']})'"
 ```
 **Expected**: Script runs, assertion passes, `baselines_summary.md` created.
+### A11. Paired Faithfulness Smoke (W4.2)
+Verify paired metrics and dominance rate.
+```powershell
+py scripts/13_w4_faithfulness_baselines.py --checkpoint temp_model --temperature_json results/week2_sanitized/calibration/temperature_scaling.json --label_map data/processed/reddit_mh_sanitized/labels.json --dataset_file data/processed/reddit_mh_sanitized/val.jsonl --preds_file results/week2_sanitized/calibration/preds_val_calibrated.jsonl --out_dir results/test_w4_2_paired --sample_n 30
+# Assertion: Report contains dominance rate
+py -c "import json; d=json.load(open('results/test_w4_2_paired/paired_faithfulness_report.json')); assert 'paired_dominance_rate' in d"
+```
+**Expected**: `paired_faithfulness_report.md` created with CI stats.
