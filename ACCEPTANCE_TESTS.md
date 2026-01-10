@@ -66,6 +66,7 @@ py scripts/05_build_sanitized_dataset.py --help
 py scripts/06_train_robust.py --help
 py scripts/07_posttrain_pack_sanitized.py --help
 py scripts/08_compare_robustness.py --help
+py scripts/10_calibration_w3.py --help
 ```
 **Expected**: Each prints usage info, exit code 0.
 
@@ -165,3 +166,26 @@ Get-ChildItem configs/text_cleaning.yaml
 Get-ChildItem configs/model_thresholds.yaml
 ```
 **Expected**: `leakage_eval_metrics.json` and config files exist.
+
+---
+
+## Week 3: Calibration
+
+### A7. Calibration W3 Smoke
+Run calibration on existing predictions.
+```powershell
+py scripts/10_calibration_w3.py --val_preds results/week2_sanitized/preds/preds_val.jsonl --test_preds results/week2_sanitized/preds/preds_test.jsonl --out_dir results/week3_calibration
+```
+**Expected**: `calibration_metrics.json`, `reliability_test.png`, `preds_test_calibrated.jsonl` created.
+
+
+---
+
+## Week 4: Evidence Extraction
+
+### A8. Evidence Smoke Test
+Run evidence extraction on a tiny sample.
+```powershell
+py scripts/12_explain_evidence.py --checkpoint temp_model --temperature_json results/week2_sanitized/calibration/temperature_scaling.json --label_map data/processed/reddit_mh_sanitized/label2id.json --dataset_file data/processed/reddit_mh_sanitized/val.jsonl --preds_file results/week2_sanitized/calibration/preds_val_calibrated.jsonl --out_dir results/test_w4_smoke --sample_n 10
+```
+**Expected**: `evidence.jsonl` and `evidence_report.md` created.
