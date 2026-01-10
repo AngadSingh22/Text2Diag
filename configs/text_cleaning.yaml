@@ -11,5 +11,13 @@ diagnosis_vocab:
   - ocd
   - ptsd
   - depression
+  - anxiety
+  - anxious
+  - bipolar
+  - schizophrenia
+  - schizo
+  - add
+  - autism
+  - borderline
 
 case_insensitive: true

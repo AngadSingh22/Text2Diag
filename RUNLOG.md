@@ -587,7 +587,17 @@ Map every file move and log decisions.
 (Pending Execution)
 
 ### Next Step
-Execute Week 3 Calibration (Next Task)
+**CRITICAL**: Rebuild Dataset and Retrain Model (Config Updated)
+
+---
+
+## 2026-01-10T06:25:00+05:30 [VERIFY]
+**Summary**: Deep Leakage Audit (Rigorous Verification).
+**Status**: **FAILURE** (Leakage 28%).
+- **Findings**: Terms like "anxiety", "bipolar", "schizophrenia" were NOT masked. 
+- **Cause**: Incomplete `diagnosis_vocab` in `configs/text_cleaning.yaml`.
+- **Action**: Updated `text_cleaning.yaml` with missing terms. Formalized audit script as `scripts/09_audit_deep_leakage.py`.
+- **Next**: **REBUILD REQUIRED**.
 
 ---
 
