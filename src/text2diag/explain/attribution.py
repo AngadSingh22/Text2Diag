@@ -1,75 +1,88 @@
+"""
+Attribution Components.
+Calculates feature importance scores (gradients) for input tokens.
+Now supports multiple methods: 'grad_x_input' (default) and 'integrated_gradients'.
+"""
 import torch
 import numpy as np
+from text2diag.explain.integrated_gradients import compute_integrated_gradients
 
-def compute_input_gradients(model, tokenizer, text, label_idx, device=None, max_len=512):
+def compute_attributions(model, tokenizer, text, label_idx, method="grad_x_input", device=None, **kwargs):
     """
-    Computes token attributions using Gradient x Input.
-    Backbone-agnostic implementation using inputs_embeds.
+    Dispatcher for attribution methods.
     
     Args:
-        model: HuggingFace model
-        tokenizer: HuggingFace tokenizer
-        text: Raw input string
-        label_idx: Target label index to explain
-        device: Torch device (defaults to model.device)
-        max_len: Maximum sequence length (must match inference)
+        model: HF Model
+        tokenizer: HF Tokenizer
+        text: Input string
+        label_idx: Target class index
+        method: "grad_x_input" (default) or "integrated_gradients"
+        device: torch device
+        **kwargs: Extra args (e.g. max_len, steps)
         
     Returns:
-        List[Dict]: List of {token, score, start, end, token_idx}
+        List[Dict]: Token attributions [{token, start, end, score}]
+    """
+    if method == "integrated_gradients":
+        steps = kwargs.get("steps", 16)
+        max_len = kwargs.get("max_len", 512)
+        return compute_integrated_gradients(
+            model, tokenizer, text, label_idx, 
+            steps=steps, max_len=max_len, device=device
+        )
+    elif method == "grad_x_input":
+        # Call legacy/default implementation
+        # For simplicity, we just call the local function logic directly or wrapping it.
+        # Since I am rewriting the file, I'll keep the logic below but wrapped.
+        return compute_input_gradients(model, tokenizer, text, label_idx, device=device, **kwargs)
+    else:
+        raise ValueError(f"Unknown attribution method: {method}")
+
+def compute_input_gradients(model, tokenizer, text, label_idx, device=None, max_len=512, **kwargs):
+    """
+    Computes Gradient x Input attribution.
     """
     if device is None:
         device = model.device
-        
-    # 1. Tokenize with offsets (Critical for span mapping)
-    # We insist on truncation=True and max_length to match inference conditions
-    inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=max_len, return_offsets_mapping=True)
-    offset_mapping = inputs.pop("offset_mapping")[0].cpu().numpy()
+
+    # 1. Tokenize
+    inputs = tokenizer(
+        text, 
+        return_tensors="pt", 
+        truncation=True, 
+        max_length=max_len,
+        return_offsets_mapping=True
+    ).to(device)
     
-    # Move to device
-    inputs = {k: v.to(device) for k, v in inputs.items()}
     input_ids = inputs["input_ids"]
+    attention_mask = inputs["attention_mask"]
     
-    # 2. Get Embedding Layer Genericially
-    try:
-        embeddings_layer = model.get_input_embeddings()
-    except AttributeError:
-        # Final fallback for models that don't impl generic header (rare in HF)
-        if hasattr(model, "distilbert"): embeddings_layer = model.distilbert.embeddings.word_embeddings
-        elif hasattr(model, "bert"): embeddings_layer = model.bert.embeddings.word_embeddings
-        elif hasattr(model, "roberta"): embeddings_layer = model.roberta.embeddings.word_embeddings
-        else: raise ValueError(f"Could not find input embeddings for {type(model)}")
+    # 2. Get Embeddings & Register Hook
+    # Backbone-Agnostic approach
+    if hasattr(model, "get_input_embeddings"):
+        embed_layer = model.get_input_embeddings()
+    elif hasattr(model.config, "embedding_layer_name"):
+         raise ValueError("Model specific hook required")
+    else:
+        embed_layer = model.get_input_embeddings()
         
-    # 3. Compute Embeddings & Retain Grad
-    # We must do this manually to have a leaf tensor to differentiate w.r.t
-    inputs_embeds = embeddings_layer(input_ids)
+    inputs_embeds = embed_layer(input_ids)
     inputs_embeds.retain_grad()
     
-    # 4. Forward Pass with inputs_embeds
-    # Exclude input_ids, use inputs_embeds instead
-    model_inputs = {k: v for k, v in inputs.items() if k != "input_ids"}
-    model_inputs["inputs_embeds"] = inputs_embeds
+    # 3. Forward Pass
+    # We must pass inputs_embeds to allow gradient flow back to it
+    out = model(inputs_embeds=inputs_embeds, attention_mask=attention_mask)
+    logits = out.logits
     
-    # Zero gradients
+    # 4. Backward Pass (Target Class)
     model.zero_grad()
+    score = logits[0, label_idx]
+    score.backward()
     
-    outputs = model(**model_inputs)
-    logits = outputs.logits
-    
-    # 5. Gradient Computation
-    target_logit = logits[0, label_idx]
-    target_logit.backward()
-    
-    # Gradients w.r.t embeddings
-    grads = inputs_embeds.grad # (1, seq_len, hidden_dim)
-    
+    # 5. Compute Attr = Input * Grad
+    grads = inputs_embeds.grad
     if grads is None:
-         # Fallback hook method would go here, but inputs_embeds usually works
          raise RuntimeError("Gradients were None! Model might not support inputs_embeds training path.")
-
-    # Gradient x Input: (embed * grad).sum(dim=-1)
-    attr_scores = (inputs_embeds * grads).sum(dim=-1).squeeze(0) # (seq_len)
-    attr_scores = attr_scores.detach().cpu().numpy()
-    
     # 6. Map to tokens
     tokens = tokenizer.convert_ids_to_tokens(input_ids[0])
     

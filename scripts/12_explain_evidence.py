@@ -44,10 +44,11 @@ def main():
     parser.add_argument("--label_map", type=Path, required=True, help="Path to label2id.json")
     parser.add_argument("--dataset_file", type=Path, required=True, help="Path to dataset jsonl (with text)")
     parser.add_argument("--preds_file", type=Path, required=True, help="Path to predictions jsonl (for selection)")
-    parser.add_argument("--out_dir", type=Path, required=True, help="Output directory")
-    parser.add_argument("--top_labels", type=int, default=2, help="Number of labels to explain per example")
-    parser.add_argument("--sample_n", type=int, default=500, help="Number of examples to process")
-    parser.add_argument("--seed", type=int, default=1337)
+    parser.add_argument("--out_dir", type=Path, default="results/week4_evidence", help="Output directory")
+    parser.add_argument("--sample_n", type=int, default=None, help="Number of examples to process")
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--evidence_method", type=str, default="grad_x_input", choices=["grad_x_input", "integrated_gradients"])
+    parser.add_argument("--ig_steps", type=int, default=16)
     
     args = parser.parse_args()
     
@@ -103,7 +104,7 @@ def main():
         sys.exit(1)
         
     # 3. Sample
-    if args.sample_n < len(valid_preds):
+    if args.sample_n is not None and args.sample_n < len(valid_preds):
         logger.info(f"Sampling {args.sample_n} examples from {len(valid_preds)}")
         sampled_preds = random.sample(valid_preds, args.sample_n)
     else:
@@ -113,7 +114,7 @@ def main():
     # 4. Run Pipeline
     results = []
     
-    logger.info("Running Evidence Extraction Pipeline...")
+    logger.info(f"Running Evidence Extraction Pipeline... Method: {args.evidence_method}")
     for item in tqdm(sampled_preds):
         eid = item["example_id"]
         raw_text = dataset_map[eid]["text"]
@@ -123,56 +124,65 @@ def main():
             continue
         probs = item["probs"]
         
-        # Get top-K labels
-        top_indices = np.argsort(probs)[::-1][:args.top_labels]
+        # We process the PREDICTED label (decision=1) or top-1
+        pred_idx = int(np.argmax(probs))
+        label_name = id2label.get(pred_idx, f"Label_{pred_idx}")
         
-        for idx in top_indices:
-            label_idx = int(idx)
-            label_name = id2label.get(label_idx, f"Label_{label_idx}")
+        # Sanitize (Same as Week 2.6)
+        # We do this here to map offsets correctly to *cleaned* text
+        # (Though dataset might be raw, model expects clean)
+        # BUT attribution needs text+offsets.
+        # Week 2.6 policy: strip_urls=True, strip_reddit_refs=True
+        # We must reproduce this cleaning.
+        # Using simple regex replacement as in sanitize.py (which I should import but regex is safer to keep self-contained here or import)
+        # I'll stick to regex here to matching previous behavior or import?
+        # Previous 12_explain_evidence.py had regex in it. Let's keep it consistent.
+        
+        # Cleaning logic re-creation:
+        import re
+        text_clean = raw_text
+        # Policy: strip_urls=True, strip_reddit_refs=True
+        text_clean = re.sub(r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", "", text_clean)
+        text_clean = re.sub(r"/?r/\w+", "", text_clean, flags=re.IGNORECASE)
+        text_clean = " ".join(text_clean.split())
+             
+        try:
+            # A. Attribution
+            # Hardcoded max_len to 512 as per model baseline
+            MAX_LEN = 512 
+            attrs = compute_attributions(
+                model, tokenizer, text_clean, pred_idx, 
+                method=args.evidence_method, device=device,
+                ig_steps=args.ig_steps,
+                max_len=MAX_LEN # explicit
+            )
             
-            try:
-                # A. Attribution
-                # Hardcoded max_len to 512 as per model baseline
-                MAX_LEN = 512 
-                attrs = compute_input_gradients(model, tokenizer, raw_text, label_idx, device=device, max_len=MAX_LEN)
-                
-                # B. Spans
-                spans = extract_spans(attrs, raw_text, k=12, max_spans=3)
-                
-                # C. Faithfulness
-                faith = verify_faithfulness(model, tokenizer, raw_text, spans, label_idx, temperature=temperature, device=device)
-                
-                # Metadata
-                # Assuming data in dataset_file IS the inference-ready text (sanitized if needed)
-                # We record this assumption.
-                meta = {
+            # B. Spans
+            spans = extract_spans(attrs, text_clean, k=12, max_spans=3)
+            
+            # C. Faithfulness
+            faith = verify_faithfulness(model, tokenizer, text_clean, spans, pred_idx, temperature=temperature, device=device)
+            
+            # Record
+            res = {
+                "example_id": eid,
+                "label": label_name,
+                "conf_calibrated": item.get("probs_calibrated", item["probs"])[pred_idx], # Approximate if not avail
+                "spans": spans,
+                "faithfulness": faith,
+                "metadata": {
                     "max_len": MAX_LEN,
-                    "sanitization_applied": "implicit_in_dataset_file", 
-                    "input_length_chars": len(raw_text)
+                    "sanitization_applied": True,
+                    "evidence_method": args.evidence_method,
+                    "ig_steps": args.ig_steps if args.evidence_method == "integrated_gradients" else None,
+                    "input_length_chars": len(text_clean)
                 }
-                
-                # Record
-                res = {
-                    "example_id": eid,
-                    "label": label_name,
-                    "prob_calibrated": faith["p_full"], # Use realtime computation
-                    "faithfulness": faith,
-                    "metadata": meta,
-                    "spans": [
-                        {
-                            "start": s["start"], 
-                            "end": s["end"], 
-                            "score": round(float(s["score"]), 4), 
-                            "snippet": s["snippet"]
-                        }
-                        for s in spans
-                    ]
-                }
-                results.append(res)
-                
-            except Exception as e:
-                logger.warning(f"Error processing {eid} label {label_name}: {e}")
-                continue
+            }
+            evidence_results.append(res)
+            
+        except Exception as e:
+            logger.warning(f"Error processing {eid} label {label_name}: {e}")
+            continue
                 
     # 5. Save Outputs
     out_path = args.out_dir / "evidence.jsonl"
