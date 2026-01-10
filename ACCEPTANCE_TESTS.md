@@ -233,3 +233,26 @@ py scripts/14_run_e2e_contract_v1.py --checkpoint temp_model --temperature_json 
 # Assertion: Output exists
 py -c "import os; assert os.path.exists('results/test_w5_batch.jsonl')"
 ```
+
+### A13. Evidence Method Switch (W5.1)
+Verify GradxInput and IG execution.
+```powershell
+# 1. Default (GradxInput)
+py scripts/12_explain_evidence.py --checkpoint temp_model --temperature_json results/week2_sanitized/calibration/temperature_scaling.json --label_map data/processed/reddit_mh_sanitized/labels.json --dataset_file data/processed/reddit_mh_sanitized/val.jsonl --preds_file results/week2_sanitized/calibration/preds_val_calibrated.jsonl --out_dir results/test_w5_1_evidence --sample_n 10
+# Assertion: Default method
+py -c "import json; d=json.load(open('results/test_w5_1_evidence/evidence.jsonl')); assert d['metadata']['evidence_method'] == 'grad_x_input'"
+
+# 2. Integrated Gradients
+py scripts/12_explain_evidence.py --checkpoint temp_model --temperature_json results/week2_sanitized/calibration/temperature_scaling.json --label_map data/processed/reddit_mh_sanitized/labels.json --dataset_file data/processed/reddit_mh_sanitized/val.jsonl --preds_file results/week2_sanitized/calibration/preds_val_calibrated.jsonl --out_dir results/test_w5_1_ig --sample_n 5 --evidence_method integrated_gradients --ig_steps 4
+# Assertion: IG method recorded
+py -c "import json; d=json.load(open('results/test_w5_1_ig/evidence.jsonl')); assert d['metadata']['evidence_method'] == 'integrated_gradients'"
+```
+
+### A14. Occlusion Audit (W5.1)
+Verify causal faithfulness audit.
+```powershell
+py scripts/15_occlusion_audit_w5_1.py --checkpoint temp_model --temperature_json results/week2_sanitized/calibration/temperature_scaling.json --label_map data/processed/reddit_mh_sanitized/labels.json --dataset_file data/processed/reddit_mh_sanitized/val.jsonl --preds_file results/week2_sanitized/calibration/preds_val_calibrated.jsonl --out_dir results/test_w5_1_audit --sample_n 10
+# Assertion: Report exists and parses
+py -c "import json; d=json.load(open('results/test_w5_1_audit/occlusion_audit.json')); assert 'dominance_rate' in d"
+```
+

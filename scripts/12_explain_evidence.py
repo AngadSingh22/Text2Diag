@@ -17,7 +17,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from text2diag.explain.attribution import compute_input_gradients
+from text2diag.explain.attribution import compute_attributions
 from text2diag.explain.spans import extract_spans
 from text2diag.explain.faithfulness import verify_faithfulness
 
@@ -178,7 +178,7 @@ def main():
                     "input_length_chars": len(text_clean)
                 }
             }
-            evidence_results.append(res)
+            results.append(res)
             
         except Exception as e:
             logger.warning(f"Error processing {eid} label {label_name}: {e}")

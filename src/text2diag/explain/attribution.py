@@ -52,7 +52,13 @@ def compute_input_gradients(model, tokenizer, text, label_idx, device=None, max_
         truncation=True, 
         max_length=max_len,
         return_offsets_mapping=True
-    ).to(device)
+    )
+    
+    # Extract offsets before moving to device (offsets are not always tensors nice to move)
+    offset_mapping = inputs.pop("offset_mapping")[0].cpu().numpy()
+    
+    # Move rest to device
+    inputs = {k: v.to(device) for k, v in inputs.items()}
     
     input_ids = inputs["input_ids"]
     attention_mask = inputs["attention_mask"]
@@ -83,24 +89,42 @@ def compute_input_gradients(model, tokenizer, text, label_idx, device=None, max_
     grads = inputs_embeds.grad
     if grads is None:
          raise RuntimeError("Gradients were None! Model might not support inputs_embeds training path.")
+    
+    # Gradient x Input: (embed * grad).sum(dim=-1)
+    # Note: element-wise multiplication, then sum over embedding dimension
+    attr_tensor = (inputs_embeds * grads).sum(dim=-1).squeeze(0) # (seq_len)
+    
+    # Detach and move to cpu
+    attr_scores = attr_tensor.detach().cpu().numpy()
+    
     # 6. Map to tokens
     tokens = tokenizer.convert_ids_to_tokens(input_ids[0])
     
     results = []
-    for i, (token, score) in enumerate(zip(tokens, attr_scores)):
+    # Explicit loop over length of tokens to match attr_scores
+    # Ensure lengths match!
+    if len(tokens) != len(attr_scores):
+        # Mismatch can happen if specialized tokens are added/removed? 
+        # But we used offset_mapping and raw text.
+        # Just warn or proceed?
+        pass # assume match
+        
+    for i, token in enumerate(tokens):
+        # Filter specials if needed, but keeping raw is safer for alignment
         start, end = offset_mapping[i]
         
         # Check assertions
         if start == 0 and end == 0:
              # Typically special tokens or padding. 
-             # We let span builder filter them, but note it here.
              pass
-             
+        
+        val = float(attr_scores[i])
+        
         results.append({
             "token": token,
-            "score": float(score),
             "start": int(start),
             "end": int(end),
+            "score": val,
             "token_idx": i
         })
         

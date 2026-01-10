@@ -84,7 +84,7 @@ def compute_integrated_gradients(model, tokenizer, text, label_idx, steps=16, ma
     
     # Turn on gradients for leaf checking? 
     # Actually we pass inputs_embeds to model. We need to retain grad on this tensor.
-    interpolated_embeds.requires_grad_(True)
+    interpolated_embeds.retain_grad()
     
     # Create matched attention masks [steps, Seq]
     # Attention mask should probably remain 1 for the real tokens? 
@@ -138,7 +138,8 @@ def compute_integrated_gradients(model, tokenizer, text, label_idx, steps=16, ma
             "token": token,
             "start": int(start),
             "end": int(end),
-            "score": score
+            "score": score,
+            "token_idx": i
         })
         
     return attributions

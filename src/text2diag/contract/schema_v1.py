@@ -25,7 +25,8 @@ SCHEMA_V1 = {
         #   "decision": 1, (int 0 or 1)
         #   "threshold_used": 0.45,
         #   "evidence_spans": [{"start": 0, "end": 10, "snippet": "...", "score": 0.1}],
-        #   "faithfulness": {"delta": 0.05, "pass": true}
+        #   "faithfulness": {"delta": 0.05, "pass": true},
+        #   "evidence_meta": {"method": "grad_x_input", "ig_steps": 16} # Optional (W5.1)
         # }
     ],
     "abstain": {

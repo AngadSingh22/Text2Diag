@@ -16,7 +16,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from text2diag.text.sanitize import sanitize_text
-from text2diag.explain.attribution import compute_input_gradients
+from text2diag.explain.attribution import compute_attributions
 from text2diag.explain.spans import extract_spans
 from text2diag.explain.faithfulness import verify_faithfulness
 from text2diag.contract.schema_v1 import SCHEMA_V1
@@ -39,7 +39,9 @@ def predict_example(
     temperature, 
     sanitize_config, 
     max_len, 
-    device
+    device,
+    evidence_method="grad_x_input",
+    ig_steps=16
 ):
     # 1. Preprocess
     text_clean, rules_applied = sanitize_text(text_raw, **sanitize_config)
@@ -78,8 +80,12 @@ def predict_example(
             "decision": d,
             "threshold_used": t,
             "evidence_spans": [],
-            "faithfulness": {"delta": 0.0, "is_faithful": False}
+            "faithfulness": {"delta": 0.0, "is_faithful": False},
+            "evidence_meta": {"method": evidence_method} # Optional W5.1
         }
+        if evidence_method == "integrated_gradients":
+            lbl_obj["evidence_meta"]["ig_steps"] = ig_steps
+            
         label_objs.append(lbl_obj)
         
     # 4. Explain Top-K (Top-2)
@@ -93,7 +99,10 @@ def predict_example(
         
         # Explain
         try:
-            attrs = compute_input_gradients(model, tokenizer, text_clean, int(idx), device=device, max_len=max_len)
+            attrs = compute_attributions(
+                model, tokenizer, text_clean, int(idx), 
+                method=evidence_method, device=device, max_len=max_len, ig_steps=ig_steps
+            )
             spans = extract_spans(attrs, text_clean, k=12, max_spans=3)
             
             if spans:
