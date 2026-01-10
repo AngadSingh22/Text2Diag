@@ -210,3 +210,26 @@ py scripts/13_w4_faithfulness_baselines.py --checkpoint temp_model --temperature
 py -c "import json; d=json.load(open('results/test_w4_2_paired/paired_faithfulness_report.json')); assert 'paired_dominance_rate' in d"
 ```
 **Expected**: `paired_faithfulness_report.md` created with CI stats.
+### A12. E2E Contract Runner Smoke (W5)
+Verify schema validity, abstention, and batch processing.
+
+**1. Single Input (Valid)**
+```powershell
+py scripts/14_run_e2e_contract_v1.py --checkpoint temp_model --temperature_json results/week2_sanitized/calibration/temperature_scaling.json --label_map data/processed/reddit_mh_sanitized/labels.json --text "I feel extremely anxious and cannot sleep because of panic attacks." --output_file results/test_w5_single.json
+# Assertion: Valid Schema
+py -c "import json; d=json.load(open('results/test_w5_single.json')); assert d['version']=='v1'; assert isinstance(d['labels'], list)"
+```
+
+**2. Abstention (Empty Input)**
+```powershell
+py scripts/14_run_e2e_contract_v1.py --checkpoint temp_model --temperature_json results/week2_sanitized/calibration/temperature_scaling.json --label_map data/processed/reddit_mh_sanitized/labels.json --text "   " --output_file results/test_w5_abstain.json
+# Assertion: Abstain=True
+py -c "import json; d=json.load(open('results/test_w5_abstain.json')); assert d['abstain']['is_abstain'] is True"
+```
+
+**3. Batch Mode**
+```powershell
+py scripts/14_run_e2e_contract_v1.py --checkpoint temp_model --temperature_json results/week2_sanitized/calibration/temperature_scaling.json --label_map data/processed/reddit_mh_sanitized/labels.json --input_jsonl results/dummy_w5.jsonl --out_jsonl results/test_w5_batch.jsonl --max_len 128
+# Assertion: Output exists
+py -c "import os; assert os.path.exists('results/test_w5_batch.jsonl')"
+```
