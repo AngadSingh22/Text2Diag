@@ -825,3 +825,35 @@ py scripts/14_run_e2e_contract_v1.py ... --input_jsonl results/dummy_w5.jsonl
 
 ### Next Step
 Week 5 Complete. Ready for deployment.
+
+## 2026-01-10T17:55:00+05:30 [SAFE]
+
+### Plan
+**Week 5.1: Layered Evidence Methods**
+Implement a layered posture: Grad×Input (Default), Integrated Gradients (Analysis), and Occlusion Audit (Offline).
+
+1.  **IG**: `src/text2diag/explain/integrated_gradients.py`
+2.  **Dispatcher**: `src/text2diag/explain/attribution.py`
+3.  **Runner**: Update `scripts/12_explain_evidence.py`
+4.  **Audit**: `scripts/15_occlusion_audit_w5_1.py`
+
+### Diff Summary
+| File | Change | Why |
+|------|--------|-----|
+| `src/text2diag/explain/integrated_gradients.py` | NEW | Stable attribution (slow, analysis only) |
+| `src/text2diag/explain/attribution.py` | Refactor | Dispatcher logic |
+| `scripts/12_explain_evidence.py` | Update | Support --evidence_method |
+| `scripts/15_occlusion_audit_w5_1.py` | NEW | Causal faithfulness check |
+
+### Commands Run
+```bash
+# Will be updated after execution
+```
+
+### Test Outputs
+```
+# Will be updated after execution
+```
+
+### Next Step
+Execute changes.

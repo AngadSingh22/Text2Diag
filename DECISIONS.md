@@ -213,3 +213,62 @@ Locked decision thresholds for the Robust (Sanitized) Model:
 ### Expected Metric Impact
 - **Faithfulness**: We expect Evidence Spans > Random Spans > Label Shuffle (in terms of delta).
 
+### Expected Metric Impact
+- **Faithfulness**: We expect Evidence Spans > Random Spans > Label Shuffle (in terms of delta).
+
+---
+
+## 2026-01-10T12:15:00+05:30 – W4.2 Paired Faithfulness Metrics
+
+### Decision
+1.  **Metric Update**: Use **Paired Dominance Rate** (`P(delta_evidence > delta_random)`) and **Paired Mean Difference** as primary validation signals.
+2.  **Reporting**: Report 95% Bootstrap CI for the mean difference.
+
+### Rationale
+- **Variance**: Individual examples vary wildly in sensitivity. Comparing group means ignores the intra-example correlation.
+- **Robustness**: If Evidence > Random on 60% of examples, that's a signal, even if the mean difference is small due to outliers.
+
+### Expected Metric Impact
+- **Dominance Rate**: Target > 50% (better than random chance).
+### Expected Metric Impact
+- **Dominance Rate**: Target > 50% (better than random chance).
+
+---
+
+## 2026-01-10T12:20:00+05:30 – W5 Output Contract & Abstention
+
+### Decision
+1.  **Schema v1**: Strict JSON structure with mandatory `metadata`, `calibration`, `labels`, and `abstain` keys.
+2.  **Repair Policy**: Auto-fix minor issues (probs float precision, snippet truncation). Critical failures = Abstain.
+3.  **Abstention Triggers**: High priority (Safe > Robust > Helpful).
+    - Confidence too low (<0.40).
+    - Input too short/empty.
+    - Leakage detected.
+
+### Rationale
+- **Deterministic Interface**: Downstream systems need guaranteed structure.
+- **Fail-Safe**: Better to return `{"abstain": true}` than a hallucinated prediction on OOD input.
+
+### Expected Metric Impact
+- **Coverage**: Will decrease (abstentions).
+- **Precision**: Should increase (filtering low-conf/short inputs).
+### Expected Metric Impact
+- **Coverage**: Will decrease (abstentions).
+- **Precision**: Should increase (filtering low-conf/short inputs).
+
+---
+
+## 2026-01-10T17:55:00+05:30 – W5.1 Layered Evidence
+
+### Decision
+1.  **Default Method**: `grad_x_input` (Fast, Production).
+2.  **Analysis Method**: `integrated_gradients` (Stable, Slow).
+3.  **Audit Policy**: Occlusion Audit runs offline on samples, not per-inference.
+4.  **Contract Stability**: Contract v1 remains unchanged; `evidence_meta` is optional.
+
+### Rationale
+- **Performance**: IG is 16x slower (default steps) than Grad×Input, too slow for real-time batch constraints if strict latency needed.
+- **Robustness**: IG satisfies Axiomatic Attribution properties (sensitivity, implementation invariance), providing a ground-truth check for Grad×Input.
+
+### Expected Metric Impact
+- **Faithfulness**: IG spans might be slightly more faithful (higher delta) but at cost of compute.
