@@ -162,3 +162,20 @@ Adopted a "Weak Label" strategy for Reddit data:
 
 ### Expected Metric Impact
 - None (refactor only).
+
+---
+
+## 2026-01-10T06:15:00+05:30 – Policy Lock: Week 2 Sanitized
+
+### Decision
+Locked decision thresholds for the Robust (Sanitized) Model:
+- **Global Threshold**: 0.480 (Optimized on `val`)
+- **Per-Label Policy**: See `results/week2_sanitized/policy/thresholds_per_label.json`
+
+### Rationale
+- Optimized for Micro-F1 on `data/processed/reddit_mh_sanitized/val.jsonl`.
+- Shift from Baseline (0.35) due to different probability distribution in robust model (less overconfident on shortcuts).
+
+### Metric Impact
+- **Micro-F1**: 0.841 (Val), 0.839 (Test).
+- **Leakage**: 0 detected shortcuts.

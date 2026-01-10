@@ -215,7 +215,7 @@ def main():
     else:
         print("WARNING: Baseline metrics not found. Skipping comparison.")
         
-    print(f"\n✅ Pack Complete. Results in {args.out_dir}")
+    print(f"\n[DONE] Pack Complete. Results in {args.out_dir}")
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,14 @@
+{
+  "val": {
+    "micro_f1": 0.8444,
+    "macro_f1": 0.3768,
+    "micro_auc": 0.9712,
+    "macro_auc": 0.8303
+  },
+  "test": {
+    "micro_f1": 0.867,
+    "macro_f1": 0.4592,
+    "micro_auc": 0.9725,
+    "macro_auc": 0.8703
+  }
+}

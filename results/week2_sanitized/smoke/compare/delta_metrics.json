@@ -1,0 +1,10 @@
+{
+  "val": {
+    "delta_micro_f1": -0.047,
+    "delta_macro_f1": -0.5056
+  },
+  "test": {
+    "delta_micro_f1": -0.0261,
+    "delta_macro_f1": -0.4235
+  }
+}

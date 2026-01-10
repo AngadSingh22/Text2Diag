@@ -587,7 +587,27 @@ Map every file move and log decisions.
 (Pending Execution)
 
 ### Next Step
-Notify User (Cleanup Complete).
+Execute Week 3 Calibration (Next Task)
+
+---
+
+## 2026-01-10T06:20:00+05:30 [SAFE]
+**Summary**: Week 2 (Sanitized) Post-Train Evaluation & Policy Lock.
+**Status**: SUCCESS.
+- **Leakage**: **0%** (Collapsed from 62%). Robustness Verified.
+- **Performance**: Test Micro-F1 **0.839** (vs 0.893 Baseline). Expected drop (-5%).
+- **Policy**: Locked Global Threshold **0.480** (optimized).
+
+**Artifacts**:
+- `results/week2_sanitized/metrics/metrics.json`
+- `results/week2_sanitized/policy/thresholds_global.json`
+- `results/week2_sanitized/audits/shortcut_report.json`
+
+**Commands Run**:
+```bash
+py -u scripts/07_posttrain_pack_sanitized.py ... --out_dir results/week2_sanitized
+py scripts/tune_thresholds_simple.py ... --out_dir results/week2_sanitized/policy
+```
 
 ---
 

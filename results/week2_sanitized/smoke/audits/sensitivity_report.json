@@ -1,0 +1,26 @@
+{
+  "len_Q1": {
+    "micro_f1": 0.7835,
+    "macro_f1": 0.1727,
+    "micro_auc": 0.9578,
+    "macro_auc": NaN
+  },
+  "len_Q2": {
+    "micro_f1": 0.92,
+    "macro_f1": 0.1917,
+    "micro_auc": 0.9913,
+    "macro_auc": NaN
+  },
+  "len_Q3": {
+    "micro_f1": 0.8952,
+    "macro_f1": 0.5226,
+    "micro_auc": 0.9758,
+    "macro_auc": NaN
+  },
+  "len_Q4": {
+    "micro_f1": 0.8654,
+    "macro_f1": 0.4846,
+    "micro_auc": 0.9628,
+    "macro_auc": NaN
+  }
+}
