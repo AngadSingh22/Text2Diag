@@ -132,7 +132,9 @@ def main():
             
             try:
                 # A. Attribution
-                attrs = compute_input_gradients(model, tokenizer, raw_text, label_idx, device=device)
+                # Hardcoded max_len to 512 as per model baseline
+                MAX_LEN = 512 
+                attrs = compute_input_gradients(model, tokenizer, raw_text, label_idx, device=device, max_len=MAX_LEN)
                 
                 # B. Spans
                 spans = extract_spans(attrs, raw_text, k=12, max_spans=3)
@@ -140,12 +142,22 @@ def main():
                 # C. Faithfulness
                 faith = verify_faithfulness(model, tokenizer, raw_text, spans, label_idx, temperature=temperature, device=device)
                 
+                # Metadata
+                # Assuming data in dataset_file IS the inference-ready text (sanitized if needed)
+                # We record this assumption.
+                meta = {
+                    "max_len": MAX_LEN,
+                    "sanitization_applied": "implicit_in_dataset_file", 
+                    "input_length_chars": len(raw_text)
+                }
+                
                 # Record
                 res = {
                     "example_id": eid,
                     "label": label_name,
                     "prob_calibrated": faith["p_full"], # Use realtime computation
                     "faithfulness": faith,
+                    "metadata": meta,
                     "spans": [
                         {
                             "start": s["start"], 
