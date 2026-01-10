@@ -646,7 +646,36 @@ py scripts/tune_thresholds_simple.py ... --out_dir results/week2_sanitized/polic
 
 ---
 
-## 2026-01-10T05:50:00+05:30 [FAST]
-**Summary**: Plan Phase 3.1: Moved legacy scripts to `docs/legacy/scripts`.
-**Commits**: (Pending)
-**Smoke**: ✓ compileall | ✓ import | ✓ pytest -q
+## 2026-01-10T11:45:00+05:30 [SAFE]
+
+### Plan
+**Week 4: Evidence Spans + Faithfulness Checks**
+Implement deterministic evidence extraction and verification.
+
+1. **Modules**:
+    - `src/text2diag/explain/attribution.py`: Gradient x Input.
+    - `src/text2diag/explain/spans.py`: Span merging.
+    - `src/text2diag/explain/faithfulness.py`: Deletion verification.
+2. **Runner**: `scripts/12_explain_evidence.py`.
+3. **Governance**: Update `DECISIONS.md` and `ACCEPTANCE_TESTS.md`.
+
+### Diff Summary
+| File | Change | Why |
+|------|--------|-----|
+| `src/text2diag/explain/*` | NEW | Attribution & verification logic |
+| `scripts/12_explain_evidence.py` | NEW | CLI runner for evidence |
+| `ACCEPTANCE_TESTS.md` | Update | Add W4 smoke test |
+| `DECISIONS.md` | Update | Log evidence method |
+
+### Commands Run
+```bash
+# Will be updated after execution
+```
+
+### Test Outputs
+```
+# Will be updated after execution
+```
+
+### Next Step
+Implement modules and runner.

@@ -179,3 +179,22 @@ Locked decision thresholds for the Robust (Sanitized) Model:
 ### Metric Impact
 - **Micro-F1**: 0.841 (Val), 0.839 (Test).
 - **Leakage**: 0 detected shortcuts.
+
+---
+
+## 2026-01-10T11:45:00+05:30 – W4 Evidence Policy: Gradient x Input + Deletion Check
+
+### Decision
+1. **Attribution Method**: Gradient x Input on Embedding Layer.
+2. **Span Selection**: Merge top-12 tokens into max 3 spans.
+3. **Faithfulness Check**: Deletion Test (Mask spans and measure probability drop).
+4. **Pass Criteria**: Delta >= 0.05 (any span) OR Delta >= 0.03 (all spans).
+
+### Rationale
+- **Gradient x Input**: Fast, deterministic, and sufficient for identifying salient tokens in Transformers.
+- **Deletion Test**: The gold standard for faithfulness. If deleting "evidence" doesn't drop the score, it wasn't evidence.
+- **Calibrated Probabilities**: Using W3 calibrated scores ensures deltas are meaningful (not raw logit noise).
+
+### Expected Metric Impact
+- **Metric**: Faithfulness Pass Rate (Target > 80%).
+- **Verification**: Will assert that the model relies on the extracted spans for its predictions.
