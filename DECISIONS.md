@@ -197,4 +197,19 @@ Locked decision thresholds for the Robust (Sanitized) Model:
 
 ### Expected Metric Impact
 - **Metric**: Faithfulness Pass Rate (Target > 80%).
-- **Verification**: Will assert that the model relies on the extracted spans for its predictions.
+---
+
+## 2026-01-10T12:00:00+05:30 – W4.1 Evidence Hardening
+
+### Decision
+1.  **Attribution**: Make `compute_input_gradients` backbone-agnostic by using `model.get_input_embeddings()` and `inputs_embeds` forward pass.
+2.  **Offsets**: Source offsets strictly from tokenizer `return_offsets_mapping=True` on the *exact* inference text.
+3.  **Baselines**: Introduce "Random-Span" and "Label-Shuffle" baselines to Contextualize faithfulness scores.
+
+### Rationale
+- **Hardcoding**: `model.distilbert.embeddings` breaks if we switch to BERT/RoBERTa/DeBERTa. The official HF API `get_input_embeddings` is safer.
+- **Verification**: A 30% pass rate is meaningless without a baseline. Random spans allow us to see if the model is just generally sensitive to *any* deletion, or specifically to the extracted spans.
+
+### Expected Metric Impact
+- **Faithfulness**: We expect Evidence Spans > Random Spans > Label Shuffle (in terms of delta).
+

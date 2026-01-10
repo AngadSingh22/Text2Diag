@@ -669,6 +669,51 @@ Implement deterministic evidence extraction and verification.
 
 ### Commands Run
 ```bash
+# Atomic Commit: Implementation
+git add src/text2diag/explain scripts/12_explain_evidence.py
+git commit -m "W4: add evidence span extraction + deletion faithfulness"
+# [main 7edbb15] ...
+
+# Atomic Commit: Tests
+git add ACCEPTANCE_TESTS.md
+git commit -m "W4: add evidence smoke acceptance"
+# [main 309325c] ...
+
+# Smoke Test
+py scripts/12_explain_evidence.py --checkpoint temp_model --temperature_json results/week2_sanitized/calibration/temperature_scaling.json --label_map data/processed/reddit_mh_sanitized/labels.json --dataset_file data/processed/reddit_mh_sanitized/val.jsonl --preds_file results/week2_sanitized/calibration/preds_val_calibrated.jsonl --out_dir results/test_w4_smoke --sample_n 10
+# Sample Size: 10
+# Faithfulness Pass Rate: 30.00% (6/20)
+# Saved evidence.jsonl and evidence_report.md
+```
+
+### Test Outputs
+```
+# Tier A (Smoke)
+# scripts/12_explain_evidence.py ran successfully.
+# Artifacts created in results/test_w4_smoke/
+# Pass rate is low (30%), suggesting model robustness (redundancy) or insufficient span budget (max 3).
+```
+
+### Next Step
+## 2026-01-10T12:00:00+05:30 [SAFE]
+
+### Plan
+**Week 4.1: Evidence Hardening + Faithfulness Baselines**
+Harden correctnes and validate signal.
+
+1.  **Refactor**: `src/text2diag/explain/attribution.py` to be backbone-agnostic (use `inputs_embeds`).
+2.  **Validation**: Add `scripts/13_w4_faithfulness_baselines.py` (Random-Span, Label-Shuffle).
+3.  **Update**: `scripts/12_explain_evidence.py` to log metadata and ensure robustness.
+
+### Diff Summary
+| File | Change | Why |
+|------|--------|-----|
+| `src/text2diag/explain/attribution.py` | Refactor | Remove hardcoded model checks |
+| `scripts/13_w4_faithfulness_baselines.py` | NEW | Validate faithfulness signal |
+| `ACCEPTANCE_TESTS.md` | Update | Add W4.1 smoke tests |
+
+### Commands Run
+```bash
 # Will be updated after execution
 ```
 
@@ -678,4 +723,4 @@ Implement deterministic evidence extraction and verification.
 ```
 
 ### Next Step
-Implement modules and runner.
+Execute refactor and baselines.
