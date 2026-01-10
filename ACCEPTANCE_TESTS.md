@@ -186,6 +186,19 @@ py scripts/10_calibration_w3.py --val_preds results/week2_sanitized/preds/preds_
 ### A8. Evidence Smoke Test
 Run evidence extraction on a tiny sample.
 ```powershell
-py scripts/12_explain_evidence.py --checkpoint temp_model --temperature_json results/week2_sanitized/calibration/temperature_scaling.json --label_map data/processed/reddit_mh_sanitized/label2id.json --dataset_file data/processed/reddit_mh_sanitized/val.jsonl --preds_file results/week2_sanitized/calibration/preds_val_calibrated.jsonl --out_dir results/test_w4_smoke --sample_n 10
+
+### A9. Hardened Evidence Runner Smoke (W4.1)
+Verify metadata logging and backbone-agnostic attribution.
+```powershell
+py scripts/12_explain_evidence.py --checkpoint temp_model --temperature_json results/week2_sanitized/calibration/temperature_scaling.json --label_map data/processed/reddit_mh_sanitized/labels.json --dataset_file data/processed/reddit_mh_sanitized/val.jsonl --preds_file results/week2_sanitized/calibration/preds_val_calibrated.jsonl --out_dir results/test_w4_1_hardening --sample_n 10
 ```
-**Expected**: `evidence.jsonl` and `evidence_report.md` created.
+**Expected**: `evidence.jsonl` contains `"metadata":`.
+
+### A10. Faithfulness Baselines Smoke (W4.1)
+Verify baselines vs evidence.
+```powershell
+py scripts/13_w4_faithfulness_baselines.py --checkpoint temp_model --temperature_json results/week2_sanitized/calibration/temperature_scaling.json --label_map data/processed/reddit_mh_sanitized/labels.json --dataset_file data/processed/reddit_mh_sanitized/val.jsonl --preds_file results/week2_sanitized/calibration/preds_val_calibrated.jsonl --out_dir results/test_w4_1_baselines --sample_n 30
+# Assertion: Evidence pass rate >= Random pass rate
+py -c "import json; d=json.load(open('results/test_w4_1_baselines/baselines_report.json')); assert d['A_pass_rate'] >= d['B_pass_rate'], f'Evidence ({d['A_pass_rate']}) worse than Random ({d['B_pass_rate']})'"
+```
+**Expected**: Script runs, assertion passes, `baselines_summary.md` created.
