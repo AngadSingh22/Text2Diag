@@ -24,6 +24,8 @@ from text2diag.contract.validate import validate_output
 from text2diag.contract.repair import repair_output
 from text2diag.decision.abstain import decide_abstain
 
+from text2diag.explain.dependency import build_dependency_graph
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(msg)s")
 logger = logging.getLogger(__name__)
 
@@ -41,10 +43,16 @@ def predict_example(
     max_len, 
     device,
     evidence_method="grad_x_input",
-    ig_steps=16
+    ig_steps=16,
+    include_dependency_graph=False,
+    skip_sanitization=False
 ):
     # 1. Preprocess
-    text_clean, rules_applied = sanitize_text(text_raw, **sanitize_config)
+    if skip_sanitization:
+        text_clean = text_raw
+        rules_applied = ["skipped"]
+    else:
+        text_clean, rules_applied = sanitize_text(text_raw, **sanitize_config)
     
     # 2. Forward Pass
     inputs = tokenizer(text_clean, return_tensors="pt", truncation=True, max_length=max_len).to(device)
@@ -56,15 +64,11 @@ def predict_example(
     # 3. Calibration & Decisions
     probs_cal = sigmoid(logits / temperature)
     
-    labels_out = []
-    
-    # We explain top-2 predicted labels if they exceed some minimal floor (e.g. 0.1)
-    # Or just explain predicted ones (decision=1).
-    # Logic: Explain top-2 regardless, to give context.
     sorted_indices = np.argsort(probs_cal)[::-1]
     
     label_objs = []
     label_probs_map = {}
+    active_labels = []
     
     # Process all labels
     for idx in range(len(id2label)):
@@ -74,6 +78,9 @@ def predict_example(
         d = 1 if p >= t else 0
         label_probs_map[name] = p
         
+        if d == 1:
+            active_labels.append(name)
+        
         lbl_obj = {
             "name": name,
             "prob_calibrated": round(p, 4),
@@ -81,7 +88,7 @@ def predict_example(
             "threshold_used": t,
             "evidence_spans": [],
             "faithfulness": {"delta": 0.0, "is_faithful": False},
-            "evidence_meta": {"method": evidence_method} # Optional W5.1
+            "evidence_meta": {"method": evidence_method}
         }
         if evidence_method == "integrated_gradients":
             lbl_obj["evidence_meta"]["ig_steps"] = ig_steps
@@ -89,15 +96,12 @@ def predict_example(
         label_objs.append(lbl_obj)
         
     # 4. Explain Top-K (Top-2)
-    # We attach explanations to the label objects we just created
     top_k_indices = sorted_indices[:2]
     
     for idx in top_k_indices:
-        # Find the label object
         name = id2label[idx]
         lbl_idx_in_list = next(i for i, l in enumerate(label_objs) if l["name"] == name)
         
-        # Explain
         try:
             attrs = compute_attributions(
                 model, tokenizer, text_clean, int(idx), 
@@ -119,17 +123,17 @@ def predict_example(
     # 5. Build Output Object
     out = {
         "version": "v1",
-        "example_id": None, # Filled by caller
+        "example_id": None, 
         "model_info": {
             "model_name": "distilbert-base",
             "checkpoint": str(model.name_or_path),
             "max_len": max_len,
-            "window_size": 3 # Assumption for now
+            "window_size": 3
         },
         "calibration": {
             "method": "temperature_scaling",
             "temperature": temperature,
-            "timestamp": "2026-01-10" # Placeholder
+            "timestamp": "2026-01-10"
         },
         "labels": label_objs,
         "abstain": {
@@ -139,18 +143,20 @@ def predict_example(
         "meta": {
             "created_at": "2026-01-10",
             "preprocessing": {
-                "sanitized": True,
+                "sanitized": not skip_sanitization,
                 "rules_applied": rules_applied
             }
         }
     }
+    
+    if include_dependency_graph:
+        out["dependency_graph"] = build_dependency_graph(active_labels)
     
     # 6. Validate & Repair
     ok, errors = validate_output(out)
     if not ok:
         out, repaired, rem_errors = repair_output(out, errors)
         if rem_errors:
-             # If strictly failing, we abstain
              out["abstain"]["is_abstain"] = True
              out["abstain"]["reasons"].extend([f"Contract Error: {e}" for e in rem_errors])
              
@@ -177,6 +183,8 @@ def main():
     parser.add_argument("--out_jsonl", type=Path, default="output.jsonl")
     parser.add_argument("--max_len", type=int, default=512)
     parser.add_argument("--output_file", type=Path, help="Output file for single text mode")
+    parser.add_argument("--include_dependency_graph", action="store_true", help="Generate dependency graph")
+    parser.add_argument("--skip_sanitization", action="store_true", help="Skip internal sanitization")
     
     args = parser.parse_args()
     
@@ -216,7 +224,9 @@ def main():
         # Single Mode
         out = predict_example(
             model, tokenizer, args.text, id2label, thresholds, temp, 
-            sanitize_config, args.max_len, device
+            sanitize_config, args.max_len, device,
+            include_dependency_graph=args.include_dependency_graph,
+            skip_sanitization=args.skip_sanitization
         )
         if args.output_file:
             with open(args.output_file, "w") as f:
@@ -235,7 +245,9 @@ def main():
                 
                 out = predict_example(
                     model, tokenizer, text, id2label, thresholds, temp, 
-                    sanitize_config, args.max_len, device
+                    sanitize_config, args.max_len, device,
+                    include_dependency_graph=args.include_dependency_graph,
+                    skip_sanitization=args.skip_sanitization
                 )
                 out["example_id"] = eid
                 f_out.write(json.dumps(out) + "\n")

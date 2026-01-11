@@ -272,3 +272,19 @@ Locked decision thresholds for the Robust (Sanitized) Model:
 
 ### Expected Metric Impact
 - **Faithfulness**: IG spans might be slightly more faithful (higher delta) but at cost of compute.
+
+---
+
+## 2026-01-11T12:15:00+05:30 – External Validation Policy
+
+### Decision
+1.  **Dataset**: Zenodo RMHD (Low et al., 2020).
+2.  **Leakage Policy**: Strict sanitization. Remove all diagnosis phrases, label tokens (synonyms), URLs, and reddit patterns.
+3.  **Labeling**: Weak labeling via subreddit mapping. Non-mapped subreddits -> Control (all 0) or Other.
+4.  **Metrics**: Compute F1/AUC only on mapped labels. Skip labels absent from dataset.
+5.  **Dependency Graph**: Deterministic co-occurrence graph generation included in E2E validation.
+
+### Rationale
+- **Leakage**: External datasets often contain "I was diagnosed with X" which trivializes the task.
+- **Dependency**: Required for Week 5 contract completeness check.
+

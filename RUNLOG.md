@@ -857,3 +857,34 @@ Implement a layered posture: Grad×Input (Default), Integrated Gradients (Analys
 
 ### Next Step
 Execute changes.
+
+---
+
+## 2026-01-11T12:15:00+05:30 [SAFE]
+
+### Plan
+**External Validation A: Zenodo RMHD (Low 2020)**
+Validation pipeline using external data, ensuring no leakage.
+
+1.  **Sanitization**: `src/text2diag/preprocess/sanitize_external.py` (Strict: no diagnosis/labels).
+2.  **Dataset**: `scripts/20_rmhd_download_subset.py`, `scripts/21_rmhd_build_jsonl.py`.
+3.  **Runner**: Update `scripts/14_run_e2e_contract_v1.py` for dependency graphs.
+4.  **Verification**: `scripts/23_week5_verify_outputs.py`.
+5.  **Notebook**: `notebooks/zenodo_rmhd_validation_colab.ipynb`.
+
+### Diff Summary
+| File | Change | Why |
+|------|--------|-----|
+| `src/text2diag/preprocess/sanitize_external.py` | NEW | Strict sanitization for external data |
+| `configs/external/rmhd_label_mapping.json` | NEW | Mapping RMHD subreddits to labels |
+| `scripts/20...`, `21...` | NEW | Dataset handling |
+| `scripts/14_run_e2e_contract_v1.py` | Update | Add dependency graph generation |
+| `scripts/23_week5_verify_outputs.py` | NEW | Verify contract conformance |
+
+### Commands Run
+```bash
+# Will be updated
+```
+
+### Next Step
+Implement sanitization and mapping.

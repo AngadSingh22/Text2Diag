@@ -256,3 +256,21 @@ py scripts/15_occlusion_audit_w5_1.py --checkpoint temp_model --temperature_json
 py -c "import json; d=json.load(open('results/test_w5_1_audit/occlusion_audit.json')); assert 'dominance_rate' in d"
 ```
 
+### A15. External Sanitization Smoke (W5/Validation)
+Verify strict sanitization logic.
+```powershell
+py -c "from text2diag.preprocess.sanitize_external import sanitize_text_strict; t = 'I was diagnosed with ADHD in r/adhd'; out = sanitize_text_strict(t); print(out); assert '[MASKED_CONDITION]' in out"
+# Should print something like "in" and have masked tokens
+```
+
+### A16. Verifier Smoke (W5/Validation)
+Verify output contract checker.
+```powershell
+# Create dummy output
+py -c "import json; json.dump({'version':'v1', 'labels':[], 'abstain':{'is_abstain':False, 'reasons':[]}, 'meta':{}, 'calibration':{}, 'model_info':{}}, open('results/dummy_verify.jsonl', 'w'))"
+py scripts/23_week5_verify_outputs.py --input_file results/dummy_verify.jsonl --out_report results/dummy_verify_report.json
+# Assertion: Report exists
+py -c "import os; assert os.path.exists('results/dummy_verify_report.json')"
+```
+
+
