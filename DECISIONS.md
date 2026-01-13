@@ -302,4 +302,18 @@ Locked decision thresholds for the Robust (Sanitized) Model:
   
  # # #   M e t r i c   I m p a c t  
  -   N o n e   o n   i n t e r n a l   m e t r i c s .  
+  
+ # #   2 0 2 6 - 0 1 - 1 4 T 0 0 : 5 0 : 2 9 + 0 5 : 3 0   â ¬    W e e k   6   F r e e z e   &   L o c k  
+  
+ # # #   D e c i s i o n  
+ 1 .     * * F r e e z e * * :   T h e   " W e e k   6   F r e e z e "   r u n   i s   t h e   c a n o n i c a l   r e p r o d u c i b l e   o u t p u t   f o r   t h i s   v e r s i o n .  
+ 2 .     * * L o c k * * :   N o   c h a n g e s   t o   m o d e l   w e i g h t s   o r   d a t a   s p l i t s .   O n l y   p a c k a g i n g ,   d e t e r m i n i s m   f i x e s ,   a n d   r e g r e s s i o n   c o n t r o l s   a r e   a l l o w e d .  
+ 3 .     * * S c o p e * * :   S t r i c t l y   i n t e r n a l   d a t a s e t   ( W e e k   1   C a n o n i c a l ) .   N o   e x t e r n a l   v a l i d a t i o n .  
+  
+ # # #   R a t i o n a l e  
+ -   * * S t a b i l i t y * * :   E n s u r e   f u t u r e   c h a n g e s   ( i f   a n y )   c a n   b e   r e g r e s s i o n - t e s t e d   a g a i n s t   a   k n o w n   g o o d   s t a t e .  
+ -   * * R e p r o d u c i b i l i t y * * :   ` s c r i p t s / 3 0 _ w e e k 6 _ f r e e z e _ r u n . p y `   p r o v i d e s   a   s i n g l e   e n t r y   p o i n t   t h a t   g u a r a n t e e s   i d e n t i c a l   o u t p u t s   g i v e n   t h e   s a m e   e n v i r o n m e n t .  
+  
+ # # #   M e t r i c   I m p a c t  
+ -   N o n e   ( L o g i c   i s   i d e n t i c a l   t o   W e e k   5   E 2 E ,   j u s t   p i n n e d ) .  
  
