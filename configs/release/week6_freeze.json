@@ -1,0 +1,32 @@
+{
+    "meta_version": "week6_freeze_v1",
+    "paths": {
+        "checkpoint": "temp_model",
+        "label_map": "data/processed/reddit_mh_sanitized/labels.json",
+        "temperature_json": "results/week2_sanitized/calibration/temperature_scaling.json",
+        "thresholds_json": "results/week2_sanitized/policy/thresholds_global.json"
+    },
+    "model": {
+        "max_len": 512,
+        "truncation": true
+    },
+    "sanitization": {
+        "enabled": true,
+        "config": {
+            "strip_urls": true,
+            "strip_reddit_refs": true,
+            "mask_diagnosis_words": false
+        }
+    },
+    "inference": {
+        "batch_size": 32,
+        "evidence_method": "grad_x_input",
+        "ig_steps": 16,
+        "include_dependency_graph": true
+    },
+    "reproducibility": {
+        "seed_python": 42,
+        "seed_numpy": 42,
+        "seed_torch": 42
+    }
+}

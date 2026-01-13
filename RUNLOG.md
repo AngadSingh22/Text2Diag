@@ -949,4 +949,31 @@ Implement sanitization and mapping.
   
  # # #   C o m m a n d s   R u n  
  ( S e e   v e r i f i c a t i o n   s t e p s )  
+  
+ # # #   T e s t   O u t p u t s   ( W e e k   6   F r e e z e )  
+ ` ` `  
+ #   1 .   C o n f i g   L o a d e r  
+ p y   s r c / t e x t 2 d i a g / r e l e a s e / l o a d _ r e l e a s e _ c o n f i g . p y   c o n f i g s / r e l e a s e / w e e k 6 _ f r e e z e . j s o n  
+ #   = = =   R e l e a s e   C o n f i g   S u m m a r y   = = =  
+ #   V e r s i o n :   w e e k 6 _ f r e e z e _ v 1  
+ #   C h e c k p o i n t :   t e m p _ m o d e l  
+ #   S e e d s :   { ' s e e d _ p y t h o n ' :   4 2 ,   ' s e e d _ n u m p y ' :   4 2 ,   ' s e e d _ t o r c h ' :   4 2 }  
+ #   = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =  
+  
+ #   2 .   G o l d e n   H a s h   G e n e r a t i o n  
+ p y   s c r i p t s / 3 1 _ w e e k 6 _ g o l d e n _ c h e c k . p y   - - r e l e a s e _ c o n f i g   c o n f i g s / r e l e a s e / w e e k 6 _ f r e e z e . j s o n   - - g e n e r a t e _ h a s h e s  
+ #   G e n e r a t i n g   n e w   g o l d e n   h a s h e s   t o   d a t a / g o l d e n / w e e k 6 _ h a s h e s . j s o n  
+ #   D o n e .  
+  
+ #   3 .   G o l d e n   R e g r e s s i o n   C h e c k  
+ p y   s c r i p t s / 3 1 _ w e e k 6 _ g o l d e n _ c h e c k . p y   - - r e l e a s e _ c o n f i g   c o n f i g s / r e l e a s e / w e e k 6 _ f r e e z e . j s o n  
+ #   R u n n i n g   g o l d e n   i n p u t s   f r o m :   d a t a / g o l d e n / w e e k 6 _ i n p u t s . j s o n l  
+ #   G o l d e n   R e g r e s s i o n   P A S S E D .   H a s h e s   m a t c h .  
+  
+ #   4 .   F r e e z e   R u n n e r   S m o k e  
+ p y   s c r i p t s / 3 0 _ w e e k 6 _ f r e e z e _ r u n . p y   - - r e l e a s e _ c o n f i g   c o n f i g s / r e l e a s e / w e e k 6 _ f r e e z e . j s o n   - - s a m p l e _ n   5  
+ #   S e e d s   s e t :   P y = 4 2 ,   N P = 4 2 ,   T o r c h = 4 2  
+ #   F r e e z e   r u n   c o m p l e t e .   A r t i f a c t s   i n   r e s u l t s / w e e k 6 _ f r o z e n  
+ #   M a n i f e s t   s a v e d   t o   r e s u l t s / w e e k 6 _ f r o z e n / m a n i f e s t . j s o n  
+ ` ` `  
  

@@ -266,4 +266,21 @@ py scripts/23_week5_verify_outputs.py --input_file results/dummy_verify.jsonl --
 py -c "import os; assert os.path.exists('results/dummy_verify_report.json')"
 ```
 
+## Week 6: Freeze & Reproducibility
+
+### A16. Freeze Runner Smoke (W6)
+Verify deterministic batch execution.
+```powershell
+py scripts/30_week6_freeze_run.py --release_config configs/release/week6_freeze.json --sample_n 5 --out_dir results/test_w6_freeze_smoke
+# Assertion: Manifest exists
+py -c "import os; assert os.path.exists('results/test_w6_freeze_smoke/manifest.json')"
+```
+
+### A17. Golden Regression Check (W6)
+Verify zero regression on golden set.
+```powershell
+py scripts/31_week6_golden_check.py --release_config configs/release/week6_freeze.json
+# Expected: Exit code 0, "Golden Regression PASSED"
+```
+
 
