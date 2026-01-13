@@ -331,4 +331,21 @@ Locked decision thresholds for the Robust (Sanitized) Model:
   
  # # #   M e t r i c   I m p a c t  
  -   N o n e   o n   F 1 / A U C .   F a i t h f u l n e s s   p a s s   r a t e   m i g h t   d r o p   s l i g h t l y   d u e   t o   s t r i c t e r   n e g a t i v e   c h e c k s .  
+  
+ # #   2 0 2 6 - 0 1 - 1 4 T 0 1 : 4 3 : 0 0 + 0 5 : 3 0   â ¬    W e e k   6   P a t c h   P o l i c i e s  
+  
+ # # #   D e c i s i o n  
+ 1 .     * * G r a p h   E m i s s i o n * * :   A l w a y s   e m i t   ` d e p e n d e n c y _ g r a p h _ t o p k `   ( k = 3 )   f o r   c o n t e x t ,   a n d   ` d e p e n d e n c y _ g r a p h _ a c t i v e `   f o r   d e c i s i o n s .  
+ 2 .     * * E v i d e n c e   S k i p p i n g * * :   S k i p   e v i d e n c e   e x t r a c t i o n   i f   p r o b a b i l i t y   <   0 . 1 0   ( n o i s e   f l o o r ) .  
+ 3 .     * * F a i t h f u l n e s s   S t a t u s * * :   U s e   e x p l i c i t   s t a t u s   f i e l d :  
+         -   ` " p a s s e d " ` :   d e l t a   > =   t h r e s h o l d   A N D   d e l t a   > =   0  
+         -   ` " f a i l e d _ l o w _ d e l t a " ` :   d e l t a   <   t h r e s h o l d   A N D   d e l t a   > =   0  
+         -   ` " s u s p i c i o u s _ n e g a t i v e _ d e l t a " ` :   d e l t a   <   0  
+         -   ` " s k i p p e d _ l o w _ p r o b " ` :   p r o b   <   0 . 1 0  
+         -   ` " s k i p p e d _ n o _ s p a n s " ` :   v a l i d   p r o b   b u t   n o   s p a n s   f o u n d  
+  
+ # # #   R a t i o n a l e  
+ -   * * N o i s e   R e d u c t i o n * * :   E x t r a c t i n g   e v i d e n c e   f o r   < 1 0 %   p r o b a b i l i t y   l a b e l s   i s   c o m p u t a t i o n a l l y   w a s t e f u l   a n d   c o n f u s i n g   t o   u s e r s .  
+ -   * * C l a r i t y * * :   E x p l i c i t   s t a t u s   p r e v e n t s   a m b i g u i t y   a b o u t   w h y   a   f a i t h f u l   c h e c k   f a i l e d   ( w a s   i t   n e g a t i v e ?   o r   j u s t   t o o   s m a l l ? ) .  
+ -   * * C o n t e x t * * :   T o p - k   g r a p h   s h o w s   w h a t   t h e   m o d e l   * t h i n k s *   a r e   r e l a t e d ,   e v e n   i f   n o t   f u l l y   a c t i v e .  
  
