@@ -32,6 +32,8 @@ logger = logging.getLogger(__name__)
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 
+import hashlib
+
 def predict_example(
     model, 
     tokenizer, 
@@ -45,14 +47,16 @@ def predict_example(
     evidence_method="grad_x_input",
     ig_steps=16,
     include_dependency_graph=False,
-    skip_sanitization=False
+    skip_sanitization=False,
+    provided_example_id=None
 ):
     # 1. Preprocess
     if skip_sanitization:
         text_clean = text_raw
         rules_applied = ["skipped"]
+        audit_meta = {"version": "skipped", "sha256": "none"}
     else:
-        text_clean, rules_applied = sanitize_text(text_raw, **sanitize_config)
+        text_clean, rules_applied, audit_meta = sanitize_text(text_raw, **sanitize_config)
     
     # 2. Forward Pass
     inputs = tokenizer(text_clean, return_tensors="pt", truncation=True, max_length=max_len).to(device)
@@ -74,7 +78,18 @@ def predict_example(
     for idx in range(len(id2label)):
         name = id2label[idx]
         p = float(probs_cal[idx])
-        t = thresholds.get(name, thresholds.get("global", 0.5))
+        
+        # Threshold Logic & Provenance
+        if name in thresholds:
+            t = thresholds[name]
+            src = "per_label"
+        elif "global" in thresholds:
+            t = thresholds["global"]
+            src = "global"
+        else:
+            t = 0.5
+            src = "default_0.5"
+            
         d = 1 if p >= t else 0
         label_probs_map[name] = p
         
@@ -86,6 +101,7 @@ def predict_example(
             "prob_calibrated": round(p, 4),
             "decision": d,
             "threshold_used": t,
+            "threshold_source": src,
             "evidence_spans": [],
             "faithfulness": {"delta": 0.0, "is_faithful": False},
             "evidence_meta": {"method": evidence_method}
@@ -113,17 +129,26 @@ def predict_example(
                 faith = verify_faithfulness(model, tokenizer, text_clean, spans, int(idx), temperature=temperature, device=device)
                 
                 label_objs[lbl_idx_in_list]["evidence_spans"] = spans
-                label_objs[lbl_idx_in_list]["faithfulness"] = {
-                    "delta": faith["delta"],
-                    "is_faithful": faith["is_faithful"]
-                }
+                label_objs[lbl_idx_in_list]["faithfulness"] = faith
         except Exception as e:
             logger.warning(f"Explan error for {name}: {e}")
             
-    # 5. Build Output Object
+    # 5. Example ID Logic
+    if provided_example_id:
+        final_eid = provided_example_id
+    else:
+        # Deterministic fallback: "gen_" + first 12 chars of sha256(text_clean)
+        # We assume audit_meta might have it, or we compute valid one
+        if "sha256" in audit_meta and audit_meta["sha256"] != "none":
+            h = audit_meta["sha256"]
+        else:
+            h = hashlib.sha256(text_clean.encode("utf-8")).hexdigest()
+        final_eid = f"gen_{h[:12]}"
+
+    # Build Output Object
     out = {
         "version": "v1",
-        "example_id": None, 
+        "example_id": final_eid, 
         "model_info": {
             "model_name": "distilbert-base",
             "checkpoint": str(model.name_or_path),
@@ -141,10 +166,11 @@ def predict_example(
             "reasons": []
         },
         "meta": {
-            "created_at": "2026-01-10",
+            "created_at": "2026-01-14",
             "preprocessing": {
                 "sanitized": not skip_sanitization,
-                "rules_applied": rules_applied
+                "rules_applied": rules_applied,
+                "sanitization_audit": audit_meta
             }
         }
     }
@@ -247,9 +273,10 @@ def main():
                     model, tokenizer, text, id2label, thresholds, temp, 
                     sanitize_config, args.max_len, device,
                     include_dependency_graph=args.include_dependency_graph,
-                    skip_sanitization=args.skip_sanitization
+                    skip_sanitization=args.skip_sanitization,
+                    provided_example_id=eid
                 )
-                out["example_id"] = eid
+                # out["example_id"] = eid # Handled inside now
                 f_out.write(json.dumps(out) + "\n")
         logger.info(f"Batch complete. Output: {args.out_jsonl}")
     else:

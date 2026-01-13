@@ -142,9 +142,10 @@ def main():
                     evidence_method=cfg["inference"]["evidence_method"],
                     ig_steps=cfg["inference"]["ig_steps"],
                     include_dependency_graph=cfg["inference"]["include_dependency_graph"],
-                    skip_sanitization=not cfg["sanitization"]["enabled"]
+                    skip_sanitization=not cfg["sanitization"]["enabled"],
+                    provided_example_id=eid
                 )
-                out["example_id"] = eid
+                # out["example_id"] = eid # Handled inside
                 
                 f_out.write(json.dumps(out) + "\n")
                 count += 1
