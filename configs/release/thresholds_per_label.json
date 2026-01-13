@@ -1,0 +1,7 @@
+{
+  "adhd": 0.01,
+  "depression": 0.5,
+  "ocd": 0.5,
+  "other": 0.5,
+  "ptsd": 0.5
+}

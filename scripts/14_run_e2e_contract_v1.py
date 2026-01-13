@@ -25,6 +25,8 @@ from text2diag.contract.repair import repair_output
 from text2diag.decision.abstain import decide_abstain
 
 from text2diag.explain.dependency import build_dependency_graph
+from text2diag.explain.explanation_graph import build_explanation_graph
+from text2diag.preprocess.mask_conditions import mask_condition_mentions
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(msg)s")
 logger = logging.getLogger(__name__)
@@ -55,8 +57,17 @@ def predict_example(
         text_clean = text_raw
         rules_applied = ["skipped"]
         audit_meta = {"version": "skipped", "sha256": "none"}
+        text_masked = text_clean
+        mask_meta = []
     else:
-        text_clean, rules_applied, audit_meta = sanitize_text(text_raw, **sanitize_config)
+        # Sanitize first
+        text_sanitized, rules_applied, audit_meta = sanitize_text(text_raw, **sanitize_config)
+        
+        # Then Mask Conditions (Week 6+ Policy)
+        # We always run this if sanitization is enabled, or based on config?
+        # Proposal said: "mandatory masking".
+        text_masked, mask_meta = mask_condition_mentions(text_sanitized)
+        text_clean = text_masked # Inference uses masked text
     
     # 2. Forward Pass
     inputs = tokenizer(text_clean, return_tensors="pt", truncation=True, max_length=max_len).to(device)
@@ -181,10 +192,17 @@ def predict_example(
             "preprocessing": {
                 "sanitized": not skip_sanitization,
                 "rules_applied": rules_applied,
-                "sanitization_audit": audit_meta
+                "sanitization_audit": audit_meta,
+                "condition_masking": {
+                    "enabled": not skip_sanitization,
+                    "masks": mask_meta if not skip_sanitization else []
+                }
             }
         }
     }
+    
+    # Explanation Graph (Week 6+)
+    out["explanation_graph"] = build_explanation_graph(out)
     
     if include_dependency_graph:
         # Emit both active and topk graphs
@@ -196,6 +214,10 @@ def predict_example(
         
         # Backward compatibility shim
         out["dependency_graph"] = out["dependency_graph_topk"]
+        
+        # Deprecation Warning
+        if "warnings" not in out["meta"]: out["meta"]["warnings"] = []
+        out["meta"]["warnings"].append("dependency_graph fields are deprecated. Use explanation_graph.")
     
     # 6. Validate & Repair
     ok, errors = validate_output(out)

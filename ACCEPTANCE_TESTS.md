@@ -306,3 +306,10 @@ py -c "import json; d=json.load(open('results/test_w6_patch.json')); assert 'dep
 ```
 
 
+# # #   A 2 0 .   E n h a n c e m e n t s   S m o k e   ( W 6 + )  
+ V e r i f y   p e r - l a b e l   t h r e s h o l d s ,   c o n d i t i o n   m a s k i n g ,   a n d   e x p l a n a t i o n   g r a p h .  
+ ` ` ` p o w e r s h e l l  
+ p y   s c r i p t s / 3 2 _ r u n _ s i n g l e _ f r o m _ r e l e a s e . p y   - - r e l e a s e _ c o n f i g   c o n f i g s / r e l e a s e / w e e k 6 _ f r e e z e . j s o n   - - t e x t   " I   h a v e   d e p r e s s i o n "   - - o u t _ f i l e   r e s u l t s / t e s t _ w 6 _ e n h a n c e . j s o n  
+ p y   - c   " i m p o r t   j s o n ;   d = j s o n . l o a d ( o p e n ( ' r e s u l t s / t e s t _ w 6 _ e n h a n c e . j s o n ' ) ) ;   a s s e r t   ' e x p l a n a t i o n _ g r a p h '   i n   d ;   a s s e r t   ' [ C O N D ] '   i n   d [ ' m e t a ' ] [ ' p r e p r o c e s s i n g ' ] [ ' c o n d i t i o n _ m a s k i n g ' ] [ ' m a s k s ' ] [ 0 ] [ ' r e p l a c e m e n t ' ] ;   p r i n t ( ' E n h a n c e m e n t s   O K ' ) "  
+ ` ` `  
+ 

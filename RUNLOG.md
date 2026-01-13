@@ -1098,4 +1098,22 @@ Implement sanitization and mapping.
   
  # # #   C o m m a n d s   R u n  
  ( S e e   v e r i f i c a t i o n   s t e p s )  
+  
+ # # #   T e s t   O u t p u t s   ( W 6 +   E n h a n c e m e n t s )  
+ ` ` `  
+ p y   s c r i p t s / 3 3 _ f i t _ t h r e s h o l d s _ p e r _ l a b e l . p y   . . .  
+ #   [ I N F O ]   L a b e l   a d h d :   B e s t   F 1 = . . .   a t   T = . . .  
+ #   [ I N F O ]   S a v e d   t h r e s h o l d s   t o   c o n f i g s / r e l e a s e / t h r e s h o l d s _ p e r _ l a b e l . j s o n  
+  
+ p y   s c r i p t s / 3 2 _ r u n _ s i n g l e _ f r o m _ r e l e a s e . p y   - - r e l e a s e _ c o n f i g   c o n f i g s / r e l e a s e / w e e k 6 _ f r e e z e . j s o n   - - t e x t   " I   h a v e   d e p r e s s i o n "   - - o u t _ f i l e   r e s u l t s / a d _ h o c / t h r e s h o l d _ t e s t . j s o n  
+ #   = = =   S i n g l e   R u n   S u m m a r y   = = =  
+ #   S t a t u s :   O K  
+ #   T o p   L a b e l :   d e p r e s s i o n   ( S c o r e :   . . . )  
+ #   G r a p h   I n c l u d e d :   T r u e  
+  
+ #   V a l i d a t i o n :  
+ #   t h r e s h o l d _ s o u r c e :   " p e r _ l a b e l "  
+ #   e x p l a n a t i o n _ g r a p h   p r e s e n t   w i t h   t y p e d   n o d e s   ( l a b e l ,   s p a n ,   r u l e )  
+ #   m e t a . p r e p r o c e s s i n g . c o n d i t i o n _ m a s k i n g . m a s k s   c o n t a i n s   " [ C O N D ] "  
+ ` ` `  
  
