@@ -888,3 +888,27 @@ Validation pipeline using external data, ensuring no leakage.
 
 ### Next Step
 Implement sanitization and mapping.
+ 
+ # #   2 0 2 6 - 0 1 - 1 3 T 2 2 : 2 0 : 0 0 + 0 5 : 3 0   [ S A F E ]  
+  
+ # # #   P l a n  
+ * * D e - s c o p e   E x t e r n a l   V a l i d a t i o n   ( Z e n o d o   R M H D ) * *  
+ T o   p r i o r i t i z e   W e e k   6   s t a b i l i t y   a n d   f r e e z e ,   w e   a r e   r e m o v i n g   t h e   Z e n o d o   R M H D   e x t e r n a l   v a l i d a t i o n   p i p e l i n e .  
+ W e   w i l l   p r e s e r v e   g e n e r a l - p u r p o s e   i m p r o v e m e n t s   m a d e   d u r i n g   t h i s   p h a s e   ( V e r i f i e r ,   E 2 E   R u n n e r   f l a g s )   b u t   r e m o v e   a l l   d a t a s e t - s p e c i f i c   c o d e .  
+  
+ # # #   A c t i o n s  
+ 1 .   * * D e l e t e * * :   ` n o t e b o o k s / z e n o d o _ * ` ,   ` s c r i p t s / * r m h d * ` ,   ` c o n f i g s / e x t e r n a l / ` ,   ` s r c / t e x t 2 d i a g / p r e p r o c e s s / s a n i t i z e _ e x t e r n a l . p y ` .  
+ 2 .   * * R e f a c t o r * * :   C l e a n   ` s c r i p t s / 1 4 _ r u n _ e 2 e _ c o n t r a c t _ v 1 . p y `   o f   a n y   i m p l i c i t   R M H D   d e p e n d e n c i e s .  
+ 3 .   * * V e r i f y * * :   R u n   f u l l   T i e r   A   s m o k e   t e s t s   a n d   s p e c i f i c   W e e k   5   v e r i f i e r s .  
+  
+ # # #   D i f f   S u m m a r y  
+ |   F i l e   |   C h a n g e   |   W h y   |  
+ | - - - - - - | - - - - - - - - | - - - - - |  
+ |   ` n o t e b o o k s / z e n o d o . . . `   |   D e l e t e   |   O u t   o f   s c o p e   |  
+ |   ` s c r i p t s / * r m h d * `   |   D e l e t e   |   O u t   o f   s c o p e   |  
+ |   ` s r c / t e x t 2 d i a g / p r e p r o c e s s / s a n i t i z e _ e x t e r n a l . p y `   |   D e l e t e   |   O u t   o f   s c o p e   |  
+ |   ` s c r i p t s / 2 3 _ w e e k 5 _ v e r i f y _ o u t p u t s . p y `   |   K e e p   |   G e n e r i c   W e e k   5   v a l i d a t o r   |  
+  
+ # # #   C o m m a n d s   R u n  
+ ( S e e   f o l l o w i n g   e n t r i e s )  
+ 

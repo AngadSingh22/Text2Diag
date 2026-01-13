@@ -288,3 +288,18 @@ Locked decision thresholds for the Robust (Sanitized) Model:
 - **Leakage**: External datasets often contain "I was diagnosed with X" which trivializes the task.
 - **Dependency**: Required for Week 5 contract completeness check.
 
+ 
+ # #   2 0 2 6 - 0 1 - 1 3 T 2 2 : 2 0 : 0 0 + 0 5 : 3 0   â ¬    D e - s c o p e   Z e n o d o   R M H D   E x t e r n a l   V a l i d a t i o n  
+  
+ # # #   D e c i s i o n  
+ 1 .     * * R e m o v e * * :   A l l   Z e n o d o / R M H D   s p e c i f i c   s c r i p t s ,   n o t e b o o k s ,   a n d   c o n f i g s .  
+ 2 .     * * P r e s e r v e * * :   C o r e   i n f r a s t r u c t u r e   a d d e d   d u r i n g   t h i s   p h a s e   ( C o n t r a c t   V e r i f i e r ,   D e p e n d e n c y   G r a p h   l o g i c ,   G e n e r i c   E 2 E   f l a g s ) .  
+  
+ # # #   R a t i o n a l e  
+ -   * * F o c u s * * :   P r i o r i t i z e   s t a b i l i t y   a n d   r e p r o d u c i b i l i t y   o n   t h e   i n t e r n a l   d a t a s e t   ( W e e k   6   F r e e z e ) .  
+ -   * * C o s t * * :   M a i n t a i n i n g   e x t e r n a l   d a t a   p i p e l i n e s   a d d s   i n s t a b i l i t y   ( U R L   r o t ,   a p p r o v a l   g a t e s ) .  
+ -   * * V a l u e * * :   C o r e   l o g i c   ( d e p e n d e n c y   g r a p h ,   s a n i t i z a t i o n   f l a g s )   i s   v a l u a b l e   i n d e p e n d e n t   o f   t h e   e x t e r n a l   d a t a s e t .  
+  
+ # # #   M e t r i c   I m p a c t  
+ -   N o n e   o n   i n t e r n a l   m e t r i c s .  
+ 
