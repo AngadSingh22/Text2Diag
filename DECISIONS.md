@@ -348,4 +348,16 @@ Locked decision thresholds for the Robust (Sanitized) Model:
  -   * * N o i s e   R e d u c t i o n * * :   E x t r a c t i n g   e v i d e n c e   f o r   < 1 0 %   p r o b a b i l i t y   l a b e l s   i s   c o m p u t a t i o n a l l y   w a s t e f u l   a n d   c o n f u s i n g   t o   u s e r s .  
  -   * * C l a r i t y * * :   E x p l i c i t   s t a t u s   p r e v e n t s   a m b i g u i t y   a b o u t   w h y   a   f a i t h f u l   c h e c k   f a i l e d   ( w a s   i t   n e g a t i v e ?   o r   j u s t   t o o   s m a l l ? ) .  
  -   * * C o n t e x t * * :   T o p - k   g r a p h   s h o w s   w h a t   t h e   m o d e l   * t h i n k s *   a r e   r e l a t e d ,   e v e n   i f   n o t   f u l l y   a c t i v e .  
+  
+ # #   2 0 2 6 - 0 1 - 1 4 T 0 1 : 5 8 : 0 0 + 0 5 : 3 0   â ¬    W e e k   6 +   P o l i c i e s  
+  
+ # # #   D e c i s i o n  
+ 1 .     * * T h r e s h o l d s * * :   U s e   ` t h r e s h o l d s _ p e r _ l a b e l . j s o n `   ( v a l - t u n e d )   a s   s o u r c e   o f   t r u t h .  
+ 2 .     * * L e a k a g e   M a s k i n g * * :   M a n d a t o r y   m a s k i n g   o f   c o n d i t i o n   n a m e s   ( " d e p r e s s i o n " ,   " a d h d " ,   e t c . )   i n   i n p u t .   I n f e r e n c e   s e e s   ` [ C O N D ] ` .  
+ 3 .     * * E x p l a n a t i o n   G r a p h * * :   ` e x p l a n a t i o n _ g r a p h _ v 1 `   i s   t h e   c a n o n i c a l   g r a p h   a r t i f a c t .   L e g a c y   ` d e p e n d e n c y _ g r a p h `   f i e l d s   a r e   d e p r e c a t e d .  
+  
+ # # #   R a t i o n a l e  
+ -   * * L e a k a g e * * :   M o d e l s   r e l y i n g   o n   " I   h a v e   d e p r e s s i o n "   i s   t r i v i a l .   M a s k i n g   f o r c e s   l e a r n i n g   o f   s y m p t o m o l o g y .  
+ -   * * P r e c i s i o n * * :   G l o b a l   0 . 5   t h r e s h o l d   i s   s u b o p t i m a l   f o r   i m b a l a n c e d   c l a s s e s .   P e r - l a b e l   t u n i n g   m a x i m i z e s   F 1 .  
+ -   * * E x p l a i n a b i l i t y * * :   T y p e d   g r a p h   p r o v i d e s   m a c h i n e - r e a d a b l e   a u d i t   t r a i l   o f   * w h y *   a   d e c i s i o n   w a s   m a d e   ( e v i d e n c e   n o d e s   - >   d e c i s i o n   n o d e s   - >   r u l e   n o d e s ) .  
  

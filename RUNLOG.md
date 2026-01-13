@@ -1071,4 +1071,31 @@ Implement sanitization and mapping.
   
  p y   s c r i p t s / 3 1 _ w e e k 6 _ g o l d e n _ c h e c k . p y   - - r e l e a s e _ c o n f i g   c o n f i g s / r e l e a s e / w e e k 6 _ f r e e z e . j s o n  
  #   [ I N F O ]   G o l d e n   R e g r e s s i o n   P A S S E D .   H a s h e s   m a t c h .  
+  
+ # #   2 0 2 6 - 0 1 - 1 4 T 0 1 : 5 8 : 0 0 + 0 5 : 3 0   [ S A F E ]  
+  
+ # # #   P l a n  
+ * * W e e k   6 +   E n h a n c e m e n t s   ( L e a k a g e ,   T h r e s h o l d s ,   G r a p h ) * *  
+ M a j o r   u p g r a d e   t o   i n f e r e n c e   r i g i d i t y   a n d   e x p l a i n a b i l i t y .  
+ 1 .     * * P e r - L a b e l   T h r e s h o l d s * * :   F i t   o p t i m a l   F 1   t h r e s h o l d s   o n   V A L ,   f r e e z e ,   a n d   u s e   f o r   i n f e r e n c e .  
+ 2 .     * * C o n d i t i o n   M a s k i n g * * :   S t r i c t   m a s k i n g   o f   c o n d i t i o n   n a m e s   t o   p r e v e n t   l e a k a g e   ( e . g .   " I   h a v e   [ C O N D ] " ) .  
+ 3 .     * * E x p l a n a t i o n   G r a p h * * :   T y p e d   g r a p h   l i n k i n g   e v i d e n c e   - >   l a b e l   - >   d e c i s i o n   - >   p o l i c y .  
+  
+ # # #   A c t i o n s  
+ -   C r e a t e   ` s c r i p t s / 3 3 _ f i t _ t h r e s h o l d s _ p e r _ l a b e l . p y `   t o   t u n e   t h r e s h o l d s .  
+ -   C r e a t e   ` s r c / t e x t 2 d i a g / p r e p r o c e s s / m a s k _ c o n d i t i o n s . p y `   f o r   l e a k a g e   c o n t r o l .  
+ -   C r e a t e   ` s r c / t e x t 2 d i a g / e x p l a i n / e x p l a n a t i o n _ g r a p h . p y `   f o r   v 1   g r a p h .  
+ -   U p d a t e   ` s c r i p t s / 1 4 _ r u n _ e 2 e _ c o n t r a c t _ v 1 . p y `   t o   w i r e   e v e r y t h i n g   t o g e t h e r .  
+ -   U p d a t e   ` s c r i p t s / 2 3 _ w e e k 5 _ v e r i f y _ o u t p u t s . p y `   t o   v a l i d a t e   n e w   s c h e m a .  
+  
+ # # #   D i f f   S u m m a r y  
+ |   F i l e   |   C h a n g e   |   W h y   |  
+ | - - - - - - | - - - - - - - - | - - - - - |  
+ |   ` s c r i p t s / 3 3 _ f i t _ t h r e s h o l d s _ p e r _ l a b e l . p y `   |   N e w   |   T h r e s h o l d   t u n i n g   |  
+ |   ` s r c / t e x t 2 d i a g / p r e p r o c e s s / m a s k _ c o n d i t i o n s . p y `   |   N e w   |   L e a k a g e   m a s k i n g   |  
+ |   ` s r c / t e x t 2 d i a g / e x p l a i n / e x p l a n a t i o n _ g r a p h . p y `   |   N e w   |   T y p e d   e x p l a n a t i o n   g r a p h   |  
+ |   ` s c r i p t s / 1 4 _ r u n _ e 2 e _ c o n t r a c t _ v 1 . p y `   |   U p d a t e   |   I n t e g r a t i o n   |  
+  
+ # # #   C o m m a n d s   R u n  
+ ( S e e   v e r i f i c a t i o n   s t e p s )  
  
