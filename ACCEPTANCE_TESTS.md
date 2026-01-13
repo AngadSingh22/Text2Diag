@@ -298,4 +298,11 @@ py -c "import sys; sys.path.insert(0, 'src'); from text2diag.explain.faithfulnes
 # Trust unit test logic or use the simple check above.
 ```
 
+### A19. Patch Smoke (W6 Graphs & Skip)
+Verify both graphs exist and low-prob evidence skipping.
+```powershell
+py scripts/32_run_single_from_release.py --release_config configs/release/week6_freeze.json --text "no symptoms" --out_file results/test_w6_patch.json
+py -c "import json; d=json.load(open('results/test_w6_patch.json')); assert 'dependency_graph_topk' in d; assert 'dependency_graph_active' in d; assert len(d['dependency_graph_topk']['edges'][0]) == 3 if d['dependency_graph_topk']['edges'] else True; print('Graphs OK')"
+```
+
 

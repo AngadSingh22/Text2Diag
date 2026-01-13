@@ -61,15 +61,25 @@ def verify_faithfulness(model, tokenizer, text, spans, label_idx, temperature=1.
     # Pass criterion: Union delta >= 0.03 AND delta >= 0
     passed = (delta >= 0.03)
     
+    status = "failed_low_delta"
+    flag = None
+    
+    if passed:
+        status = "passed"
+    elif delta < 0:
+        status = "suspicious_negative_delta"
+        flag = "negative_delta_suspicious"
+    
     result = {
         "p_full": round(float(p_full), 4),
         "p_masked": round(float(p_masked), 4),
         "delta": round(float(delta), 4),
-        "is_faithful": bool(passed)
+        "is_faithful": bool(passed),
+        "faithfulness_status": status
     }
     
-    if delta < 0:
-        result["flag"] = "negative_delta_suspicious"
+    if flag:
+        result["flag"] = flag
         result["is_faithful"] = False # Enforce not faithful if negative
         
     return result

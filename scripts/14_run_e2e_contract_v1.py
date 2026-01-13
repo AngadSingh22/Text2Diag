@@ -113,11 +113,19 @@ def predict_example(
         
     # 4. Explain Top-K (Top-2)
     top_k_indices = sorted_indices[:2]
+    EVIDENCE_MIN_PROB = 0.10
     
     for idx in top_k_indices:
         name = id2label[idx]
-        lbl_idx_in_list = next(i for i, l in enumerate(label_objs) if l["name"] == name)
+        lbl_obj = next(l for l in label_objs if l["name"] == name)
         
+        # SKIP if prob too low
+        if lbl_obj["prob_calibrated"] < EVIDENCE_MIN_PROB:
+            lbl_obj["evidence_meta"]["skipped_reason"] = "low_prob"
+            lbl_obj["evidence_meta"]["min_prob"] = EVIDENCE_MIN_PROB
+            lbl_obj["faithfulness"]["faithfulness_status"] = "skipped_low_prob"
+            continue
+            
         try:
             attrs = compute_attributions(
                 model, tokenizer, text_clean, int(idx), 
@@ -128,8 +136,11 @@ def predict_example(
             if spans:
                 faith = verify_faithfulness(model, tokenizer, text_clean, spans, int(idx), temperature=temperature, device=device)
                 
-                label_objs[lbl_idx_in_list]["evidence_spans"] = spans
-                label_objs[lbl_idx_in_list]["faithfulness"] = faith
+                lbl_obj["evidence_spans"] = spans
+                lbl_obj["faithfulness"] = faith
+            else:
+                 lbl_obj["faithfulness"]["faithfulness_status"] = "skipped_no_spans"
+                 
         except Exception as e:
             logger.warning(f"Explan error for {name}: {e}")
             
@@ -176,7 +187,15 @@ def predict_example(
     }
     
     if include_dependency_graph:
-        out["dependency_graph"] = build_dependency_graph(active_labels)
+        # Emit both active and topk graphs
+        # Active: decision=1
+        out["dependency_graph_active"] = build_dependency_graph(active_labels, label_probs_map, mode="active")
+        
+        # Top-K: top 3
+        out["dependency_graph_topk"] = build_dependency_graph(active_labels, label_probs_map, mode="topk", k=3)
+        
+        # Backward compatibility shim
+        out["dependency_graph"] = out["dependency_graph_topk"]
     
     # 6. Validate & Repair
     ok, errors = validate_output(out)
